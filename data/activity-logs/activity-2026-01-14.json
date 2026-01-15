@@ -1,0 +1,164 @@
+[
+  {
+    "timestamp": "2026-01-14T09:00:00.000Z",
+    "userId": "U0A8PDB3UJZ",
+    "eventType": "presence_change",
+    "presence": "active"
+  },
+  {
+    "timestamp": "2026-01-14T09:05:23.000Z",
+    "userId": "U0A8PDB3UJZ",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "hasText": true,
+    "textLength": 42
+  },
+  {
+    "timestamp": "2026-01-14T09:15:45.000Z",
+    "userId": "U0A8PDB3UJZ",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "hasText": true,
+    "textLength": 28
+  },
+  {
+    "timestamp": "2026-01-14T09:30:12.000Z",
+    "userId": "U0A8PDB3UJZ",
+    "eventType": "huddle_start",
+    "channelId": "C0A7WF18KPD"
+  },
+  {
+    "timestamp": "2026-01-14T10:15:34.000Z",
+    "userId": "U0A8PDB3UJZ",
+    "eventType": "huddle_end",
+    "channelId": "C0A7WF18KPD"
+  },
+  {
+    "timestamp": "2026-01-14T10:20:56.000Z",
+    "userId": "U0A8PDB3UJZ",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "hasText": true,
+    "textLength": 15
+  },
+  {
+    "timestamp": "2026-01-14T14:00:00.000Z",
+    "userId": "U0A8PDB3UJZ",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "hasText": true,
+    "textLength": 67
+  },
+  {
+    "timestamp": "2026-01-14T14:30:22.000Z",
+    "userId": "U0A8PDB3UJZ",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "hasText": true,
+    "textLength": 34
+  },
+  {
+    "timestamp": "2026-01-14T15:45:11.000Z",
+    "userId": "U0A8PDB3UJZ",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "hasText": true,
+    "textLength": 89
+  },
+  {
+    "timestamp": "2026-01-14T16:30:00.000Z",
+    "userId": "U0A8PDB3UJZ",
+    "eventType": "presence_change",
+    "presence": "away"
+  },
+  {
+    "timestamp": "2026-01-14T09:30:00.000Z",
+    "userId": "U0A83923VHA",
+    "eventType": "presence_change",
+    "presence": "active"
+  },
+  {
+    "timestamp": "2026-01-14T09:45:12.000Z",
+    "userId": "U0A83923VHA",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "hasText": true,
+    "textLength": 23
+  },
+  {
+    "timestamp": "2026-01-14T10:00:34.000Z",
+    "userId": "U0A83923VHA",
+    "eventType": "channel_join",
+    "channelId": "C0A7WF18KPD"
+  },
+  {
+    "timestamp": "2026-01-14T11:15:45.000Z",
+    "userId": "U0A83923VHA",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "hasText": true,
+    "textLength": 56
+  },
+  {
+    "timestamp": "2026-01-14T12:00:00.000Z",
+    "userId": "U0A83923VHA",
+    "eventType": "presence_change",
+    "presence": "away"
+  },
+  {
+    "timestamp": "2026-01-14T22:29:15.768Z",
+    "userId": "U0A7T9TCX8B",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "hasText": true,
+    "textLength": 2
+  },
+  {
+    "timestamp": "2026-01-14T22:34:19.353Z",
+    "userId": "U0A83923VHA",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "hasText": true,
+    "textLength": 21
+  },
+  {
+    "timestamp": "2026-01-14T22:34:26.727Z",
+    "userId": "U0A7T9TCX8B",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "hasText": true,
+    "textLength": 7
+  },
+  {
+    "timestamp": "2026-01-14T22:34:32.606Z",
+    "userId": "U0A83923VHA",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "hasText": true,
+    "textLength": 39
+  },
+  {
+    "timestamp": "2026-01-14T22:34:38.367Z",
+    "userId": "U0A83923VHA",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "hasText": true,
+    "textLength": 33
+  },
+  {
+    "timestamp": "2026-01-14T22:34:45.073Z",
+    "userId": "U0A83923VHA",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "hasText": true,
+    "textLength": 33
+  },
+  {
+    "timestamp": "2026-01-14T22:39:51.923Z",
+    "userId": "U0A83923VHA",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "hasText": true,
+    "textLength": 4
+  }
+]

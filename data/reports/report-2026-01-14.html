@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatório de Atividade - 2026-01-14</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 40px;
+      text-align: center;
+    }
+    .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+    .header p { font-size: 1.2em; opacity: 0.9; }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 40px;
+      background: #f8f9fa;
+    }
+    .stat-card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .stat-card h3 { color: #667eea; font-size: 2em; margin-bottom: 5px; }
+    .stat-card p { color: #666; font-size: 0.9em; }
+    .users { padding: 40px; }
+    .user-card {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 30px;
+      margin-bottom: 30px;
+      border-left: 5px solid #667eea;
+    }
+    .user-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .user-id {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #333;
+    }
+    .user-time {
+      font-size: 1.8em;
+      color: #667eea;
+      font-weight: bold;
+    }
+    .user-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .mini-stat {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .mini-stat strong { display: block; font-size: 1.5em; color: #667eea; }
+    .mini-stat span { font-size: 0.85em; color: #666; }
+    .sessions {
+      margin-top: 20px;
+    }
+    .sessions h4 {
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 1.1em;
+    }
+    .session {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .session-time { color: #666; font-size: 0.9em; }
+    .session-duration {
+      background: #667eea;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+    .event-types {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+    .event-badge {
+      background: #e9ecef;
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 0.85em;
+      color: #495057;
+    }
+    .footer {
+      background: #f8f9fa;
+      padding: 20px;
+      text-align: center;
+      color: #666;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📊 Relatório de Atividade</h1>
+      <p>2026-01-14</p>
+    </div>
+
+    <div class="summary">
+      <div class="stat-card">
+        <h3>22</h3>
+        <p>Total de Eventos</p>
+      </div>
+      <div class="stat-card">
+        <h3>2</h3>
+        <p>Usuários Ativos</p>
+      </div>
+      <div class="stat-card">
+        <h3>10</h3>
+        <p>Sessões Totais</p>
+      </div>
+    </div>
+
+    <div class="users">
+      
+        <div class="user-card">
+          <div class="user-header">
+            <div>
+              <div class="user-id">👤 Paulo victor</div>
+              <div style="font-size: 0.9em; color: #666; margin-top: 5px;">📧 victuribdev@gmail.com</div>
+            </div>
+            <div class="user-time">⏱️ 36min</div>
+          </div>
+
+          <div class="user-stats">
+            <div class="mini-stat">
+              <strong>10</strong>
+              <span>Eventos</span>
+            </div>
+            <div class="mini-stat">
+              <strong>4</strong>
+              <span>Sessões</span>
+            </div>
+            <div class="mini-stat">
+              <strong>7</strong>
+              <span>Mensagens</span>
+            </div>
+            <div class="mini-stat">
+              <strong>0</strong>
+              <span>Calls</span>
+            </div>
+          </div>
+
+          <div class="event-types">
+            <span class="event-badge">presence_change: 2</span><span class="event-badge">message: 7</span><span class="event-badge">channel_join: 1</span>
+          </div>
+
+          <div class="sessions">
+            <h4>📅 Sessões de Atividade (4)</h4>
+            
+              <div class="session">
+                <div class="session-time">
+                  06:30:00 - 
+                  07:00:34
+                  <span style="color: #999; margin-left: 10px;">(3 eventos)</span>
+                </div>
+                <div class="session-duration">31min</div>
+              </div>
+            
+              <div class="session">
+                <div class="session-time">
+                  08:15:45 - 
+                  08:15:45
+                  <span style="color: #999; margin-left: 10px;">(1 eventos)</span>
+                </div>
+                <div class="session-duration">0min</div>
+              </div>
+            
+              <div class="session">
+                <div class="session-time">
+                  09:00:00 - 
+                  09:00:00
+                  <span style="color: #999; margin-left: 10px;">(1 eventos)</span>
+                </div>
+                <div class="session-duration">0min</div>
+              </div>
+            
+              <div class="session">
+                <div class="session-time">
+                  19:34:19 - 
+                  19:39:51
+                  <span style="color: #999; margin-left: 10px;">(5 eventos)</span>
+                </div>
+                <div class="session-duration">6min</div>
+              </div>
+            
+          </div>
+        </div>
+      
+        <div class="user-card">
+          <div class="user-header">
+            <div>
+              <div class="user-id">👤 victor-dev</div>
+              <div style="font-size: 0.9em; color: #666; margin-top: 5px;">📧 victtinho.ribeiro@gmail.com</div>
+            </div>
+            <div class="user-time">⏱️ 36min</div>
+          </div>
+
+          <div class="user-stats">
+            <div class="mini-stat">
+              <strong>10</strong>
+              <span>Eventos</span>
+            </div>
+            <div class="mini-stat">
+              <strong>6</strong>
+              <span>Sessões</span>
+            </div>
+            <div class="mini-stat">
+              <strong>6</strong>
+              <span>Mensagens</span>
+            </div>
+            <div class="mini-stat">
+              <strong>1</strong>
+              <span>Calls</span>
+            </div>
+          </div>
+
+          <div class="event-types">
+            <span class="event-badge">presence_change: 2</span><span class="event-badge">message: 6</span><span class="event-badge">huddle_start: 1</span><span class="event-badge">huddle_end: 1</span>
+          </div>
+
+          <div class="sessions">
+            <h4>📅 Sessões de Atividade (6)</h4>
+            
+              <div class="session">
+                <div class="session-time">
+                  06:00:00 - 
+                  06:30:12
+                  <span style="color: #999; margin-left: 10px;">(4 eventos)</span>
+                </div>
+                <div class="session-duration">30min</div>
+              </div>
+            
+              <div class="session">
+                <div class="session-time">
+                  07:15:34 - 
+                  07:20:56
+                  <span style="color: #999; margin-left: 10px;">(2 eventos)</span>
+                </div>
+                <div class="session-duration">5min</div>
+              </div>
+            
+              <div class="session">
+                <div class="session-time">
+                  11:00:00 - 
+                  11:00:00
+                  <span style="color: #999; margin-left: 10px;">(1 eventos)</span>
+                </div>
+                <div class="session-duration">0min</div>
+              </div>
+            
+              <div class="session">
+                <div class="session-time">
+                  11:30:22 - 
+                  11:30:22
+                  <span style="color: #999; margin-left: 10px;">(1 eventos)</span>
+                </div>
+                <div class="session-duration">0min</div>
+              </div>
+            
+              <div class="session">
+                <div class="session-time">
+                  12:45:11 - 
+                  12:45:11
+                  <span style="color: #999; margin-left: 10px;">(1 eventos)</span>
+                </div>
+                <div class="session-duration">0min</div>
+              </div>
+            
+              <div class="session">
+                <div class="session-time">
+                  13:30:00 - 
+                  13:30:00
+                  <span style="color: #999; margin-left: 10px;">(1 eventos)</span>
+                </div>
+                <div class="session-duration">0min</div>
+              </div>
+            
+          </div>
+        </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>Relatório gerado automaticamente pelo Slack Activity Logger</p>
+      <p>Modo: Sensor Passivo | Data: 14/01/2026, 19:48:00</p>
+    </div>
+  </div>
+</body>
+</html>
+    

@@ -1,0 +1,8 @@
+{
+    "excludeUsers": [
+        "U0A7T9TCX8B"
+    ],
+    "excludeBots": true,
+    "enrichUserData": true,
+    "sessionGapMinutes": 30
+}

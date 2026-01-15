@@ -1,0 +1,112 @@
+{
+  "date": "2026-01-14",
+  "totalEvents": 22,
+  "uniqueUsers": 2,
+  "users": [
+    {
+      "userId": "U0A83923VHA",
+      "userName": "Paulo victor",
+      "userEmail": "victuribdev@gmail.com",
+      "userDisplayName": "Paulo victor",
+      "totalEvents": 10,
+      "totalSessions": 4,
+      "totalActiveTime": 36.1095,
+      "totalActiveTimeFormatted": "36min",
+      "eventTypeCounts": {
+        "presence_change": 2,
+        "message": 7,
+        "channel_join": 1
+      },
+      "sessions": [
+        {
+          "start": "2026-01-14T09:30:00.000Z",
+          "end": "2026-01-14T10:00:34.000Z",
+          "duration": 30.566666666666666,
+          "durationFormatted": "31min",
+          "eventCount": 3
+        },
+        {
+          "start": "2026-01-14T11:15:45.000Z",
+          "end": "2026-01-14T11:15:45.000Z",
+          "duration": 0,
+          "durationFormatted": "0min",
+          "eventCount": 1
+        },
+        {
+          "start": "2026-01-14T12:00:00.000Z",
+          "end": "2026-01-14T12:00:00.000Z",
+          "duration": 0,
+          "durationFormatted": "0min",
+          "eventCount": 1
+        },
+        {
+          "start": "2026-01-14T22:34:19.353Z",
+          "end": "2026-01-14T22:39:51.923Z",
+          "duration": 5.542833333333333,
+          "durationFormatted": "6min",
+          "eventCount": 5
+        }
+      ]
+    },
+    {
+      "userId": "U0A8PDB3UJZ",
+      "userName": "victor-dev",
+      "userEmail": "victtinho.ribeiro@gmail.com",
+      "userDisplayName": "victor-dev",
+      "totalEvents": 10,
+      "totalSessions": 6,
+      "totalActiveTime": 35.56666666666666,
+      "totalActiveTimeFormatted": "36min",
+      "eventTypeCounts": {
+        "presence_change": 2,
+        "message": 6,
+        "huddle_start": 1,
+        "huddle_end": 1
+      },
+      "sessions": [
+        {
+          "start": "2026-01-14T09:00:00.000Z",
+          "end": "2026-01-14T09:30:12.000Z",
+          "duration": 30.2,
+          "durationFormatted": "30min",
+          "eventCount": 4
+        },
+        {
+          "start": "2026-01-14T10:15:34.000Z",
+          "end": "2026-01-14T10:20:56.000Z",
+          "duration": 5.366666666666666,
+          "durationFormatted": "5min",
+          "eventCount": 2
+        },
+        {
+          "start": "2026-01-14T14:00:00.000Z",
+          "end": "2026-01-14T14:00:00.000Z",
+          "duration": 0,
+          "durationFormatted": "0min",
+          "eventCount": 1
+        },
+        {
+          "start": "2026-01-14T14:30:22.000Z",
+          "end": "2026-01-14T14:30:22.000Z",
+          "duration": 0,
+          "durationFormatted": "0min",
+          "eventCount": 1
+        },
+        {
+          "start": "2026-01-14T15:45:11.000Z",
+          "end": "2026-01-14T15:45:11.000Z",
+          "duration": 0,
+          "durationFormatted": "0min",
+          "eventCount": 1
+        },
+        {
+          "start": "2026-01-14T16:30:00.000Z",
+          "end": "2026-01-14T16:30:00.000Z",
+          "duration": 0,
+          "durationFormatted": "0min",
+          "eventCount": 1
+        }
+      ]
+    }
+  ]
+}

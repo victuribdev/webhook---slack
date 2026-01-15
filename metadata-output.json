@@ -1,0 +1,6641 @@
+{
+  "Version": "4.0",
+  "xmlns:edmx": "http://docs.oasis-open.org/odata/ns/edmx",
+  "edmx:DataServices": {
+    "Schema": [
+      {
+        "Namespace": "Jibble.Workspace.Model",
+        "xmlns": "http://docs.oasis-open.org/odata/ns/edm",
+        "EntityType": [
+          {
+            "Name": "Activity",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "name",
+                "Type": "Edm.String",
+                "Nullable": "false",
+                "MaxLength": "250"
+              },
+              {
+                "Name": "code",
+                "Type": "Edm.String",
+                "MaxLength": "50"
+              },
+              {
+                "Name": "description",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "color",
+                "Type": "Edm.String",
+                "MaxLength": "6"
+              },
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "assignedGroups",
+                "Type": "Collection(Jibble.Workspace.Model.ActivityGroups)"
+              },
+              {
+                "Name": "status",
+                "Type": "Jibble.Common.Model.CommonStatus",
+                "Nullable": "false"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": {
+              "Name": "organization",
+              "Type": "Jibble.Workspace.Model.Organization",
+              "ReferentialConstraint": {
+                "Property": "organizationId",
+                "ReferencedProperty": "id"
+              }
+            }
+          },
+          {
+            "Name": "BreakRoundingHistoricalSettings",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "roundingSettings",
+                "Type": "Jibble.Common.Model.SettingTypes.Rounding.BreakRoundingSettings"
+              },
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "ownerId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "ownerType",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "settingType",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "validFrom",
+                "Type": "Edm.DateTimeOffset"
+              },
+              {
+                "Name": "validTo",
+                "Type": "Edm.DateTimeOffset"
+              },
+              {
+                "Name": "isInherited",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "parentSettingsId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "createdBy",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedBy",
+                "Type": "Edm.Guid"
+              }
+            ],
+            "NavigationProperty": {
+              "Name": "organization",
+              "Type": "Jibble.Workspace.Model.Organization",
+              "ReferentialConstraint": {
+                "Property": "organizationId",
+                "ReferencedProperty": "id"
+              }
+            }
+          },
+          {
+            "Name": "Calendar",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String",
+                "Nullable": "false",
+                "MaxLength": "250"
+              },
+              {
+                "Name": "default",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "importSourceId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "calendarImportSourceExtraOption",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "autoSync",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "lastRefreshedAt",
+                "Type": "Edm.DateTimeOffset"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "organization",
+                "Type": "Jibble.Workspace.Model.Organization",
+                "ReferentialConstraint": {
+                  "Property": "organizationId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "people",
+                "Type": "Collection(Jibble.Workspace.Model.Person)"
+              },
+              {
+                "Name": "groups",
+                "Type": "Collection(Jibble.Workspace.Model.Group)"
+              },
+              {
+                "Name": "importSource",
+                "Type": "Jibble.Workspace.Model.CalendarImportSource"
+              }
+            ]
+          },
+          {
+            "Name": "CalendarDay",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "calendarId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "date",
+                "Type": "Edm.Date",
+                "Nullable": "false"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String",
+                "Nullable": "false",
+                "MaxLength": "250"
+              },
+              {
+                "Name": "status",
+                "Type": "Jibble.Workspace.Model.DayStatus",
+                "Nullable": "false"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "rules",
+                "Type": "Collection(Jibble.Common.Model.DayRule)"
+              },
+              {
+                "Name": "isShortDay",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": {
+              "Name": "calendar",
+              "Type": "Jibble.Workspace.Model.Calendar",
+              "ReferentialConstraint": {
+                "Property": "calendarId",
+                "ReferencedProperty": "id"
+              }
+            }
+          },
+          {
+            "Name": "CalendarImportSource",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "availableRegions",
+                "Type": "Collection(Edm.String)"
+              },
+              {
+                "Name": "syncData",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "Client",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "name",
+                "Type": "Edm.String",
+                "Nullable": "false",
+                "MaxLength": "250"
+              },
+              {
+                "Name": "code",
+                "Type": "Edm.String",
+                "MaxLength": "50"
+              },
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "status",
+                "Type": "Jibble.Common.Model.CommonStatus",
+                "Nullable": "false"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "organization",
+                "Type": "Jibble.Workspace.Model.Organization",
+                "ReferentialConstraint": {
+                  "Property": "organizationId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "projects",
+                "Type": "Collection(Jibble.Workspace.Model.Project)"
+              }
+            ]
+          },
+          {
+            "Name": "DeletedOrganization",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "reason",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "reasonDescription",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "feedback",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "deletionTimestamp",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "EmploymentType",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "status",
+                "Type": "Jibble.Common.Model.CommonStatus",
+                "Nullable": "false"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": {
+              "Name": "organization",
+              "Type": "Jibble.Workspace.Model.Organization",
+              "ReferentialConstraint": {
+                "Property": "organizationId",
+                "ReferencedProperty": "id"
+              }
+            }
+          },
+          {
+            "Name": "History",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "entityType",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "entityId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "operation",
+                "Type": "Jibble.Common.Model.History.Operations",
+                "Nullable": "false"
+              },
+              {
+                "Name": "operationDate",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "authorId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "diff",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "authorInfo",
+                "Type": "Jibble.Common.Model.History.AuthorInfo"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "organization",
+                "Type": "Jibble.Workspace.Model.Organization",
+                "ReferentialConstraint": {
+                  "Property": "organizationId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "author",
+                "Type": "Jibble.Workspace.Model.Person"
+              }
+            ]
+          },
+          {
+            "Name": "InRoundingHistoricalSettings",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "roundingSettings",
+                "Type": "Jibble.Common.Model.SettingTypes.Rounding.InRoundingSettings"
+              },
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "ownerId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "ownerType",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "settingType",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "validFrom",
+                "Type": "Edm.DateTimeOffset"
+              },
+              {
+                "Name": "validTo",
+                "Type": "Edm.DateTimeOffset"
+              },
+              {
+                "Name": "isInherited",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "parentSettingsId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "createdBy",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedBy",
+                "Type": "Edm.Guid"
+              }
+            ],
+            "NavigationProperty": {
+              "Name": "organization",
+              "Type": "Jibble.Workspace.Model.Organization",
+              "ReferentialConstraint": {
+                "Property": "organizationId",
+                "ReferencedProperty": "id"
+              }
+            }
+          },
+          {
+            "Name": "InvitationLink",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "isActive",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "link",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": {
+              "Name": "organization",
+              "Type": "Jibble.Workspace.Model.Organization",
+              "ReferentialConstraint": {
+                "Property": "organizationId",
+                "ReferencedProperty": "id"
+              }
+            }
+          },
+          {
+            "Name": "Kiosk",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "locationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String",
+                "Nullable": "false",
+                "MaxLength": "64"
+              },
+              {
+                "Name": "masterPinCode",
+                "Type": "Edm.String",
+                "Nullable": "false",
+                "MaxLength": "4"
+              },
+              {
+                "Name": "people",
+                "Type": "Collection(Jibble.Workspace.Model.PersonKiosk)"
+              },
+              {
+                "Name": "groups",
+                "Type": "Collection(Jibble.Workspace.Model.GroupKiosk)"
+              },
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "status",
+                "Type": "Jibble.Common.Model.CommonStatus",
+                "Nullable": "false"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "faceRecognitionModelId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "location",
+                "Type": "Jibble.Workspace.Model.Location",
+                "ReferentialConstraint": {
+                  "Property": "locationId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "organization",
+                "Type": "Jibble.Workspace.Model.Organization",
+                "ReferentialConstraint": {
+                  "Property": "organizationId",
+                  "ReferencedProperty": "id"
+                }
+              }
+            ]
+          },
+          {
+            "Name": "KioskDeviceAssignment",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "kioskId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "deviceId",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "kiosk",
+                "Type": "Jibble.Workspace.Model.Kiosk",
+                "ReferentialConstraint": {
+                  "Property": "kioskId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "organization",
+                "Type": "Jibble.Workspace.Model.Organization",
+                "ReferentialConstraint": {
+                  "Property": "organizationId",
+                  "ReferencedProperty": "id"
+                }
+              }
+            ]
+          },
+          {
+            "Name": "Location",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String",
+                "Nullable": "false",
+                "MaxLength": "100"
+              },
+              {
+                "Name": "code",
+                "Type": "Edm.String",
+                "MaxLength": "50"
+              },
+              {
+                "Name": "address",
+                "Type": "Edm.String",
+                "Nullable": "false",
+                "MaxLength": "1000"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "geoFence",
+                "Type": "Jibble.Workspace.Model.EnhancedGeoFence"
+              },
+              {
+                "Name": "coordinates",
+                "Type": "Jibble.Common.Model.Coordinates"
+              },
+              {
+                "Name": "status",
+                "Type": "Jibble.Common.Model.CommonStatus",
+                "Nullable": "false"
+              },
+              {
+                "Name": "schedules",
+                "Type": "Collection(Jibble.Workspace.Model.ScheduleLocation)"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "organization",
+                "Type": "Jibble.Workspace.Model.Organization",
+                "ReferentialConstraint": {
+                  "Property": "organizationId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "usedInSchedules",
+                "Type": "Collection(Jibble.Workspace.Model.Schedule)"
+              }
+            ]
+          },
+          {
+            "Name": "NpsAnswer",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "userId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "date",
+                "Type": "Edm.DateTimeOffset"
+              },
+              {
+                "Name": "scheduledDate",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "dismissed",
+                "Type": "Edm.Boolean"
+              },
+              {
+                "Name": "score",
+                "Type": "Edm.Int32"
+              },
+              {
+                "Name": "feedback",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "platform",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "withReview",
+                "Type": "Edm.Boolean"
+              },
+              {
+                "Name": "retryCount",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": {
+              "Name": "user",
+              "Type": "Jibble.Workspace.Model.User",
+              "ReferentialConstraint": {
+                "Property": "userId",
+                "ReferencedProperty": "id"
+              }
+            }
+          },
+          {
+            "Name": "NpsReview",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "userId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "scheduledDate",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "retryCount",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "status",
+                "Type": "Jibble.Workspace.Model.NpsReviewStatus",
+                "Nullable": "false"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": {
+              "Name": "user",
+              "Type": "Jibble.Workspace.Model.User",
+              "ReferentialConstraint": {
+                "Property": "userId",
+                "ReferencedProperty": "id"
+              }
+            }
+          },
+          {
+            "Name": "OutRoundingHistoricalSettings",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "roundingSettings",
+                "Type": "Jibble.Common.Model.SettingTypes.Rounding.OutRoundingSettings"
+              },
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "ownerId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "ownerType",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "settingType",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "validFrom",
+                "Type": "Edm.DateTimeOffset"
+              },
+              {
+                "Name": "validTo",
+                "Type": "Edm.DateTimeOffset"
+              },
+              {
+                "Name": "isInherited",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "parentSettingsId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "createdBy",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedBy",
+                "Type": "Edm.Guid"
+              }
+            ],
+            "NavigationProperty": {
+              "Name": "organization",
+              "Type": "Jibble.Workspace.Model.Organization",
+              "ReferentialConstraint": {
+                "Property": "organizationId",
+                "ReferencedProperty": "id"
+              }
+            }
+          },
+          {
+            "Name": "PayPeriodDefinition",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "cycle",
+                "Type": "Jibble.Common.Model.PayPeriodCycle",
+                "Nullable": "false"
+              },
+              {
+                "Name": "startAtDayOfWeek",
+                "Type": "System.DayOfWeek"
+              },
+              {
+                "Name": "startFromDate",
+                "Type": "Edm.Date"
+              },
+              {
+                "Name": "startAtDayNumberFirst",
+                "Type": "Edm.Int32"
+              },
+              {
+                "Name": "startAtDayNumberSecond",
+                "Type": "Edm.Int32"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "default",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": {
+              "Name": "organization",
+              "Type": "Jibble.Workspace.Model.Organization",
+              "ReferentialConstraint": {
+                "Property": "organizationId",
+                "ReferencedProperty": "id"
+              }
+            }
+          },
+          {
+            "Name": "Payslip",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "name",
+                "Type": "Edm.String",
+                "Nullable": "false"
+              },
+              {
+                "Name": "releasedAt",
+                "Type": "Edm.Date",
+                "Nullable": "false"
+              },
+              {
+                "Name": "url",
+                "Type": "Edm.String",
+                "Nullable": "false"
+              },
+              {
+                "Name": "externalProvider",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "personId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "person",
+                "Type": "Jibble.Workspace.Model.Person",
+                "ReferentialConstraint": {
+                  "Property": "personId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "organization",
+                "Type": "Jibble.Workspace.Model.Organization",
+                "ReferentialConstraint": {
+                  "Property": "organizationId",
+                  "ReferencedProperty": "id"
+                }
+              }
+            ]
+          },
+          {
+            "Name": "Unit",
+            "Abstract": "true",
+            "OpenType": "true",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "overriddenProperties",
+                "Type": "Collection(Edm.String)"
+              },
+              {
+                "Name": "projects",
+                "Type": "Collection(Jibble.Workspace.Model.ProjectUnit)"
+              },
+              {
+                "Name": "workTypes",
+                "Type": "Collection(Jibble.Workspace.Model.WorkTypeUnit)"
+              },
+              {
+                "Name": "managers",
+                "Type": "Collection(Jibble.Workspace.Model.ManagerMapping)"
+              },
+              {
+                "Name": "calendarId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "scheduleId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "payPeriodDefinitionId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "unitTimeOffPolicies",
+                "Type": "Collection(Jibble.Workspace.Model.UnitTimeOffPolicy)"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "settingItems",
+                "Type": "Collection(Jibble.Workspace.ViewModels.SettingItem)",
+                "ContainsTarget": "true"
+              },
+              {
+                "Name": "organization",
+                "Type": "Jibble.Workspace.Model.Organization",
+                "ReferentialConstraint": {
+                  "Property": "organizationId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "unitManagers",
+                "Type": "Collection(Jibble.Workspace.Model.Person)"
+              },
+              {
+                "Name": "calendar",
+                "Type": "Jibble.Workspace.Model.Calendar",
+                "ReferentialConstraint": {
+                  "Property": "calendarId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "schedule",
+                "Type": "Jibble.Workspace.Model.Schedule",
+                "ReferentialConstraint": {
+                  "Property": "scheduleId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "payPeriodDefinition",
+                "Type": "Jibble.Workspace.Model.PayPeriodDefinition",
+                "ReferentialConstraint": {
+                  "Property": "payPeriodDefinitionId",
+                  "ReferencedProperty": "id"
+                }
+              }
+            ]
+          },
+          {
+            "Name": "Person",
+            "BaseType": "Jibble.Workspace.Model.Unit",
+            "OpenType": "true",
+            "Property": [
+              {
+                "Name": "groupId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "positionId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "employmentTypeId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "userId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "joinDate",
+                "Type": "Edm.DateTimeOffset"
+              },
+              {
+                "Name": "email",
+                "Type": "Edm.String",
+                "MaxLength": "320"
+              },
+              {
+                "Name": "phoneNumber",
+                "Type": "Edm.String",
+                "MaxLength": "16"
+              },
+              {
+                "Name": "countryCode",
+                "Type": "Edm.String",
+                "MaxLength": "2"
+              },
+              {
+                "Name": "picture",
+                "Type": "Jibble.Common.Abstractions.FileData"
+              },
+              {
+                "Name": "fullName",
+                "Type": "Edm.String",
+                "Nullable": "false"
+              },
+              {
+                "Name": "preferredName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "role",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "managedUnits",
+                "Type": "Collection(Jibble.Workspace.Model.ManagerMapping)"
+              },
+              {
+                "Name": "kiosks",
+                "Type": "Collection(Jibble.Workspace.Model.PersonKiosk)"
+              },
+              {
+                "Name": "status",
+                "Type": "Jibble.Common.Model.PersonStatus",
+                "Nullable": "false"
+              },
+              {
+                "Name": "code",
+                "Type": "Edm.String",
+                "MaxLength": "50"
+              },
+              {
+                "Name": "pinCode",
+                "Type": "Edm.String",
+                "MaxLength": "4"
+              },
+              {
+                "Name": "invitedAt",
+                "Type": "Edm.DateTimeOffset"
+              },
+              {
+                "Name": "removedAt",
+                "Type": "Edm.DateTimeOffset"
+              },
+              {
+                "Name": "hasEmbeddings",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "nfcToken",
+                "Type": "Edm.String",
+                "MaxLength": "255"
+              },
+              {
+                "Name": "workStartDate",
+                "Type": "Edm.Date",
+                "Nullable": "false"
+              },
+              {
+                "Name": "latestTimeEntryTime",
+                "Type": "Edm.DateTimeOffset"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "group",
+                "Type": "Jibble.Workspace.Model.Group",
+                "ReferentialConstraint": {
+                  "Property": "groupId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "position",
+                "Type": "Jibble.Workspace.Model.Position",
+                "ReferentialConstraint": {
+                  "Property": "positionId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "employmentType",
+                "Type": "Jibble.Workspace.Model.EmploymentType",
+                "ReferentialConstraint": {
+                  "Property": "employmentTypeId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "managed",
+                "Type": "Collection(Jibble.Workspace.Model.Unit)"
+              },
+              {
+                "Name": "payslips",
+                "Type": "Collection(Jibble.Workspace.Model.Payslip)"
+              }
+            ]
+          },
+          {
+            "Name": "PersonFaceData",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "personId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "version",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "embeddings",
+                "Type": "Collection(Edm.String)"
+              },
+              {
+                "Name": "picture",
+                "Type": "Jibble.Common.Abstractions.FileData"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "person",
+                "Type": "Jibble.Workspace.Model.Person",
+                "ReferentialConstraint": {
+                  "Property": "personId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "organization",
+                "Type": "Jibble.Workspace.Model.Organization",
+                "ReferentialConstraint": {
+                  "Property": "organizationId",
+                  "ReferencedProperty": "id"
+                }
+              }
+            ]
+          },
+          {
+            "Name": "PersonFaceDataPictureHistory",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "picture",
+                "Type": "Jibble.Common.Abstractions.FileData"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "personId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": {
+              "Name": "person",
+              "Type": "Jibble.Workspace.Model.Person",
+              "ReferentialConstraint": {
+                "Property": "personId",
+                "ReferencedProperty": "id"
+              }
+            }
+          },
+          {
+            "Name": "Position",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "status",
+                "Type": "Jibble.Common.Model.CommonStatus",
+                "Nullable": "false"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": {
+              "Name": "organization",
+              "Type": "Jibble.Workspace.Model.Organization",
+              "ReferentialConstraint": {
+                "Property": "organizationId",
+                "ReferencedProperty": "id"
+              }
+            }
+          },
+          {
+            "Name": "Project",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "name",
+                "Type": "Edm.String",
+                "Nullable": "false",
+                "MaxLength": "250"
+              },
+              {
+                "Name": "code",
+                "Type": "Edm.String",
+                "MaxLength": "50"
+              },
+              {
+                "Name": "description",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "clientId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "locationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "assignees",
+                "Type": "Collection(Jibble.Workspace.Model.ProjectUnit)"
+              },
+              {
+                "Name": "status",
+                "Type": "Jibble.Common.Model.CommonStatus",
+                "Nullable": "false"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "organization",
+                "Type": "Jibble.Workspace.Model.Organization",
+                "ReferentialConstraint": {
+                  "Property": "organizationId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "client",
+                "Type": "Jibble.Workspace.Model.Client",
+                "ReferentialConstraint": {
+                  "Property": "clientId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "location",
+                "Type": "Jibble.Workspace.Model.Location",
+                "ReferentialConstraint": {
+                  "Property": "locationId",
+                  "ReferencedProperty": "id"
+                }
+              }
+            ]
+          },
+          {
+            "Name": "RuleSet",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "name",
+                "Type": "Edm.String",
+                "Nullable": "false",
+                "MaxLength": "64"
+              },
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "status",
+                "Type": "Jibble.Common.CustomRules.RuleStatus",
+                "Nullable": "false"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "order",
+                "Type": "Edm.Single",
+                "Nullable": "false"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "organization",
+                "Type": "Jibble.Workspace.Model.Organization",
+                "ReferentialConstraint": {
+                  "Property": "organizationId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "validationRules",
+                "Type": "Collection(Jibble.Workspace.Model.ValidationRule)"
+              }
+            ]
+          },
+          {
+            "Name": "Schedule",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "workArrangement",
+                "Type": "Jibble.Common.Model.WorkArrangement",
+                "Nullable": "false"
+              },
+              {
+                "Name": "default",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "daySchedules",
+                "Type": "Collection(Jibble.Common.Model.DaySchedule)"
+              },
+              {
+                "Name": "autoDeductions",
+                "Type": "Collection(Jibble.Common.Model.AutoBreak)"
+              },
+              {
+                "Name": "breaks",
+                "Type": "Collection(Jibble.Common.Model.Break)"
+              },
+              {
+                "Name": "locations",
+                "Type": "Collection(Jibble.Workspace.Model.ScheduleLocation)"
+              },
+              {
+                "Name": "breaksType",
+                "Type": "Jibble.Common.Model.BreakType",
+                "Nullable": "false"
+              },
+              {
+                "Name": "overtime",
+                "Type": "Jibble.Common.Model.Overtime"
+              },
+              {
+                "Name": "weeklyHours",
+                "Type": "Edm.Duration"
+              },
+              {
+                "Name": "excludeEarlyClockIn",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "geofencingLocations",
+                "Type": "Collection(Jibble.Workspace.Model.Location)"
+              },
+              {
+                "Name": "people",
+                "Type": "Collection(Jibble.Workspace.Model.Person)"
+              },
+              {
+                "Name": "groups",
+                "Type": "Collection(Jibble.Workspace.Model.Group)"
+              },
+              {
+                "Name": "organization",
+                "Type": "Jibble.Workspace.Model.Organization",
+                "ReferentialConstraint": {
+                  "Property": "organizationId",
+                  "ReferencedProperty": "id"
+                }
+              }
+            ]
+          },
+          {
+            "Name": "SettingDefinition",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "level",
+                "Type": "Jibble.Common.Model.SettingLevel",
+                "Nullable": "false"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "description",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "service",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": {
+              "Name": "settingProperties",
+              "Type": "Collection(Jibble.Workspace.Model.SettingProperty)",
+              "ContainsTarget": "true"
+            }
+          },
+          {
+            "Name": "SettingEnum",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "type",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "identifier",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "description",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "SettingProperty",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "settingDefinitionId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "path",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "description",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "type",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "defaultValue",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": {
+              "Name": "settingDefinition",
+              "Type": "Jibble.Workspace.Model.SettingDefinition",
+              "ReferentialConstraint": {
+                "Property": "settingDefinitionId",
+                "ReferencedProperty": "id"
+              }
+            }
+          },
+          {
+            "Name": "TimeOffPolicy",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "approvalConfigId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "compensation",
+                "Type": "Jibble.Common.Model.TimeOff.Compensation",
+                "Nullable": "false"
+              },
+              {
+                "Name": "kind",
+                "Type": "Jibble.Common.Model.TimeOff.LeaveIntervalKind",
+                "Nullable": "false"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "status",
+                "Type": "Jibble.Common.Model.CommonStatus",
+                "Nullable": "false"
+              },
+              {
+                "Name": "accrualSettings",
+                "Type": "Jibble.Common.Model.TimeOff.ValueObjects.AccrualSettings"
+              },
+              {
+                "Name": "balanceRules",
+                "Type": "Jibble.Common.Model.TimeOff.ValueObjects.BalanceRules"
+              },
+              {
+                "Name": "timeOffPolicyUnits",
+                "Type": "Collection(Jibble.Workspace.Model.UnitTimeOffPolicy)"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "organization",
+                "Type": "Jibble.Workspace.Model.Organization",
+                "ReferentialConstraint": {
+                  "Property": "organizationId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "approvalConfig",
+                "Type": "Jibble.Workspace.Model.Approval.ApprovalConfig",
+                "ReferentialConstraint": {
+                  "Property": "approvalConfigId",
+                  "ReferencedProperty": "id"
+                }
+              }
+            ]
+          },
+          {
+            "Name": "TrackedDataChange",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "personId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "oldEmail",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "newEmail",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "oldPhoneNumber",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "newPhoneNumber",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "changedOn",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "notifiedOn",
+                "Type": "Edm.DateTimeOffset"
+              },
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": {
+              "Name": "organization",
+              "Type": "Jibble.Workspace.Model.Organization",
+              "ReferentialConstraint": {
+                "Property": "organizationId",
+                "ReferencedProperty": "id"
+              }
+            }
+          },
+          {
+            "Name": "User",
+            "OpenType": "true",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "email",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "phoneNumber",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "fullName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "emailConfirmed",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "phoneNumberConfirmed",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": {
+              "Name": "settingItems",
+              "Type": "Collection(Jibble.Workspace.ViewModels.SettingItem)",
+              "ContainsTarget": "true"
+            }
+          },
+          {
+            "Name": "ValidationRule",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "ruleSetId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String",
+                "Nullable": "false",
+                "MaxLength": "64"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "entityName",
+                "Type": "Edm.String",
+                "Nullable": "false",
+                "MaxLength": "64"
+              },
+              {
+                "Name": "condition",
+                "Type": "Edm.String",
+                "Nullable": "false"
+              },
+              {
+                "Name": "message",
+                "Type": "Edm.String",
+                "Nullable": "false"
+              },
+              {
+                "Name": "order",
+                "Type": "Edm.Single",
+                "Nullable": "false"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "ruleSet",
+                "Type": "Jibble.Workspace.Model.RuleSet",
+                "ReferentialConstraint": {
+                  "Property": "ruleSetId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "organization",
+                "Type": "Jibble.Workspace.Model.Organization",
+                "ReferentialConstraint": {
+                  "Property": "organizationId",
+                  "ReferencedProperty": "id"
+                }
+              }
+            ]
+          },
+          {
+            "Name": "WorkType",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "category",
+                "Type": "Jibble.Workspace.Model.WorkCategory",
+                "Nullable": "false"
+              },
+              {
+                "Name": "units",
+                "Type": "Collection(Jibble.Workspace.Model.WorkTypeUnit)"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": {
+              "Name": "organization",
+              "Type": "Jibble.Workspace.Model.Organization",
+              "ReferentialConstraint": {
+                "Property": "organizationId",
+                "ReferencedProperty": "id"
+              }
+            }
+          },
+          {
+            "Name": "Organization",
+            "OpenType": "true",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "status",
+                "Type": "Jibble.Common.Model.CommonStatus",
+                "Nullable": "false"
+              },
+              {
+                "Name": "faceRecognitionModelId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "settingItems",
+                "Type": "Collection(Jibble.Workspace.ViewModels.SettingItem)",
+                "ContainsTarget": "true"
+              },
+              {
+                "Name": "units",
+                "Type": "Collection(Jibble.Workspace.Model.Unit)"
+              },
+              {
+                "Name": "locations",
+                "Type": "Collection(Jibble.Workspace.Model.Location)"
+              },
+              {
+                "Name": "activities",
+                "Type": "Collection(Jibble.Workspace.Model.Activity)"
+              },
+              {
+                "Name": "projects",
+                "Type": "Collection(Jibble.Workspace.Model.Project)"
+              },
+              {
+                "Name": "schedules",
+                "Type": "Collection(Jibble.Workspace.Model.Schedule)"
+              },
+              {
+                "Name": "positions",
+                "Type": "Collection(Jibble.Workspace.Model.Position)"
+              },
+              {
+                "Name": "clients",
+                "Type": "Collection(Jibble.Workspace.Model.Client)"
+              }
+            ]
+          },
+          {
+            "Name": "Group",
+            "BaseType": "Jibble.Workspace.Model.Unit",
+            "OpenType": "true",
+            "Property": [
+              {
+                "Name": "name",
+                "Type": "Edm.String",
+                "Nullable": "false",
+                "MaxLength": "250"
+              },
+              {
+                "Name": "kiosks",
+                "Type": "Collection(Jibble.Workspace.Model.GroupKiosk)"
+              },
+              {
+                "Name": "status",
+                "Type": "Jibble.Common.Model.CommonStatus",
+                "Nullable": "false"
+              },
+              {
+                "Name": "firstApprovers",
+                "Type": "Collection(Jibble.Workspace.Model.GroupFirstApprover)"
+              },
+              {
+                "Name": "secondApprovers",
+                "Type": "Collection(Jibble.Workspace.Model.GroupSecondApprover)"
+              },
+              {
+                "Name": "activities",
+                "Type": "Collection(Jibble.Workspace.Model.ActivityGroups)"
+              }
+            ],
+            "NavigationProperty": {
+              "Name": "members",
+              "Type": "Collection(Jibble.Workspace.Model.Person)"
+            }
+          },
+          {
+            "Name": "PersonInfo",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "preferredName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "fullName",
+                "Type": "Edm.String"
+              }
+            ]
+          },
+          {
+            "Name": "KioskSummary",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "totalPeople",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              }
+            ]
+          }
+        ],
+        "ComplexType": [
+          {
+            "Name": "ProjectUnit",
+            "Property": [
+              {
+                "Name": "projectId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "unitId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "project",
+                "Type": "Jibble.Workspace.Model.Project"
+              },
+              {
+                "Name": "unit",
+                "Type": "Jibble.Workspace.Model.Unit"
+              }
+            ]
+          },
+          {
+            "Name": "EnhancedGeoFence",
+            "BaseType": "Jibble.Common.Model.GeoFence",
+            "Property": {
+              "Name": "radiusInMeters",
+              "Type": "Edm.Double",
+              "Nullable": "false"
+            }
+          },
+          {
+            "Name": "ScheduleLocation",
+            "Property": [
+              {
+                "Name": "scheduleId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "locationId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "schedule",
+                "Type": "Jibble.Workspace.Model.Schedule"
+              },
+              {
+                "Name": "location",
+                "Type": "Jibble.Workspace.Model.Location"
+              }
+            ]
+          },
+          {
+            "Name": "GroupKiosk",
+            "Property": [
+              {
+                "Name": "groupId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "kioskId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "group",
+                "Type": "Jibble.Workspace.Model.Group"
+              },
+              {
+                "Name": "kiosk",
+                "Type": "Jibble.Workspace.Model.Kiosk"
+              }
+            ]
+          },
+          {
+            "Name": "PersonKiosk",
+            "Property": [
+              {
+                "Name": "personId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "kioskId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "person",
+                "Type": "Jibble.Workspace.Model.Person"
+              },
+              {
+                "Name": "kiosk",
+                "Type": "Jibble.Workspace.Model.Kiosk"
+              }
+            ]
+          },
+          {
+            "Name": "GroupFirstApprover",
+            "Property": [
+              {
+                "Name": "groupId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "approverId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "group",
+                "Type": "Jibble.Workspace.Model.Group"
+              },
+              {
+                "Name": "approver",
+                "Type": "Jibble.Workspace.Model.Person"
+              }
+            ]
+          },
+          {
+            "Name": "GroupSecondApprover",
+            "Property": [
+              {
+                "Name": "groupId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "approverId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "group",
+                "Type": "Jibble.Workspace.Model.Group"
+              },
+              {
+                "Name": "approver",
+                "Type": "Jibble.Workspace.Model.Person"
+              }
+            ]
+          },
+          {
+            "Name": "ActivityGroups",
+            "Property": [
+              {
+                "Name": "activityId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "groupId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "activity",
+                "Type": "Jibble.Workspace.Model.Activity"
+              },
+              {
+                "Name": "group",
+                "Type": "Jibble.Workspace.Model.Group"
+              }
+            ]
+          },
+          {
+            "Name": "WorkTypeUnit",
+            "Property": [
+              {
+                "Name": "workTypeId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "unitId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "workType",
+                "Type": "Jibble.Workspace.Model.WorkType"
+              },
+              {
+                "Name": "unit",
+                "Type": "Jibble.Workspace.Model.Unit"
+              }
+            ]
+          },
+          {
+            "Name": "ManagerMapping",
+            "Property": [
+              {
+                "Name": "unitId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "managerId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "unit",
+                "Type": "Jibble.Workspace.Model.Unit"
+              },
+              {
+                "Name": "manager",
+                "Type": "Jibble.Workspace.Model.Person"
+              }
+            ]
+          },
+          {
+            "Name": "UnitTimeOffPolicy",
+            "Property": [
+              {
+                "Name": "unitId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "timeOffPolicyId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "joinedAt",
+                "Type": "Edm.Date",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "unit",
+                "Type": "Jibble.Workspace.Model.Unit"
+              },
+              {
+                "Name": "timeOffPolicy",
+                "Type": "Jibble.Workspace.Model.TimeOffPolicy"
+              }
+            ]
+          }
+        ],
+        "EnumType": [
+          {
+            "Name": "WorkCategory",
+            "Member": {
+              "Name": "None",
+              "Value": "0"
+            }
+          },
+          {
+            "Name": "DayStatus",
+            "Member": [
+              {
+                "Name": "Manual",
+                "Value": "0"
+              },
+              {
+                "Name": "Imported",
+                "Value": "1"
+              }
+            ]
+          },
+          {
+            "Name": "NpsReviewStatus",
+            "Member": [
+              {
+                "Name": "Waiting",
+                "Value": "0"
+              },
+              {
+                "Name": "Dismissed",
+                "Value": "1"
+              },
+              {
+                "Name": "Accepted",
+                "Value": "2"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Namespace": "Jibble.Workspace.Model.Approval",
+        "xmlns": "http://docs.oasis-open.org/odata/ns/edm",
+        "EntityType": [
+          {
+            "Name": "ApprovalConfig",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "default",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String",
+                "Nullable": "false",
+                "MaxLength": "250"
+              },
+              {
+                "Name": "description",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "status",
+                "Type": "Jibble.Common.Model.CommonStatus",
+                "Nullable": "false"
+              },
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "organization",
+                "Type": "Jibble.Workspace.Model.Organization",
+                "ReferentialConstraint": {
+                  "Property": "organizationId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "rules",
+                "Type": "Collection(Jibble.Workspace.Model.Approval.ApprovalRule)"
+              }
+            ]
+          },
+          {
+            "Name": "ApprovalRule",
+            "Abstract": "true",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "approvalConfigId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "order",
+                "Type": "Edm.Single",
+                "Nullable": "false"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": {
+              "Name": "approvalConfig",
+              "Type": "Jibble.Workspace.Model.Approval.ApprovalConfig",
+              "ReferentialConstraint": {
+                "Property": "approvalConfigId",
+                "ReferencedProperty": "id"
+              }
+            }
+          },
+          {
+            "Name": "SimpleApprovalRule",
+            "BaseType": "Jibble.Workspace.Model.Approval.ApprovalRule",
+            "Property": [
+              {
+                "Name": "groupManagers",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "directManagers",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "admin",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "owner",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "individuals",
+                "Type": "Collection(Jibble.Workspace.Model.Approval.IndividualApprover)"
+              },
+              {
+                "Name": "groups",
+                "Type": "Collection(Jibble.Workspace.Model.Approval.GroupApprover)"
+              }
+            ]
+          }
+        ],
+        "ComplexType": [
+          {
+            "Name": "IndividualApprover",
+            "Property": [
+              {
+                "Name": "personId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "approvalRuleId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "person",
+                "Type": "Jibble.Workspace.Model.Person"
+              },
+              {
+                "Name": "approvalRule",
+                "Type": "Jibble.Workspace.Model.Approval.SimpleApprovalRule"
+              }
+            ]
+          },
+          {
+            "Name": "GroupApprover",
+            "Property": [
+              {
+                "Name": "groupId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "approvalRuleId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "group",
+                "Type": "Jibble.Workspace.Model.Group"
+              },
+              {
+                "Name": "approvalRule",
+                "Type": "Jibble.Workspace.Model.Approval.SimpleApprovalRule"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Namespace": "Jibble.Workspace.Data",
+        "xmlns": "http://docs.oasis-open.org/odata/ns/edm",
+        "EntityType": {
+          "Name": "OnboardingProgress",
+          "Key": {
+            "PropertyRef": {
+              "Name": "id"
+            }
+          },
+          "Property": [
+            {
+              "Name": "locationsOnboarded",
+              "Type": "Edm.Boolean",
+              "Nullable": "false"
+            },
+            {
+              "Name": "activitiesOnboarded",
+              "Type": "Edm.Boolean",
+              "Nullable": "false"
+            },
+            {
+              "Name": "rulesOnboarded",
+              "Type": "Edm.Boolean",
+              "Nullable": "false"
+            },
+            {
+              "Name": "membersOnboarded",
+              "Type": "Edm.Boolean",
+              "Nullable": "false"
+            },
+            {
+              "Name": "scheduleOnboarded",
+              "Type": "Edm.Boolean",
+              "Nullable": "false"
+            },
+            {
+              "Name": "kioskOnboarded",
+              "Type": "Edm.Boolean",
+              "Nullable": "false"
+            },
+            {
+              "Name": "welcomePresented",
+              "Type": "Edm.Boolean",
+              "Nullable": "false"
+            },
+            {
+              "Name": "id",
+              "Type": "Edm.Guid",
+              "Nullable": "false"
+            }
+          ]
+        }
+      },
+      {
+        "Namespace": "Jibble.Common.Model",
+        "xmlns": "http://docs.oasis-open.org/odata/ns/edm",
+        "ComplexType": [
+          {
+            "Name": "Break",
+            "Property": [
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "from",
+                "Type": "Edm.TimeOfDay"
+              },
+              {
+                "Name": "to",
+                "Type": "Edm.TimeOfDay"
+              },
+              {
+                "Name": "allowToBeTakenFromTo",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "duration",
+                "Type": "Edm.Duration"
+              }
+            ]
+          },
+          {
+            "Name": "NamedEntity",
+            "Property": [
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              }
+            ]
+          },
+          {
+            "Name": "PersonHoliday",
+            "Property": [
+              {
+                "Name": "date",
+                "Type": "Edm.Date",
+                "Nullable": "false"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "rules",
+                "Type": "Collection(Jibble.Common.Model.DayRule)"
+              },
+              {
+                "Name": "isShortDay",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "PersonSchedule",
+            "Property": [
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "workArrangement",
+                "Type": "Jibble.Common.Model.WorkArrangement",
+                "Nullable": "false"
+              },
+              {
+                "Name": "default",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "daySchedules",
+                "Type": "Collection(Jibble.Common.Model.DaySchedule)"
+              },
+              {
+                "Name": "autoDeductions",
+                "Type": "Collection(Jibble.Common.Model.AutoBreak)"
+              },
+              {
+                "Name": "breaks",
+                "Type": "Collection(Jibble.Common.Model.Break)"
+              },
+              {
+                "Name": "overtime",
+                "Type": "Jibble.Common.Model.Overtime"
+              },
+              {
+                "Name": "excludeEarlyClockIn",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "breaksType",
+                "Type": "Jibble.Common.Model.BreakType",
+                "Nullable": "false"
+              },
+              {
+                "Name": "weeklyHours",
+                "Type": "Edm.Duration"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "PersonActivity",
+            "Property": [
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "code",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "description",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "color",
+                "Type": "Edm.String"
+              }
+            ]
+          },
+          {
+            "Name": "PersonProject",
+            "Property": [
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "code",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "description",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "clientId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "locationId",
+                "Type": "Edm.Guid"
+              }
+            ]
+          },
+          {
+            "Name": "PersonGeoFence",
+            "Property": [
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "address",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "geoFence",
+                "Type": "Jibble.Common.Model.GeoFence"
+              },
+              {
+                "Name": "coordinates",
+                "Type": "Jibble.Common.Model.Coordinates"
+              }
+            ]
+          },
+          {
+            "Name": "PersonGeoFenceWithDistance",
+            "BaseType": "Jibble.Common.Model.PersonGeoFence",
+            "Property": [
+              {
+                "Name": "distance",
+                "Type": "Edm.Double",
+                "Nullable": "false"
+              },
+              {
+                "Name": "isInside",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "GeoFence",
+            "Property": [
+              {
+                "Name": "radius",
+                "Type": "Edm.Double",
+                "Nullable": "false"
+              },
+              {
+                "Name": "units",
+                "Type": "Jibble.Common.Model.GeoUnits",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "Coordinates",
+            "Property": [
+              {
+                "Name": "latitude",
+                "Type": "Edm.Double",
+                "Nullable": "false"
+              },
+              {
+                "Name": "longitude",
+                "Type": "Edm.Double",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "DaySchedule",
+            "Property": [
+              {
+                "Name": "day",
+                "Type": "System.DayOfWeek",
+                "Nullable": "false"
+              },
+              {
+                "Name": "from",
+                "Type": "Edm.TimeOfDay"
+              },
+              {
+                "Name": "to",
+                "Type": "Edm.TimeOfDay"
+              },
+              {
+                "Name": "duration",
+                "Type": "Edm.Duration"
+              }
+            ]
+          },
+          {
+            "Name": "AutoBreak",
+            "Property": [
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "duration",
+                "Type": "Edm.Duration",
+                "Nullable": "false"
+              },
+              {
+                "Name": "threshold",
+                "Type": "Edm.Duration"
+              }
+            ]
+          },
+          {
+            "Name": "Overtime",
+            "Property": [
+              {
+                "Name": "timeRangeStyle",
+                "Type": "Jibble.Common.Model.TimeRangeStyle",
+                "Nullable": "false"
+              },
+              {
+                "Name": "dailyOvertime",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "dailyFrom",
+                "Type": "Edm.TimeOfDay"
+              },
+              {
+                "Name": "dailyDuration",
+                "Type": "Edm.Duration"
+              },
+              {
+                "Name": "dailyOvertimeMultiplier",
+                "Type": "Edm.Double"
+              },
+              {
+                "Name": "dailyDoubleOvertime",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "dailyDoubleFrom",
+                "Type": "Edm.TimeOfDay"
+              },
+              {
+                "Name": "dailyDoubleDuration",
+                "Type": "Edm.Duration"
+              },
+              {
+                "Name": "dailyDoubleOvertimeMultiplier",
+                "Type": "Edm.Double"
+              },
+              {
+                "Name": "weeklyOvertime",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "weeklyDuration",
+                "Type": "Edm.Duration"
+              },
+              {
+                "Name": "weeklyOvertimeMultiplier",
+                "Type": "Edm.Double"
+              },
+              {
+                "Name": "restDayOvertime",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "restDayOvertimeMultiplier",
+                "Type": "Edm.Double"
+              },
+              {
+                "Name": "publicHolidayOvertime",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "publicHolidayOvertimeMultiplier",
+                "Type": "Edm.Double"
+              },
+              {
+                "Name": "endWorkDayAt",
+                "Type": "Edm.TimeOfDay",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "DayRule",
+            "Property": [
+              {
+                "Name": "scheduleProperty",
+                "Type": "Jibble.Common.Model.ScheduleProperty",
+                "Nullable": "false"
+              },
+              {
+                "Name": "operation",
+                "Type": "Jibble.Common.Model.ScheduleRuleOperation",
+                "Nullable": "false"
+              },
+              {
+                "Name": "spanValue",
+                "Type": "Edm.Duration"
+              },
+              {
+                "Name": "timeOfDayValue",
+                "Type": "Edm.TimeOfDay"
+              },
+              {
+                "Name": "applyTo",
+                "Type": "Jibble.Common.Model.ScheduleRuleApplyTo",
+                "Nullable": "false"
+              },
+              {
+                "Name": "schedules",
+                "Type": "Collection(Jibble.Common.Model.NamedEntity)"
+              }
+            ]
+          }
+        ],
+        "EnumType": [
+          {
+            "Name": "CommonStatus",
+            "Member": [
+              {
+                "Name": "Active",
+                "Value": "0"
+              },
+              {
+                "Name": "Archived",
+                "Value": "1"
+              }
+            ]
+          },
+          {
+            "Name": "GeoUnits",
+            "Member": [
+              {
+                "Name": "Meters",
+                "Value": "0"
+              },
+              {
+                "Name": "Feet",
+                "Value": "1"
+              }
+            ]
+          },
+          {
+            "Name": "WorkArrangement",
+            "Member": [
+              {
+                "Name": "Fixed",
+                "Value": "0"
+              },
+              {
+                "Name": "Flexible",
+                "Value": "1"
+              },
+              {
+                "Name": "Weekly",
+                "Value": "2"
+              }
+            ]
+          },
+          {
+            "Name": "PayPeriodCycle",
+            "Member": [
+              {
+                "Name": "Monthly",
+                "Value": "0"
+              },
+              {
+                "Name": "TwiceInMonth",
+                "Value": "1"
+              },
+              {
+                "Name": "OnceInTwoWeeks",
+                "Value": "2"
+              },
+              {
+                "Name": "Weekly",
+                "Value": "3"
+              }
+            ]
+          },
+          {
+            "Name": "PersonStatus",
+            "Member": [
+              {
+                "Name": "NotInvited",
+                "Value": "0"
+              },
+              {
+                "Name": "PendingInvitation",
+                "Value": "1"
+              },
+              {
+                "Name": "Joined",
+                "Value": "2"
+              },
+              {
+                "Name": "Removed",
+                "Value": "3"
+              }
+            ]
+          },
+          {
+            "Name": "BreakType",
+            "Member": [
+              {
+                "Name": "Unpaid",
+                "Value": "0"
+              },
+              {
+                "Name": "Paid",
+                "Value": "1"
+              }
+            ]
+          },
+          {
+            "Name": "TimeRangeStyle",
+            "Member": [
+              {
+                "Name": "Hours",
+                "Value": "0"
+              },
+              {
+                "Name": "Time",
+                "Value": "1"
+              }
+            ]
+          },
+          {
+            "Name": "ScheduleProperty",
+            "Member": [
+              {
+                "Name": "All",
+                "Value": "0"
+              },
+              {
+                "Name": "ExpectedWorkHours",
+                "Value": "1"
+              },
+              {
+                "Name": "DailyOvertime",
+                "Value": "2"
+              },
+              {
+                "Name": "DailyDoubleOvertime",
+                "Value": "3"
+              }
+            ]
+          },
+          {
+            "Name": "ScheduleRuleOperation",
+            "Member": [
+              {
+                "Name": "Are",
+                "Value": "0"
+              },
+              {
+                "Name": "AreUntil",
+                "Value": "1"
+              },
+              {
+                "Name": "ReducedBy",
+                "Value": "2"
+              },
+              {
+                "Name": "StartsAt",
+                "Value": "3"
+              },
+              {
+                "Name": "StartsAfter",
+                "Value": "4"
+              }
+            ]
+          },
+          {
+            "Name": "ScheduleRuleApplyTo",
+            "Member": [
+              {
+                "Name": "AllSchedules",
+                "Value": "0"
+              },
+              {
+                "Name": "SelectedSchedules",
+                "Value": "1"
+              }
+            ]
+          },
+          {
+            "Name": "SettingLevel",
+            "IsFlags": "true",
+            "Member": [
+              {
+                "Name": "None",
+                "Value": "0"
+              },
+              {
+                "Name": "Organization",
+                "Value": "1"
+              },
+              {
+                "Name": "Person",
+                "Value": "2"
+              },
+              {
+                "Name": "Group",
+                "Value": "4"
+              },
+              {
+                "Name": "User",
+                "Value": "8"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Namespace": "Jibble.Workspace.ViewModels",
+        "xmlns": "http://docs.oasis-open.org/odata/ns/edm",
+        "ComplexType": [
+          {
+            "Name": "GroupScheduleInfo",
+            "Property": [
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "totalPeopleCount",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "peopleWithScheduleCount",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "scheduleId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "scheduleName",
+                "Type": "Edm.String"
+              }
+            ]
+          },
+          {
+            "Name": "PersonCreationResult",
+            "Property": [
+              {
+                "Name": "personId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "organizationId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "fullName",
+                "Type": "Edm.String"
+              }
+            ]
+          },
+          {
+            "Name": "InvitationLinkInfo",
+            "Property": [
+              {
+                "Name": "status",
+                "Type": "Jibble.Workspace.ViewModels.InvitationLinkStatus",
+                "Nullable": "false"
+              },
+              {
+                "Name": "organizationName",
+                "Type": "Edm.String"
+              }
+            ]
+          }
+        ],
+        "EntityType": [
+          {
+            "Name": "TimeZoneModel",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "id",
+                "Type": "Edm.String",
+                "Nullable": "false"
+              },
+              {
+                "Name": "code",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "daylightName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "displayName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "standardName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "baseUtcOffset",
+                "Type": "Edm.Duration",
+                "Nullable": "false"
+              },
+              {
+                "Name": "supportsDaylightSavingTime",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "PersonDetails",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "groupId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "positionId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "employmentTypeId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "userId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "joinDate",
+                "Type": "Edm.DateTimeOffset"
+              },
+              {
+                "Name": "email",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "phoneNumber",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "countryCode",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "picture",
+                "Type": "Jibble.Common.Abstractions.FileData"
+              },
+              {
+                "Name": "fullName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "preferredName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "role",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "managedUnits",
+                "Type": "Collection(Jibble.Workspace.Model.ManagerMapping)"
+              },
+              {
+                "Name": "managers",
+                "Type": "Collection(Jibble.Workspace.Model.ManagerMapping)"
+              },
+              {
+                "Name": "kiosks",
+                "Type": "Collection(Jibble.Workspace.Model.PersonKiosk)"
+              },
+              {
+                "Name": "status",
+                "Type": "Jibble.Common.Model.PersonStatus",
+                "Nullable": "false"
+              },
+              {
+                "Name": "code",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "invitedAt",
+                "Type": "Edm.DateTimeOffset"
+              },
+              {
+                "Name": "removedAt",
+                "Type": "Edm.DateTimeOffset"
+              },
+              {
+                "Name": "hasEmbeddings",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "hasNfcToken",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "workStartDate",
+                "Type": "Edm.Date",
+                "Nullable": "false"
+              },
+              {
+                "Name": "latestTimeEntryTime",
+                "Type": "Edm.DateTimeOffset"
+              },
+              {
+                "Name": "calendarId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "scheduleId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "updatedAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "effectiveCalendarId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "effectiveScheduleId",
+                "Type": "Edm.Guid"
+              }
+            ],
+            "NavigationProperty": [
+              {
+                "Name": "group",
+                "Type": "Jibble.Workspace.Model.Group",
+                "ReferentialConstraint": {
+                  "Property": "groupId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "position",
+                "Type": "Jibble.Workspace.Model.Position",
+                "ReferentialConstraint": {
+                  "Property": "positionId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "employmentType",
+                "Type": "Jibble.Workspace.Model.EmploymentType",
+                "ReferentialConstraint": {
+                  "Property": "employmentTypeId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "calendar",
+                "Type": "Jibble.Workspace.Model.Calendar",
+                "ReferentialConstraint": {
+                  "Property": "calendarId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "schedule",
+                "Type": "Jibble.Workspace.Model.Schedule",
+                "ReferentialConstraint": {
+                  "Property": "scheduleId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "effectiveCalendar",
+                "Type": "Jibble.Workspace.Model.Calendar",
+                "ReferentialConstraint": {
+                  "Property": "calendarId",
+                  "ReferencedProperty": "id"
+                }
+              },
+              {
+                "Name": "effectiveSchedule",
+                "Type": "Jibble.Workspace.Model.Schedule",
+                "ReferentialConstraint": {
+                  "Property": "scheduleId",
+                  "ReferencedProperty": "id"
+                }
+              }
+            ]
+          },
+          {
+            "Name": "SettingItem",
+            "OpenType": "true",
+            "Key": {
+              "PropertyRef": {
+                "Name": "path"
+              }
+            },
+            "Property": [
+              {
+                "Name": "path",
+                "Type": "Edm.String",
+                "Nullable": "false"
+              },
+              {
+                "Name": "description",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "inherited",
+                "Type": "Edm.Boolean"
+              }
+            ]
+          }
+        ],
+        "EnumType": {
+          "Name": "InvitationLinkStatus",
+          "Member": [
+            {
+              "Name": "Disabled",
+              "Value": "0"
+            },
+            {
+              "Name": "Enabled",
+              "Value": "1"
+            },
+            {
+              "Name": "OutOfSeats",
+              "Value": "2"
+            },
+            {
+              "Name": "NonExistent",
+              "Value": "3"
+            }
+          ]
+        }
+      },
+      {
+        "Namespace": "Jibble.Workspace.Model.DTO",
+        "xmlns": "http://docs.oasis-open.org/odata/ns/edm",
+        "ComplexType": {
+          "Name": "PersonEmbeddingInfo",
+          "Property": [
+            {
+              "Name": "id",
+              "Type": "Edm.Guid",
+              "Nullable": "false"
+            },
+            {
+              "Name": "groupId",
+              "Type": "Edm.Guid"
+            },
+            {
+              "Name": "embeddings",
+              "Type": "Collection(Edm.String)"
+            }
+          ]
+        },
+        "EntityType": [
+          {
+            "Name": "OrganizationInfo",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "groupsCount",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "averageGroupSize",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "activitiesCount",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "projectsCount",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "clientsCount",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "locationsCount",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "fixedSchedulesCount",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "flexibleSchedulesCount",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "paidBreaksCount",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "unpaidBreaksCount",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "autoDeductionsCount",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "positionsCount",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "managersCount",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "integratedWithSlack",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "integratedWithMSTeams",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "ShortOrganizationInfo",
+            "OpenType": "true",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "personsCount",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "createdAt",
+                "Type": "Edm.DateTimeOffset",
+                "Nullable": "false"
+              },
+              {
+                "Name": "status",
+                "Type": "Jibble.Common.Model.CommonStatus",
+                "Nullable": "false"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Namespace": "Jibble.Common.Abstractions",
+        "xmlns": "http://docs.oasis-open.org/odata/ns/edm",
+        "ComplexType": [
+          {
+            "Name": "FileUploadInfo",
+            "Property": [
+              {
+                "Name": "url",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "fileId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "FileData",
+            "Property": [
+              {
+                "Name": "fileName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "size",
+                "Type": "Edm.Int64",
+                "Nullable": "false"
+              },
+              {
+                "Name": "content",
+                "Type": "Edm.Binary"
+              },
+              {
+                "Name": "fileId",
+                "Type": "Edm.Guid"
+              },
+              {
+                "Name": "hash",
+                "Type": "Edm.String"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Namespace": "Jibble.Workspace.Controllers",
+        "xmlns": "http://docs.oasis-open.org/odata/ns/edm",
+        "EntityType": {
+          "Name": "JibbleConfiguration",
+          "Property": [
+            {
+              "Name": "locationsEntryService",
+              "Type": "Edm.String"
+            },
+            {
+              "Name": "minimalVersioniOS",
+              "Type": "Edm.String"
+            },
+            {
+              "Name": "minimalVersionAndroid",
+              "Type": "Edm.String"
+            }
+          ]
+        }
+      },
+      {
+        "Namespace": "Jibble.Common.Meta",
+        "xmlns": "http://docs.oasis-open.org/odata/ns/edm",
+        "ComplexType": [
+          {
+            "Name": "RestrictionDescription",
+            "Property": [
+              {
+                "Name": "restricted",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "restrictedTitle",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "badgeTitle",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "badgeStyle",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "helpArticleURL",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "tooltip",
+                "Type": "Edm.String"
+              }
+            ]
+          },
+          {
+            "Name": "MetaType",
+            "Property": [
+              {
+                "Name": "kind",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "genericArguments",
+                "Type": "Collection(Jibble.Common.Meta.MetaType)"
+              },
+              {
+                "Name": "fullName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "friendlyName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "service",
+                "Type": "Edm.String"
+              }
+            ]
+          },
+          {
+            "Name": "MetaField",
+            "Property": [
+              {
+                "Name": "fullName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "description",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "type",
+                "Type": "Jibble.Common.Meta.MetaType"
+              },
+              {
+                "Name": "linkTypeFullName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "length",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "required",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "editable",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "allowInitialValue",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "entityFullName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "isSystem",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "isNavigation",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "hiddenForOData",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "validation",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "inline",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "MetaHandler",
+            "Property": [
+              {
+                "Name": "fullName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "executeOn",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "order",
+                "Type": "Edm.Double",
+                "Nullable": "false"
+              },
+              {
+                "Name": "description",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "entityFullName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "remarks",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "boundBy",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "specifications",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "onlyForRoles",
+                "Type": "Collection(Edm.String)"
+              },
+              {
+                "Name": "excludeForRoles",
+                "Type": "Collection(Edm.String)"
+              },
+              {
+                "Name": "excludeForPolicies",
+                "Type": "Collection(Edm.String)"
+              },
+              {
+                "Name": "onlyForPolicies",
+                "Type": "Collection(Edm.String)"
+              },
+              {
+                "Name": "kind",
+                "Type": "Edm.String"
+              }
+            ]
+          }
+        ],
+        "EntityType": [
+          {
+            "Name": "MetaRestriction",
+            "OpenType": "true",
+            "Key": {
+              "PropertyRef": {
+                "Name": "id"
+              }
+            },
+            "Property": [
+              {
+                "Name": "id",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "entityName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "featureSet",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "type",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "description",
+                "Type": "Jibble.Common.Meta.RestrictionDescription"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "features",
+                "Type": "Collection(Edm.Guid)",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "MetaEntity",
+            "Key": {
+              "PropertyRef": {
+                "Name": "fullName"
+              }
+            },
+            "Property": [
+              {
+                "Name": "fullName",
+                "Type": "Edm.String",
+                "Nullable": "false"
+              },
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "kind",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "description",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "namespace",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "remarks",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "baseType",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "specifications",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "implementations",
+                "Type": "Collection(Jibble.Common.Meta.MetaType)"
+              },
+              {
+                "Name": "propagatesTo",
+                "Type": "Jibble.Common.Meta.MetaType"
+              },
+              {
+                "Name": "syncFrom",
+                "Type": "Jibble.Common.Meta.MetaType"
+              },
+              {
+                "Name": "fields",
+                "Type": "Collection(Jibble.Common.Meta.MetaField)"
+              },
+              {
+                "Name": "handlers",
+                "Type": "Collection(Jibble.Common.Meta.MetaHandler)"
+              },
+              {
+                "Name": "propagationHandlers",
+                "Type": "Collection(Jibble.Common.Meta.MetaHandler)"
+              },
+              {
+                "Name": "assemblyQualifiedName",
+                "Type": "Edm.String"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Namespace": "Jibble.Common",
+        "xmlns": "http://docs.oasis-open.org/odata/ns/edm",
+        "ComplexType": [
+          {
+            "Name": "Restriction",
+            "Abstract": "true",
+            "Property": [
+              {
+                "Name": "name",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "featureIds",
+                "Type": "Collection(Edm.Guid)",
+                "Nullable": "false"
+              },
+              {
+                "Name": "description",
+                "Type": "Jibble.Common.RestrictionDescription"
+              },
+              {
+                "Name": "onlyForRoles",
+                "Type": "Collection(Edm.String)"
+              }
+            ]
+          },
+          {
+            "Name": "RestrictionDescription",
+            "Property": [
+              {
+                "Name": "restricted",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "restrictedTitle",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "badgeTitle",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "badgeStyle",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "helpArticleURL",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "tooltip",
+                "Type": "Edm.String"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Namespace": "Jibble.Auth.Client",
+        "xmlns": "http://docs.oasis-open.org/odata/ns/edm",
+        "ComplexType": [
+          {
+            "Name": "EntityRestriction",
+            "BaseType": "Jibble.Common.Restriction",
+            "Property": {
+              "Name": "entityName",
+              "Type": "Edm.String",
+              "Nullable": "false"
+            }
+          },
+          {
+            "Name": "EntityCountRestriction",
+            "BaseType": "Jibble.Common.Restriction",
+            "Property": [
+              {
+                "Name": "maxCount",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "filter",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "entityName",
+                "Type": "Edm.String",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "PropertyRestriction",
+            "BaseType": "Jibble.Auth.Client.EntityRestriction",
+            "Property": {
+              "Name": "propertyName",
+              "Type": "Edm.String",
+              "Nullable": "false"
+            }
+          },
+          {
+            "Name": "PropertyValueRestriction",
+            "BaseType": "Jibble.Auth.Client.PropertyRestriction",
+            "Property": [
+              {
+                "Name": "propertyValue",
+                "Type": "Edm.String",
+                "Nullable": "false"
+              },
+              {
+                "Name": "defaultValue",
+                "Type": "Edm.String"
+              }
+            ]
+          },
+          {
+            "Name": "RangePropertyValueRestriction",
+            "BaseType": "Jibble.Auth.Client.PropertyRestriction",
+            "Property": [
+              {
+                "Name": "defaultValue",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "minimumValue",
+                "Type": "Edm.Decimal",
+                "Scale": "variable"
+              },
+              {
+                "Name": "maximumValue",
+                "Type": "Edm.Decimal",
+                "Scale": "variable"
+              }
+            ]
+          },
+          {
+            "Name": "ActionRestriction",
+            "BaseType": "Jibble.Common.Restriction",
+            "Property": {
+              "Name": "actionName",
+              "Type": "Edm.String"
+            }
+          },
+          {
+            "Name": "ActionParameterRestriction",
+            "BaseType": "Jibble.Auth.Client.ActionRestriction",
+            "Property": [
+              {
+                "Name": "parameterName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "expression",
+                "Type": "Edm.String"
+              }
+            ]
+          },
+          {
+            "Name": "AggregatedPropertyValueRestriction",
+            "BaseType": "Jibble.Common.Restriction",
+            "Property": {
+              "Name": "restrictions",
+              "Type": "Collection(Jibble.Auth.Client.PropertyValueRestriction)"
+            }
+          },
+          {
+            "Name": "EntityExpirationRestriction",
+            "BaseType": "Jibble.Common.Restriction",
+            "Property": [
+              {
+                "Name": "entityName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "interval",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "intervalKind",
+                "Type": "Jibble.Auth.Client.ExpirationIntervalKind",
+                "Nullable": "false"
+              },
+              {
+                "Name": "action",
+                "Type": "Jibble.Auth.Client.ExpirationAction",
+                "Nullable": "false"
+              },
+              {
+                "Name": "isIntervalOverwritingAllowed",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "FileRestriction",
+            "BaseType": "Jibble.Auth.Client.EntityRestriction",
+            "Property": [
+              {
+                "Name": "maxSize",
+                "Type": "Edm.Int64",
+                "Nullable": "false"
+              },
+              {
+                "Name": "allowedExtensions",
+                "Type": "Collection(Edm.String)"
+              }
+            ]
+          },
+          {
+            "Name": "InformationRestriction",
+            "BaseType": "Jibble.Common.Restriction"
+          },
+          {
+            "Name": "NestedEntityCountRestriction",
+            "BaseType": "Jibble.Common.Restriction",
+            "Property": [
+              {
+                "Name": "maxCount",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "filter",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "entityName",
+                "Type": "Edm.String",
+                "Nullable": "false"
+              },
+              {
+                "Name": "parentEntityName",
+                "Type": "Edm.String",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "PolicyRestriction",
+            "BaseType": "Jibble.Common.Restriction",
+            "Property": {
+              "Name": "policyName",
+              "Type": "Edm.String"
+            }
+          }
+        ],
+        "EnumType": [
+          {
+            "Name": "ExpirationIntervalKind",
+            "Member": [
+              {
+                "Name": "Days",
+                "Value": "0"
+              },
+              {
+                "Name": "Months",
+                "Value": "1"
+              }
+            ]
+          },
+          {
+            "Name": "ExpirationAction",
+            "Member": [
+              {
+                "Name": "Hide",
+                "Value": "0"
+              },
+              {
+                "Name": "Delete",
+                "Value": "1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Namespace": "Jibble.Common.Model.TimeOff.ValueObjects",
+        "xmlns": "http://docs.oasis-open.org/odata/ns/edm",
+        "ComplexType": [
+          {
+            "Name": "AccrualSettings",
+            "Property": [
+              {
+                "Name": "schedule",
+                "Type": "Jibble.Common.Model.TimeOff.AccrualSettingsSchedule",
+                "Nullable": "false"
+              },
+              {
+                "Name": "accrue",
+                "Type": "Edm.Decimal",
+                "Nullable": "false",
+                "Scale": "variable"
+              },
+              {
+                "Name": "accrualDate",
+                "Type": "Jibble.Common.Model.TimeOff.AccrualDate"
+              },
+              {
+                "Name": "accrualDateProcessingType",
+                "Type": "Jibble.Common.Model.TimeOff.AccrualDateProcessingType",
+                "Nullable": "false"
+              },
+              {
+                "Name": "customDateDay",
+                "Type": "Edm.Int32"
+              },
+              {
+                "Name": "customDateMonth",
+                "Type": "Edm.Int32"
+              },
+              {
+                "Name": "waitingPeriod",
+                "Type": "Edm.Decimal",
+                "Nullable": "false",
+                "Scale": "variable"
+              },
+              {
+                "Name": "payrollHours",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              },
+              {
+                "Name": "accrualEndDate",
+                "Type": "Edm.Date"
+              },
+              {
+                "Name": "maxLimit",
+                "Type": "Edm.Decimal",
+                "Nullable": "false",
+                "Scale": "variable"
+              },
+              {
+                "Name": "excludeNonWorkingDays",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "excludePublicHolidays",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "BalanceRules",
+            "Property": [
+              {
+                "Name": "carryForwardAmount",
+                "Type": "Edm.Decimal",
+                "Nullable": "false",
+                "Scale": "variable"
+              },
+              {
+                "Name": "monthsToExpireCarryForward",
+                "Type": "Edm.Int32",
+                "Nullable": "false"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Namespace": "Jibble.Common.Model.SettingTypes.Rounding",
+        "xmlns": "http://docs.oasis-open.org/odata/ns/edm",
+        "ComplexType": [
+          {
+            "Name": "BreakRoundingSettings",
+            "Property": [
+              {
+                "Name": "roundingMethod",
+                "Type": "Jibble.Common.Model.Rounding.RoundingMethod",
+                "Nullable": "false"
+              },
+              {
+                "Name": "roundingInterval",
+                "Type": "Edm.Duration",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "InRoundingSettings",
+            "Property": [
+              {
+                "Name": "roundingMethod",
+                "Type": "Jibble.Common.Model.Rounding.RoundingMethod",
+                "Nullable": "false"
+              },
+              {
+                "Name": "roundingInterval",
+                "Type": "Edm.Duration",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "OutRoundingSettings",
+            "Property": [
+              {
+                "Name": "roundingMethod",
+                "Type": "Jibble.Common.Model.Rounding.RoundingMethod",
+                "Nullable": "false"
+              },
+              {
+                "Name": "roundingInterval",
+                "Type": "Edm.Duration",
+                "Nullable": "false"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Namespace": "Jibble.Common.Model.History",
+        "xmlns": "http://docs.oasis-open.org/odata/ns/edm",
+        "ComplexType": {
+          "Name": "AuthorInfo",
+          "Property": [
+            {
+              "Name": "fullName",
+              "Type": "Edm.String"
+            },
+            {
+              "Name": "email",
+              "Type": "Edm.String"
+            },
+            {
+              "Name": "role",
+              "Type": "Edm.String"
+            }
+          ]
+        },
+        "EnumType": {
+          "Name": "Operations",
+          "Member": [
+            {
+              "Name": "Add",
+              "Value": "0"
+            },
+            {
+              "Name": "Edit",
+              "Value": "1"
+            },
+            {
+              "Name": "Delete",
+              "Value": "2"
+            },
+            {
+              "Name": "Reset",
+              "Value": "3"
+            }
+          ]
+        }
+      },
+      {
+        "Namespace": "System",
+        "xmlns": "http://docs.oasis-open.org/odata/ns/edm",
+        "EnumType": {
+          "Name": "DayOfWeek",
+          "Member": [
+            {
+              "Name": "Sunday",
+              "Value": "0"
+            },
+            {
+              "Name": "Monday",
+              "Value": "1"
+            },
+            {
+              "Name": "Tuesday",
+              "Value": "2"
+            },
+            {
+              "Name": "Wednesday",
+              "Value": "3"
+            },
+            {
+              "Name": "Thursday",
+              "Value": "4"
+            },
+            {
+              "Name": "Friday",
+              "Value": "5"
+            },
+            {
+              "Name": "Saturday",
+              "Value": "6"
+            }
+          ]
+        }
+      },
+      {
+        "Namespace": "Jibble.Common.Model.TimeOff",
+        "xmlns": "http://docs.oasis-open.org/odata/ns/edm",
+        "EnumType": [
+          {
+            "Name": "Compensation",
+            "Member": [
+              {
+                "Name": "Paid",
+                "Value": "0"
+              },
+              {
+                "Name": "Unpaid",
+                "Value": "1"
+              }
+            ]
+          },
+          {
+            "Name": "LeaveIntervalKind",
+            "Member": [
+              {
+                "Name": "FullDay",
+                "Value": "0"
+              },
+              {
+                "Name": "Hours",
+                "Value": "1"
+              }
+            ]
+          },
+          {
+            "Name": "AccrualSettingsSchedule",
+            "Member": [
+              {
+                "Name": "None",
+                "Value": "0"
+              },
+              {
+                "Name": "Annually",
+                "Value": "1"
+              },
+              {
+                "Name": "Monthly",
+                "Value": "2"
+              },
+              {
+                "Name": "PayPeriod",
+                "Value": "3"
+              },
+              {
+                "Name": "PayrollHours",
+                "Value": "4"
+              }
+            ]
+          },
+          {
+            "Name": "AccrualDate",
+            "Member": [
+              {
+                "Name": "JoinedDate",
+                "Value": "0"
+              },
+              {
+                "Name": "PolicyJoinedDate",
+                "Value": "1"
+              },
+              {
+                "Name": "CustomDate",
+                "Value": "2"
+              }
+            ]
+          },
+          {
+            "Name": "AccrualDateProcessingType",
+            "Member": [
+              {
+                "Name": "Start",
+                "Value": "0"
+              },
+              {
+                "Name": "End",
+                "Value": "1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Namespace": "Jibble.Common.Model.Rounding",
+        "xmlns": "http://docs.oasis-open.org/odata/ns/edm",
+        "EnumType": {
+          "Name": "RoundingMethod",
+          "Member": [
+            {
+              "Name": "Nearest",
+              "Value": "0"
+            },
+            {
+              "Name": "Up",
+              "Value": "1"
+            },
+            {
+              "Name": "Down",
+              "Value": "2"
+            }
+          ]
+        }
+      },
+      {
+        "Namespace": "Jibble.Common.CustomRules",
+        "xmlns": "http://docs.oasis-open.org/odata/ns/edm",
+        "EnumType": {
+          "Name": "RuleStatus",
+          "Member": [
+            {
+              "Name": "Active",
+              "Value": "0"
+            },
+            {
+              "Name": "Evaluate",
+              "Value": "1"
+            },
+            {
+              "Name": "Disabled",
+              "Value": "2"
+            }
+          ]
+        }
+      },
+      {
+        "Namespace": "Default",
+        "xmlns": "http://docs.oasis-open.org/odata/ns/edm",
+        "Function": [
+          {
+            "Name": "PeopleBySchedule",
+            "Parameter": {
+              "Name": "scheduleId",
+              "Type": "Edm.Guid",
+              "Nullable": "false"
+            },
+            "ReturnType": {
+              "Type": "Collection(Jibble.Workspace.Model.Person)"
+            }
+          },
+          {
+            "Name": "GroupsBySchedule",
+            "Parameter": {
+              "Name": "scheduleId",
+              "Type": "Edm.Guid",
+              "Nullable": "false"
+            },
+            "ReturnType": {
+              "Type": "Collection(Jibble.Workspace.Model.Group)"
+            }
+          },
+          {
+            "Name": "GroupsCountSchedule",
+            "Parameter": {
+              "Name": "scheduleId",
+              "Type": "Edm.Guid",
+              "Nullable": "false"
+            },
+            "ReturnType": {
+              "Type": "Jibble.Workspace.ViewModels.GroupScheduleInfo"
+            }
+          },
+          {
+            "Name": "MinimumAllowedDate",
+            "ReturnType": {
+              "Type": "Edm.Date",
+              "Nullable": "false"
+            }
+          },
+          {
+            "Name": "PersonSchedule",
+            "Parameter": {
+              "Name": "personId",
+              "Type": "Edm.Guid",
+              "Nullable": "false"
+            },
+            "ReturnType": {
+              "Type": "Jibble.Common.Model.PersonSchedule"
+            }
+          },
+          {
+            "Name": "PersonHolidays",
+            "Parameter": {
+              "Name": "personId",
+              "Type": "Edm.Guid",
+              "Nullable": "false"
+            },
+            "ReturnType": {
+              "Type": "Collection(Jibble.Common.Model.PersonHoliday)"
+            }
+          },
+          {
+            "Name": "PersonActivities",
+            "Parameter": {
+              "Name": "personId",
+              "Type": "Edm.Guid",
+              "Nullable": "false"
+            },
+            "ReturnType": {
+              "Type": "Collection(Jibble.Common.Model.PersonActivity)"
+            }
+          },
+          {
+            "Name": "PersonProjects",
+            "Parameter": {
+              "Name": "personId",
+              "Type": "Edm.Guid",
+              "Nullable": "false"
+            },
+            "ReturnType": {
+              "Type": "Collection(Jibble.Common.Model.PersonProject)"
+            }
+          },
+          {
+            "Name": "PersonGeoFence",
+            "Parameter": {
+              "Name": "personId",
+              "Type": "Edm.Guid",
+              "Nullable": "false"
+            },
+            "ReturnType": {
+              "Type": "Collection(Jibble.Common.Model.PersonGeoFence)"
+            }
+          },
+          {
+            "Name": "PersonGeoFenceWithDistance",
+            "Parameter": [
+              {
+                "Name": "personId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "latitude",
+                "Type": "Edm.Double",
+                "Nullable": "false"
+              },
+              {
+                "Name": "longitude",
+                "Type": "Edm.Double",
+                "Nullable": "false"
+              }
+            ],
+            "ReturnType": {
+              "Type": "Collection(Jibble.Common.Model.PersonGeoFenceWithDistance)"
+            }
+          },
+          {
+            "Name": "KioskEmbeddings",
+            "Parameter": {
+              "Name": "kioskId",
+              "Type": "Edm.Guid",
+              "Nullable": "false"
+            },
+            "ReturnType": {
+              "Type": "Collection(Jibble.Workspace.Model.DTO.PersonEmbeddingInfo)"
+            }
+          },
+          {
+            "Name": "KioskPeople",
+            "Parameter": {
+              "Name": "kioskId",
+              "Type": "Edm.Guid",
+              "Nullable": "false"
+            },
+            "ReturnType": {
+              "Type": "Collection(Jibble.Workspace.Model.Person)"
+            }
+          },
+          {
+            "Name": "GetFileUploadUrl",
+            "Parameter": [
+              {
+                "Name": "fileName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "contentType",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "md5",
+                "Type": "Edm.String"
+              }
+            ],
+            "ReturnType": {
+              "Type": "Jibble.Common.Abstractions.FileUploadInfo"
+            }
+          },
+          {
+            "Name": "GetFileUploadUrl",
+            "Parameter": [
+              {
+                "Name": "fileName",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "contentType",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "md5",
+                "Type": "Edm.String"
+              },
+              {
+                "Name": "tags",
+                "Type": "Edm.String"
+              }
+            ],
+            "ReturnType": {
+              "Type": "Jibble.Common.Abstractions.FileUploadInfo"
+            }
+          },
+          {
+            "Name": "GetInvitationLinkStatus",
+            "Parameter": {
+              "Name": "linkId",
+              "Type": "Edm.Guid",
+              "Nullable": "false"
+            },
+            "ReturnType": {
+              "Type": "Jibble.Workspace.ViewModels.InvitationLinkInfo"
+            }
+          }
+        ],
+        "Action": [
+          {
+            "Name": "ResetPersonPin",
+            "Parameter": [
+              {
+                "Name": "personId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "generateNew",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "viaEmail",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              },
+              {
+                "Name": "viaSms",
+                "Type": "Edm.Boolean",
+                "Nullable": "false"
+              }
+            ]
+          },
+          {
+            "Name": "EnsureOrganizationDeleted",
+            "Parameter": {
+              "Name": "organizationIds",
+              "Type": "Edm.String"
+            }
+          },
+          {
+            "Name": "RegisterPersonViaInvitationLink",
+            "Parameter": [
+              {
+                "Name": "invitationCode",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "fullName",
+                "Type": "Edm.String",
+                "Annotation": {
+                  "Term": "Org.OData.Core.V1.OptionalParameter"
+                }
+              },
+              {
+                "Name": "email",
+                "Type": "Edm.String",
+                "Annotation": {
+                  "Term": "Org.OData.Core.V1.OptionalParameter"
+                }
+              },
+              {
+                "Name": "phoneNumber",
+                "Type": "Edm.String",
+                "Annotation": {
+                  "Term": "Org.OData.Core.V1.OptionalParameter"
+                }
+              },
+              {
+                "Name": "password",
+                "Type": "Edm.String",
+                "Annotation": {
+                  "Term": "Org.OData.Core.V1.OptionalParameter"
+                }
+              }
+            ],
+            "ReturnType": {
+              "Type": "Jibble.Workspace.ViewModels.PersonCreationResult"
+            }
+          },
+          {
+            "Name": "ResendInvitation",
+            "Parameter": {
+              "Name": "personId",
+              "Type": "Edm.Guid",
+              "Nullable": "false"
+            }
+          },
+          {
+            "Name": "Import",
+            "IsBound": "true",
+            "Parameter": [
+              {
+                "Name": "bindingParameter",
+                "Type": "Jibble.Workspace.Model.Calendar"
+              },
+              {
+                "Name": "importSourceId",
+                "Type": "Edm.Guid",
+                "Nullable": "false"
+              },
+              {
+                "Name": "region",
+                "Type": "Edm.String",
+                "Annotation": {
+                  "Term": "Org.OData.Core.V1.OptionalParameter"
+                }
+              }
+            ]
+          },
+          {
+            "Name": "RefreshCalendars",
+            "Parameter": [
+              {
+                "Name": "calendarIds",
+                "Type": "Collection(Edm.Guid)",
+                "Nullable": "false"
+              },
+              {
+                "Name": "from",
+                "Type": "Edm.DateTimeOffset"
+              }
+            ]
+          },
+          {
+            "Name": "ResetSetting",
+            "IsBound": "true",
+            "Parameter": [
+              {
+                "Name": "bindingParameter",
+                "Type": "Jibble.Workspace.Model.Unit"
+              },
+              {
+                "Name": "path",
+                "Type": "Edm.String"
+              }
+            ]
+          },
+          {
+            "Name": "CreateInvitationLink",
+            "IsBound": "true",
+            "Parameter": {
+              "Name": "bindingParameter",
+              "Type": "Collection(Jibble.Workspace.Model.InvitationLink)"
+            }
+          },
+          {
+            "Name": "DataSync",
+            "Parameter": [
+              {
+                "Name": "entityNames",
+                "Type": "Collection(Edm.String)"
+              },
+              {
+                "Name": "servicesNames",
+                "Type": "Collection(Edm.String)"
+              },
+              {
+                "Name": "ids",
+                "Type": "Collection(Edm.Guid)",
+                "Nullable": "false",
+                "Annotation": {
+                  "Term": "Org.OData.Core.V1.OptionalParameter"
+                }
+              },
+              {
+                "Name": "startDate",
+                "Type": "Edm.DateTimeOffset"
+              },
+              {
+                "Name": "endDate",
+                "Type": "Edm.DateTimeOffset"
+              }
+            ]
+          },
+          {
+            "Name": "ClearCache"
+          }
+        ],
+        "EntityContainer": {
+          "Name": "Container",
+          "EntitySet": [
+            {
+              "Name": "Activities",
+              "EntityType": "Jibble.Workspace.Model.Activity",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "assignedGroups/activity",
+                  "Target": "Activities"
+                },
+                {
+                  "Path": "assignedGroups/group",
+                  "Target": "Groups"
+                },
+                {
+                  "Path": "organization",
+                  "Target": "Organizations"
+                }
+              ],
+              "Annotation": {
+                "Term": "Org.OData.Core.V1.OptimisticConcurrency",
+                "Collection": {
+                  "PropertyPath": "updatedAt"
+                }
+              }
+            },
+            {
+              "Name": "BreakRoundingHistoricalSettings",
+              "EntityType": "Jibble.Workspace.Model.BreakRoundingHistoricalSettings",
+              "NavigationPropertyBinding": {
+                "Path": "organization",
+                "Target": "Organizations"
+              }
+            },
+            {
+              "Name": "Calendars",
+              "EntityType": "Jibble.Workspace.Model.Calendar",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "groups",
+                  "Target": "Groups"
+                },
+                {
+                  "Path": "importSource",
+                  "Target": "CalendarImportSources"
+                },
+                {
+                  "Path": "organization",
+                  "Target": "Organizations"
+                },
+                {
+                  "Path": "people",
+                  "Target": "People"
+                }
+              ],
+              "Annotation": {
+                "Term": "Org.OData.Core.V1.OptimisticConcurrency",
+                "Collection": {
+                  "PropertyPath": "updatedAt"
+                }
+              }
+            },
+            {
+              "Name": "CalendarDays",
+              "EntityType": "Jibble.Workspace.Model.CalendarDay",
+              "NavigationPropertyBinding": {
+                "Path": "calendar",
+                "Target": "Calendars"
+              }
+            },
+            {
+              "Name": "CalendarImportSources",
+              "EntityType": "Jibble.Workspace.Model.CalendarImportSource"
+            },
+            {
+              "Name": "Clients",
+              "EntityType": "Jibble.Workspace.Model.Client",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "organization",
+                  "Target": "Organizations"
+                },
+                {
+                  "Path": "projects",
+                  "Target": "Projects"
+                }
+              ],
+              "Annotation": {
+                "Term": "Org.OData.Core.V1.OptimisticConcurrency",
+                "Collection": {
+                  "PropertyPath": "updatedAt"
+                }
+              }
+            },
+            {
+              "Name": "DeletedOrganizations",
+              "EntityType": "Jibble.Workspace.Model.DeletedOrganization"
+            },
+            {
+              "Name": "EmploymentTypes",
+              "EntityType": "Jibble.Workspace.Model.EmploymentType",
+              "NavigationPropertyBinding": {
+                "Path": "organization",
+                "Target": "Organizations"
+              },
+              "Annotation": {
+                "Term": "Org.OData.Core.V1.OptimisticConcurrency",
+                "Collection": {
+                  "PropertyPath": "updatedAt"
+                }
+              }
+            },
+            {
+              "Name": "History",
+              "EntityType": "Jibble.Workspace.Model.History",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "author",
+                  "Target": "People"
+                },
+                {
+                  "Path": "organization",
+                  "Target": "Organizations"
+                }
+              ]
+            },
+            {
+              "Name": "InRoundingHistoricalSettings",
+              "EntityType": "Jibble.Workspace.Model.InRoundingHistoricalSettings",
+              "NavigationPropertyBinding": {
+                "Path": "organization",
+                "Target": "Organizations"
+              }
+            },
+            {
+              "Name": "InvitationLinks",
+              "EntityType": "Jibble.Workspace.Model.InvitationLink",
+              "NavigationPropertyBinding": {
+                "Path": "organization",
+                "Target": "Organizations"
+              }
+            },
+            {
+              "Name": "Kiosks",
+              "EntityType": "Jibble.Workspace.Model.Kiosk",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "groups/group",
+                  "Target": "Groups"
+                },
+                {
+                  "Path": "groups/kiosk",
+                  "Target": "Kiosks"
+                },
+                {
+                  "Path": "location",
+                  "Target": "Locations"
+                },
+                {
+                  "Path": "organization",
+                  "Target": "Organizations"
+                },
+                {
+                  "Path": "people/kiosk",
+                  "Target": "Kiosks"
+                },
+                {
+                  "Path": "people/person",
+                  "Target": "People"
+                }
+              ],
+              "Annotation": {
+                "Term": "Org.OData.Core.V1.OptimisticConcurrency",
+                "Collection": {
+                  "PropertyPath": "updatedAt"
+                }
+              }
+            },
+            {
+              "Name": "KioskDeviceAssignments",
+              "EntityType": "Jibble.Workspace.Model.KioskDeviceAssignment",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "kiosk",
+                  "Target": "Kiosks"
+                },
+                {
+                  "Path": "organization",
+                  "Target": "Organizations"
+                }
+              ]
+            },
+            {
+              "Name": "Locations",
+              "EntityType": "Jibble.Workspace.Model.Location",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "organization",
+                  "Target": "Organizations"
+                },
+                {
+                  "Path": "schedules/location",
+                  "Target": "Locations"
+                },
+                {
+                  "Path": "schedules/schedule",
+                  "Target": "Schedules"
+                },
+                {
+                  "Path": "usedInSchedules",
+                  "Target": "Schedules"
+                }
+              ],
+              "Annotation": {
+                "Term": "Org.OData.Core.V1.OptimisticConcurrency",
+                "Collection": {
+                  "PropertyPath": "updatedAt"
+                }
+              }
+            },
+            {
+              "Name": "NpsAnswers",
+              "EntityType": "Jibble.Workspace.Model.NpsAnswer",
+              "NavigationPropertyBinding": {
+                "Path": "user",
+                "Target": "Users"
+              }
+            },
+            {
+              "Name": "NpsReviews",
+              "EntityType": "Jibble.Workspace.Model.NpsReview",
+              "NavigationPropertyBinding": {
+                "Path": "user",
+                "Target": "Users"
+              }
+            },
+            {
+              "Name": "OutRoundingHistoricalSettings",
+              "EntityType": "Jibble.Workspace.Model.OutRoundingHistoricalSettings",
+              "NavigationPropertyBinding": {
+                "Path": "organization",
+                "Target": "Organizations"
+              }
+            },
+            {
+              "Name": "PayPeriodDefinitions",
+              "EntityType": "Jibble.Workspace.Model.PayPeriodDefinition",
+              "NavigationPropertyBinding": {
+                "Path": "organization",
+                "Target": "Organizations"
+              }
+            },
+            {
+              "Name": "Payslips",
+              "EntityType": "Jibble.Workspace.Model.Payslip",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "organization",
+                  "Target": "Organizations"
+                },
+                {
+                  "Path": "person",
+                  "Target": "People"
+                }
+              ]
+            },
+            {
+              "Name": "People",
+              "EntityType": "Jibble.Workspace.Model.Person",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "calendar",
+                  "Target": "Calendars"
+                },
+                {
+                  "Path": "employmentType",
+                  "Target": "EmploymentTypes"
+                },
+                {
+                  "Path": "group",
+                  "Target": "Groups"
+                },
+                {
+                  "Path": "kiosks/kiosk",
+                  "Target": "Kiosks"
+                },
+                {
+                  "Path": "kiosks/person",
+                  "Target": "People"
+                },
+                {
+                  "Path": "managed",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "managedUnits/manager",
+                  "Target": "People"
+                },
+                {
+                  "Path": "managedUnits/unit",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "managers/manager",
+                  "Target": "People"
+                },
+                {
+                  "Path": "managers/unit",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "organization",
+                  "Target": "Organizations"
+                },
+                {
+                  "Path": "payPeriodDefinition",
+                  "Target": "PayPeriodDefinitions"
+                },
+                {
+                  "Path": "payslips",
+                  "Target": "Payslips"
+                },
+                {
+                  "Path": "position",
+                  "Target": "Positions"
+                },
+                {
+                  "Path": "projects/project",
+                  "Target": "Projects"
+                },
+                {
+                  "Path": "projects/unit",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "schedule",
+                  "Target": "Schedules"
+                },
+                {
+                  "Path": "unitManagers",
+                  "Target": "People"
+                },
+                {
+                  "Path": "unitTimeOffPolicies/timeOffPolicy",
+                  "Target": "TimeOffPolicies"
+                },
+                {
+                  "Path": "unitTimeOffPolicies/unit",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "workTypes/unit",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "workTypes/workType",
+                  "Target": "WorkTypes"
+                }
+              ],
+              "Annotation": {
+                "Term": "Org.OData.Core.V1.OptimisticConcurrency",
+                "Collection": {
+                  "PropertyPath": "updatedAt"
+                }
+              }
+            },
+            {
+              "Name": "PersonFaceData",
+              "EntityType": "Jibble.Workspace.Model.PersonFaceData",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "organization",
+                  "Target": "Organizations"
+                },
+                {
+                  "Path": "person",
+                  "Target": "People"
+                }
+              ]
+            },
+            {
+              "Name": "PersonFaceDataPictureHistory",
+              "EntityType": "Jibble.Workspace.Model.PersonFaceDataPictureHistory",
+              "NavigationPropertyBinding": {
+                "Path": "person",
+                "Target": "People"
+              }
+            },
+            {
+              "Name": "Positions",
+              "EntityType": "Jibble.Workspace.Model.Position",
+              "NavigationPropertyBinding": {
+                "Path": "organization",
+                "Target": "Organizations"
+              },
+              "Annotation": {
+                "Term": "Org.OData.Core.V1.OptimisticConcurrency",
+                "Collection": {
+                  "PropertyPath": "updatedAt"
+                }
+              }
+            },
+            {
+              "Name": "Projects",
+              "EntityType": "Jibble.Workspace.Model.Project",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "assignees/project",
+                  "Target": "Projects"
+                },
+                {
+                  "Path": "assignees/unit",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "client",
+                  "Target": "Clients"
+                },
+                {
+                  "Path": "location",
+                  "Target": "Locations"
+                },
+                {
+                  "Path": "organization",
+                  "Target": "Organizations"
+                }
+              ],
+              "Annotation": {
+                "Term": "Org.OData.Core.V1.OptimisticConcurrency",
+                "Collection": {
+                  "PropertyPath": "updatedAt"
+                }
+              }
+            },
+            {
+              "Name": "RuleSets",
+              "EntityType": "Jibble.Workspace.Model.RuleSet",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "organization",
+                  "Target": "Organizations"
+                },
+                {
+                  "Path": "validationRules",
+                  "Target": "ValidationRules"
+                }
+              ]
+            },
+            {
+              "Name": "Schedules",
+              "EntityType": "Jibble.Workspace.Model.Schedule",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "geofencingLocations",
+                  "Target": "Locations"
+                },
+                {
+                  "Path": "groups",
+                  "Target": "Groups"
+                },
+                {
+                  "Path": "locations/location",
+                  "Target": "Locations"
+                },
+                {
+                  "Path": "locations/schedule",
+                  "Target": "Schedules"
+                },
+                {
+                  "Path": "organization",
+                  "Target": "Organizations"
+                },
+                {
+                  "Path": "people",
+                  "Target": "People"
+                }
+              ],
+              "Annotation": {
+                "Term": "Org.OData.Core.V1.OptimisticConcurrency",
+                "Collection": {
+                  "PropertyPath": "updatedAt"
+                }
+              }
+            },
+            {
+              "Name": "SettingDefinitions",
+              "EntityType": "Jibble.Workspace.Model.SettingDefinition",
+              "Annotation": {
+                "Term": "Org.OData.Capabilities.V1.ExpandRestrictions",
+                "Record": {
+                  "PropertyValue": [
+                    {
+                      "Property": "Expandable",
+                      "Bool": "true"
+                    },
+                    {
+                      "Property": "NonExpandableProperties",
+                      "Collection": {
+                        "NavigationPropertyPath": "settingProperties"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "SettingEnums",
+              "EntityType": "Jibble.Workspace.Model.SettingEnum"
+            },
+            {
+              "Name": "SettingProperties",
+              "EntityType": "Jibble.Workspace.Model.SettingProperty",
+              "NavigationPropertyBinding": {
+                "Path": "settingDefinition",
+                "Target": "SettingDefinitions"
+              }
+            },
+            {
+              "Name": "TimeOffPolicies",
+              "EntityType": "Jibble.Workspace.Model.TimeOffPolicy",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "approvalConfig",
+                  "Target": "ApprovalConfigs"
+                },
+                {
+                  "Path": "organization",
+                  "Target": "Organizations"
+                },
+                {
+                  "Path": "timeOffPolicyUnits/timeOffPolicy",
+                  "Target": "TimeOffPolicies"
+                },
+                {
+                  "Path": "timeOffPolicyUnits/unit",
+                  "Target": "Units"
+                }
+              ]
+            },
+            {
+              "Name": "TrackedDataChanges",
+              "EntityType": "Jibble.Workspace.Model.TrackedDataChange",
+              "NavigationPropertyBinding": {
+                "Path": "organization",
+                "Target": "Organizations"
+              }
+            },
+            {
+              "Name": "Units",
+              "EntityType": "Jibble.Workspace.Model.Unit",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "calendar",
+                  "Target": "Calendars"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Group/activities/activity",
+                  "Target": "Activities"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Group/activities/group",
+                  "Target": "Groups"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Group/firstApprovers/approver",
+                  "Target": "People"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Group/firstApprovers/group",
+                  "Target": "Groups"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Group/kiosks/group",
+                  "Target": "Groups"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Group/kiosks/kiosk",
+                  "Target": "Kiosks"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Group/members",
+                  "Target": "People"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Group/secondApprovers/approver",
+                  "Target": "People"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Group/secondApprovers/group",
+                  "Target": "Groups"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Person/employmentType",
+                  "Target": "EmploymentTypes"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Person/group",
+                  "Target": "Groups"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Person/kiosks/kiosk",
+                  "Target": "Kiosks"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Person/kiosks/person",
+                  "Target": "People"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Person/managed",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Person/managedUnits/manager",
+                  "Target": "People"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Person/managedUnits/unit",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Person/payslips",
+                  "Target": "Payslips"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Person/position",
+                  "Target": "Positions"
+                },
+                {
+                  "Path": "managers/manager",
+                  "Target": "People"
+                },
+                {
+                  "Path": "managers/unit",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "organization",
+                  "Target": "Organizations"
+                },
+                {
+                  "Path": "payPeriodDefinition",
+                  "Target": "PayPeriodDefinitions"
+                },
+                {
+                  "Path": "projects/project",
+                  "Target": "Projects"
+                },
+                {
+                  "Path": "projects/unit",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "schedule",
+                  "Target": "Schedules"
+                },
+                {
+                  "Path": "unitManagers",
+                  "Target": "People"
+                },
+                {
+                  "Path": "unitTimeOffPolicies/timeOffPolicy",
+                  "Target": "TimeOffPolicies"
+                },
+                {
+                  "Path": "unitTimeOffPolicies/unit",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "workTypes/unit",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "workTypes/workType",
+                  "Target": "WorkTypes"
+                }
+              ],
+              "Annotation": [
+                {
+                  "Term": "Org.OData.Core.V1.OptimisticConcurrency",
+                  "Collection": {
+                    "PropertyPath": "updatedAt"
+                  }
+                },
+                {
+                  "Term": "Org.OData.Capabilities.V1.ExpandRestrictions",
+                  "Record": {
+                    "PropertyValue": [
+                      {
+                        "Property": "Expandable",
+                        "Bool": "true"
+                      },
+                      {
+                        "Property": "NonExpandableProperties",
+                        "Collection": {
+                          "NavigationPropertyPath": "settingItems"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "Name": "Users",
+              "EntityType": "Jibble.Workspace.Model.User",
+              "Annotation": {
+                "Term": "Org.OData.Capabilities.V1.ExpandRestrictions",
+                "Record": {
+                  "PropertyValue": [
+                    {
+                      "Property": "Expandable",
+                      "Bool": "true"
+                    },
+                    {
+                      "Property": "NonExpandableProperties",
+                      "Collection": {
+                        "NavigationPropertyPath": "settingItems"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "ValidationRules",
+              "EntityType": "Jibble.Workspace.Model.ValidationRule",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "organization",
+                  "Target": "Organizations"
+                },
+                {
+                  "Path": "ruleSet",
+                  "Target": "RuleSets"
+                }
+              ]
+            },
+            {
+              "Name": "WorkTypes",
+              "EntityType": "Jibble.Workspace.Model.WorkType",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "organization",
+                  "Target": "Organizations"
+                },
+                {
+                  "Path": "units/unit",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "units/workType",
+                  "Target": "WorkTypes"
+                }
+              ]
+            },
+            {
+              "Name": "ApprovalConfigs",
+              "EntityType": "Jibble.Workspace.Model.Approval.ApprovalConfig",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "organization",
+                  "Target": "Organizations"
+                },
+                {
+                  "Path": "rules",
+                  "Target": "ApprovalRules"
+                }
+              ]
+            },
+            {
+              "Name": "ApprovalRules",
+              "EntityType": "Jibble.Workspace.Model.Approval.ApprovalRule",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "approvalConfig",
+                  "Target": "ApprovalConfigs"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Approval.SimpleApprovalRule/groups/approvalRule",
+                  "Target": "SimpleApprovalRules"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Approval.SimpleApprovalRule/groups/group",
+                  "Target": "Groups"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Approval.SimpleApprovalRule/individuals/approvalRule",
+                  "Target": "SimpleApprovalRules"
+                },
+                {
+                  "Path": "Jibble.Workspace.Model.Approval.SimpleApprovalRule/individuals/person",
+                  "Target": "People"
+                }
+              ]
+            },
+            {
+              "Name": "SimpleApprovalRules",
+              "EntityType": "Jibble.Workspace.Model.Approval.SimpleApprovalRule",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "approvalConfig",
+                  "Target": "ApprovalConfigs"
+                },
+                {
+                  "Path": "groups/approvalRule",
+                  "Target": "SimpleApprovalRules"
+                },
+                {
+                  "Path": "groups/group",
+                  "Target": "Groups"
+                },
+                {
+                  "Path": "individuals/approvalRule",
+                  "Target": "SimpleApprovalRules"
+                },
+                {
+                  "Path": "individuals/person",
+                  "Target": "People"
+                }
+              ]
+            },
+            {
+              "Name": "OnboardingProgresss",
+              "EntityType": "Jibble.Workspace.Data.OnboardingProgress"
+            },
+            {
+              "Name": "Organizations",
+              "EntityType": "Jibble.Workspace.Model.Organization",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "activities",
+                  "Target": "Activities"
+                },
+                {
+                  "Path": "clients",
+                  "Target": "Clients"
+                },
+                {
+                  "Path": "locations",
+                  "Target": "Locations"
+                },
+                {
+                  "Path": "positions",
+                  "Target": "Positions"
+                },
+                {
+                  "Path": "projects",
+                  "Target": "Projects"
+                },
+                {
+                  "Path": "schedules",
+                  "Target": "Schedules"
+                },
+                {
+                  "Path": "units",
+                  "Target": "Units"
+                }
+              ],
+              "Annotation": [
+                {
+                  "Term": "Org.OData.Core.V1.OptimisticConcurrency",
+                  "Collection": {
+                    "PropertyPath": "updatedAt"
+                  }
+                },
+                {
+                  "Term": "Org.OData.Capabilities.V1.ExpandRestrictions",
+                  "Record": {
+                    "PropertyValue": [
+                      {
+                        "Property": "Expandable",
+                        "Bool": "true"
+                      },
+                      {
+                        "Property": "NonExpandableProperties",
+                        "Collection": {
+                          "NavigationPropertyPath": "settingItems"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "Name": "Groups",
+              "EntityType": "Jibble.Workspace.Model.Group",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "activities/activity",
+                  "Target": "Activities"
+                },
+                {
+                  "Path": "activities/group",
+                  "Target": "Groups"
+                },
+                {
+                  "Path": "calendar",
+                  "Target": "Calendars"
+                },
+                {
+                  "Path": "firstApprovers/approver",
+                  "Target": "People"
+                },
+                {
+                  "Path": "firstApprovers/group",
+                  "Target": "Groups"
+                },
+                {
+                  "Path": "kiosks/group",
+                  "Target": "Groups"
+                },
+                {
+                  "Path": "kiosks/kiosk",
+                  "Target": "Kiosks"
+                },
+                {
+                  "Path": "managers/manager",
+                  "Target": "People"
+                },
+                {
+                  "Path": "managers/unit",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "members",
+                  "Target": "People"
+                },
+                {
+                  "Path": "organization",
+                  "Target": "Organizations"
+                },
+                {
+                  "Path": "payPeriodDefinition",
+                  "Target": "PayPeriodDefinitions"
+                },
+                {
+                  "Path": "projects/project",
+                  "Target": "Projects"
+                },
+                {
+                  "Path": "projects/unit",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "schedule",
+                  "Target": "Schedules"
+                },
+                {
+                  "Path": "secondApprovers/approver",
+                  "Target": "People"
+                },
+                {
+                  "Path": "secondApprovers/group",
+                  "Target": "Groups"
+                },
+                {
+                  "Path": "unitManagers",
+                  "Target": "People"
+                },
+                {
+                  "Path": "unitTimeOffPolicies/timeOffPolicy",
+                  "Target": "TimeOffPolicies"
+                },
+                {
+                  "Path": "unitTimeOffPolicies/unit",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "workTypes/unit",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "workTypes/workType",
+                  "Target": "WorkTypes"
+                }
+              ],
+              "Annotation": {
+                "Term": "Org.OData.Core.V1.OptimisticConcurrency",
+                "Collection": {
+                  "PropertyPath": "updatedAt"
+                }
+              }
+            },
+            {
+              "Name": "TimeZones",
+              "EntityType": "Jibble.Workspace.ViewModels.TimeZoneModel"
+            },
+            {
+              "Name": "AllManagedPeople",
+              "EntityType": "Jibble.Workspace.Model.PersonInfo"
+            },
+            {
+              "Name": "KioskSummary",
+              "EntityType": "Jibble.Workspace.Model.KioskSummary"
+            },
+            {
+              "Name": "ManagedPeople",
+              "EntityType": "Jibble.Workspace.Model.PersonInfo"
+            },
+            {
+              "Name": "OrganizationInfo",
+              "EntityType": "Jibble.Workspace.Model.DTO.OrganizationInfo"
+            },
+            {
+              "Name": "PersonDetails",
+              "EntityType": "Jibble.Workspace.ViewModels.PersonDetails",
+              "NavigationPropertyBinding": [
+                {
+                  "Path": "calendar",
+                  "Target": "Calendars"
+                },
+                {
+                  "Path": "effectiveCalendar",
+                  "Target": "Calendars"
+                },
+                {
+                  "Path": "effectiveSchedule",
+                  "Target": "Schedules"
+                },
+                {
+                  "Path": "employmentType",
+                  "Target": "EmploymentTypes"
+                },
+                {
+                  "Path": "group",
+                  "Target": "Groups"
+                },
+                {
+                  "Path": "kiosks/kiosk",
+                  "Target": "Kiosks"
+                },
+                {
+                  "Path": "kiosks/person",
+                  "Target": "People"
+                },
+                {
+                  "Path": "managedUnits/manager",
+                  "Target": "People"
+                },
+                {
+                  "Path": "managedUnits/unit",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "managers/manager",
+                  "Target": "People"
+                },
+                {
+                  "Path": "managers/unit",
+                  "Target": "Units"
+                },
+                {
+                  "Path": "position",
+                  "Target": "Positions"
+                },
+                {
+                  "Path": "schedule",
+                  "Target": "Schedules"
+                }
+              ]
+            },
+            {
+              "Name": "ShortOrganizationInfo",
+              "EntityType": "Jibble.Workspace.Model.DTO.ShortOrganizationInfo"
+            },
+            {
+              "Name": "UpcomingHolidays",
+              "EntityType": "Jibble.Workspace.Model.CalendarDay",
+              "NavigationPropertyBinding": {
+                "Path": "calendar",
+                "Target": "Calendars"
+              }
+            },
+            {
+              "Name": "MetaRestrictions",
+              "EntityType": "Jibble.Common.Meta.MetaRestriction"
+            },
+            {
+              "Name": "MetaEntities",
+              "EntityType": "Jibble.Common.Meta.MetaEntity"
+            }
+          ],
+          "Singleton": {
+            "Name": "Configuration",
+            "Type": "Jibble.Workspace.Controllers.JibbleConfiguration"
+          },
+          "FunctionImport": [
+            {
+              "Name": "PeopleBySchedule",
+              "Function": "Default.PeopleBySchedule",
+              "IncludeInServiceDocument": "true"
+            },
+            {
+              "Name": "GroupsBySchedule",
+              "Function": "Default.GroupsBySchedule",
+              "IncludeInServiceDocument": "true"
+            },
+            {
+              "Name": "GroupsCountSchedule",
+              "Function": "Default.GroupsCountSchedule",
+              "IncludeInServiceDocument": "true"
+            },
+            {
+              "Name": "MinimumAllowedDate",
+              "Function": "Default.MinimumAllowedDate",
+              "IncludeInServiceDocument": "true"
+            },
+            {
+              "Name": "PersonSchedule",
+              "Function": "Default.PersonSchedule",
+              "IncludeInServiceDocument": "true"
+            },
+            {
+              "Name": "PersonHolidays",
+              "Function": "Default.PersonHolidays",
+              "IncludeInServiceDocument": "true"
+            },
+            {
+              "Name": "PersonActivities",
+              "Function": "Default.PersonActivities",
+              "IncludeInServiceDocument": "true"
+            },
+            {
+              "Name": "PersonProjects",
+              "Function": "Default.PersonProjects",
+              "IncludeInServiceDocument": "true"
+            },
+            {
+              "Name": "PersonGeoFence",
+              "Function": "Default.PersonGeoFence",
+              "IncludeInServiceDocument": "true"
+            },
+            {
+              "Name": "PersonGeoFenceWithDistance",
+              "Function": "Default.PersonGeoFenceWithDistance",
+              "IncludeInServiceDocument": "true"
+            },
+            {
+              "Name": "KioskEmbeddings",
+              "Function": "Default.KioskEmbeddings",
+              "IncludeInServiceDocument": "true"
+            },
+            {
+              "Name": "KioskPeople",
+              "Function": "Default.KioskPeople",
+              "IncludeInServiceDocument": "true"
+            },
+            {
+              "Name": "GetFileUploadUrl",
+              "Function": "Default.GetFileUploadUrl",
+              "IncludeInServiceDocument": "true"
+            },
+            {
+              "Name": "GetInvitationLinkStatus",
+              "Function": "Default.GetInvitationLinkStatus",
+              "IncludeInServiceDocument": "true"
+            }
+          ],
+          "ActionImport": [
+            {
+              "Name": "ResetPersonPin",
+              "Action": "Default.ResetPersonPin"
+            },
+            {
+              "Name": "EnsureOrganizationDeleted",
+              "Action": "Default.EnsureOrganizationDeleted"
+            },
+            {
+              "Name": "RegisterPersonViaInvitationLink",
+              "Action": "Default.RegisterPersonViaInvitationLink"
+            },
+            {
+              "Name": "ResendInvitation",
+              "Action": "Default.ResendInvitation"
+            },
+            {
+              "Name": "RefreshCalendars",
+              "Action": "Default.RefreshCalendars"
+            },
+            {
+              "Name": "DataSync",
+              "Action": "Default.DataSync"
+            },
+            {
+              "Name": "ClearCache",
+              "Action": "Default.ClearCache"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
