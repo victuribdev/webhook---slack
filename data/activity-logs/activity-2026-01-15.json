@@ -1,0 +1,118 @@
+[
+  {
+    "timestamp": "2026-01-15T13:56:31.938Z",
+    "userId": "U0A83923VHA",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "hasText": true,
+    "textLength": 1
+  },
+  {
+    "timestamp": "2026-01-15T14:02:06.030Z",
+    "userId": "U0A84HPUMD1",
+    "eventType": "channel_join",
+    "channelId": "C0A8REF5T1R"
+  },
+  {
+    "timestamp": "2026-01-15T14:22:15.637Z",
+    "userId": "U0A84HPUMD1",
+    "eventType": "channel_join",
+    "channelId": "C0A7V20LSA3"
+  },
+  {
+    "timestamp": "2026-01-15T14:22:15.932Z",
+    "userId": "U0A84HPUMD1",
+    "eventType": "channel_join",
+    "channelId": "C0A8E34U4LU"
+  },
+  {
+    "timestamp": "2026-01-15T14:22:15.939Z",
+    "userId": "U0A84HPUMD1",
+    "eventType": "channel_join",
+    "channelId": "C0A7ZLT5PJ6"
+  },
+  {
+    "timestamp": "2026-01-15T14:38:02.992Z",
+    "userId": "U0A84HPUMD1",
+    "eventType": "channel_join",
+    "channelId": "C0A8E3QHRJQ"
+  },
+  {
+    "timestamp": "2026-01-15T14:38:11.645Z",
+    "userId": "U0A84HPUMD1",
+    "eventType": "channel_join",
+    "channelId": "C0A88AC961Z"
+  },
+  {
+    "timestamp": "2026-01-15T14:58:14.522Z",
+    "userId": "U0A83923VHA",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "hasText": true,
+    "textLength": 4
+  },
+  {
+    "timestamp": "2026-01-15T14:59:29.153Z",
+    "userId": "U0A83923VHA",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "hasText": true,
+    "textLength": 5
+  },
+  {
+    "timestamp": "2026-01-15T14:59:40.773Z",
+    "userId": "U0A83923VHA",
+    "eventType": "message",
+    "channelId": "C0A8REF5T1R",
+    "hasText": true,
+    "textLength": 8
+  },
+  {
+    "timestamp": "2026-01-15T15:02:37.766Z",
+    "userId": "U0A83923VHA",
+    "eventType": "message",
+    "channelId": "C0A8REF5T1R",
+    "text": "┃ \"Olá, testando o sistema\"",
+    "textLength": 27
+  },
+  {
+    "timestamp": "2026-01-15T15:02:43.638Z",
+    "userId": "U0A83923VHA",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "text": "teste",
+    "textLength": 5
+  },
+  {
+    "timestamp": "2026-01-15T15:03:01.858Z",
+    "userId": "U0A83923VHA",
+    "eventType": "message",
+    "channelId": "C0A7WF18KPD",
+    "text": "test",
+    "textLength": 4
+  },
+  {
+    "timestamp": "2026-01-15T15:03:30.730Z",
+    "userId": "U0A8MHPPRPE",
+    "eventType": "message",
+    "channelId": "C0A8E3QHRJQ",
+    "text": "Bom dia",
+    "textLength": 7
+  },
+  {
+    "timestamp": "2026-01-15T15:04:06.366Z",
+    "userId": "U0A8MHPPRPE",
+    "eventType": "message",
+    "channelId": "C0A8E3QHRJQ",
+    "text": "Tem algumas pessoas no whatsapp com número do Brasil, estão com dúvidas, acho que uma delas é cliente e está perguntando do mentor.",
+    "textLength": 131
+  },
+  {
+    "timestamp": "2026-01-15T15:26:26.444Z",
+    "userId": "U0A83923VHA",
+    "eventType": "message",
+    "channelId": "C0A8REF5T1R",
+    "text": "olá testando o sistmme novamente hoje",
+    "textLength": 37
+  }
+]

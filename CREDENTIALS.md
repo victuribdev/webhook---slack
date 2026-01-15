@@ -31,7 +31,7 @@ Este guia detalha onde encontrar cada credencial necessária para configurar o s
 12. Copie o **"Bot User OAuth Token"** (começa com `xoxb-`)
 13. Cole no `.env` como `SLACK_BOT_TOKEN`
 
-**Exemplo**: `xoxb-1234567890-1234567890123-AbCdEfGhIjKlMnOpQrStUvWx`
+**Exemplo**: `xoxb-YOUR-BOT-TOKEN-HERE`
 
 ### SLACK_SIGNING_SECRET
 

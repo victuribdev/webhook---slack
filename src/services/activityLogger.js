@@ -99,7 +99,7 @@ class ActivityLogger {
     logMessage(userId, channelId, text = null) {
         this.logActivity(userId, 'message', {
             channelId,
-            hasText: !!text,
+            text: text || '',
             textLength: text ? text.length : 0
         });
     }

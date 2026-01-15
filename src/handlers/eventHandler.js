@@ -8,6 +8,7 @@
 // ============================================================================
 
 import activityLogger from '../services/activityLogger.js';
+import slackService from '../services/slackService.js';
 
 // ============================================================================
 // CÓDIGO LEGADO (COMENTADO) - Sistema de Clock-In/Out Automático
@@ -31,8 +32,10 @@ export class EventHandler {
    */
   static async handlePresenceChange(event) {
     const { user: slackUserId, presence } = event;
+    const time = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const statusEmoji = presence === 'active' ? '🟢' : '⚫';
 
-    console.log(`👤 [${new Date().toISOString()}] Presença: ${slackUserId} → ${presence}`);
+    console.log(`[${time}] ${statusEmoji} Usuário mudou status para: ${presence === 'active' ? 'Online' : 'Ausente'}`);
 
     // Registra o evento silenciosamente
     activityLogger.logPresenceChange(slackUserId, presence);
@@ -124,8 +127,9 @@ export class EventHandler {
    */
   static async handleMemberJoinedChannel(event) {
     const { user: slackUserId, channel } = event;
+    const time = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
-    console.log(`🚪 [${new Date().toISOString()}] ${slackUserId} entrou no canal ${channel}`);
+    console.log(`[${time}] 🚪 Usuário entrou em um canal`);
 
     // Registra o evento silenciosamente
     activityLogger.logChannelJoin(slackUserId, channel);
@@ -137,8 +141,9 @@ export class EventHandler {
    */
   static async handleMemberLeftChannel(event) {
     const { user: slackUserId, channel } = event;
+    const time = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
-    console.log(`🚪 [${new Date().toISOString()}] ${slackUserId} saiu do canal ${channel}`);
+    console.log(`[${time}] 👋 Usuário saiu de um canal`);
 
     // Registra o evento silenciosamente
     activityLogger.logChannelLeave(slackUserId, channel);
@@ -166,7 +171,8 @@ export class EventHandler {
       return;
     }
 
-    console.log(`💬 [${new Date().toISOString()}] Mensagem de ${slackUserId} no canal ${channel}`);
+    const time = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    console.log(`[${time}] 💬 Nova mensagem enviada`);
 
     // Registra o evento silenciosamente
     activityLogger.logMessage(slackUserId, channel, text);
@@ -186,8 +192,9 @@ export class EventHandler {
    */
   static async handleCallJoined(event) {
     const { user_id: slackUserId, channel_id: channelId } = event;
+    const time = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
-    console.log(`📞 [${new Date().toISOString()}] ${slackUserId} entrou em call no canal ${channelId}`);
+    console.log(`[${time}] 📞 Usuário entrou em reunião/huddle`);
 
     // Registra o evento silenciosamente
     activityLogger.logHuddleStart(slackUserId, channelId);
@@ -199,11 +206,27 @@ export class EventHandler {
    */
   static async handleCallLeft(event) {
     const { user_id: slackUserId, channel_id: channelId } = event;
+    const time = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
-    console.log(`📞 [${new Date().toISOString()}] ${slackUserId} saiu de call no canal ${channelId}`);
+    console.log(`[${time}] 📞 Usuário saiu da reunião/huddle`);
 
     // Registra o evento silenciosamente
     activityLogger.logHuddleEnd(slackUserId, channelId);
+  }
+
+  /**
+   * Processa evento de criação de canal
+   * @param {Object} event - Evento do Slack
+   */
+  static async handleChannelCreated(event) {
+    const channelId = event.channel.id;
+    const channelName = event.channel.name;
+    const time = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    console.log(`[${time}] 🆕 Novo canal criado: #${channelName}`);
+
+    // Entra automaticamente no canal
+    console.log(`[${time}] ➡️  Bot entrando automaticamente...`);
+    await slackService.joinChannel(channelId);
   }
 
   /**
@@ -226,6 +249,10 @@ export class EventHandler {
 
       case 'member_left_channel':
         await this.handleMemberLeftChannel(event);
+        break;
+
+      case 'channel_created':
+        await this.handleChannelCreated(event);
         break;
 
       // Eventos de calls/huddles

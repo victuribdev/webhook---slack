@@ -1,0 +1,535 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatório de Produtividade - 2026-01-15</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4A90E2;
+      --secondary: #50E3C2;
+      --bg: #F7F9FC;
+      --card-bg: #FFFFFF;
+      --text-main: #2C3E50;
+      --text-muted: #95A5A6;
+      --success: #2ECC71;
+      --warning: #F1C40F;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+    .header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+    .badge-date {
+      background: #E1E8ED;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      color: #34495E;
+    }
+
+    /* Summary Cards */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .card {
+      background: var(--card-bg);
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: translateY(-5px); }
+    .card-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+    .card-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    /* User Rows */
+    .user-row {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+      overflow: hidden;
+    }
+    
+    .user-header {
+      padding: 25px;
+      border-bottom: 1px solid #EEF2F7;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .user-info {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+    .avatar-circle {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .user-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .user-email {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .user-meta {
+      display: flex;
+      gap: 30px;
+    }
+    .meta-item {
+      text-align: right;
+    }
+    .meta-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .meta-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* Visual Timeline */
+    .timeline-wrapper {
+      padding: 20px 25px;
+      background: #FAFBFC;
+      border-bottom: 1px solid #EEF2F7;
+    }
+    .timeline-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    .timeline-track {
+      position: relative;
+      height: 24px;
+      background: #EDF2F7;
+      border-radius: 12px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .timeline-bar {
+      position: absolute;
+      height: 100%;
+      background: linear-gradient(90deg, #4A90E2 0%, #63B3ED 100%);
+      border-radius: 4px;
+      opacity: 0.9;
+    }
+    .timeline-ruler {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+      color: #CBD5E0;
+      font-size: 0.7rem;
+    }
+
+    /* Activities Breakdown */
+    .activities-breakdown {
+      padding: 20px 25px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .tag {
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tag:hover { transform: translateY(-2px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .tag-msg { background: #E3F2FD; color: #1565C0; }
+    .tag-call { background: #E8F5E9; color: #2E7D32; }
+    .tag-session { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Session Details (collapsible) */
+    .session-details {
+      margin-top: 15px;
+      padding: 15px 25px;
+      background: #F8F9FA;
+      border-radius: 8px;
+      display: none;
+      animation: fadeIn 0.3s;
+    }
+    .session-details.active { display: block; }
+    .session-item {
+      padding: 10px 0;
+      border-bottom: 1px solid #E9ECEF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .session-item:last-child { border-bottom: none; }
+    .session-time-range {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .session-event-count {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📊 Relatório de Produtividade</h1>
+      <p>Resumo de Atividade do Dia • <span class="badge-date">2026-01-15</span></p>
+    </div>
+
+    <!-- Resumo Global -->
+    <div class="summary-grid">
+      <div class="card">
+        <div class="card-value">2</div>
+        <div class="card-label">Colaboradores Ativos</div>
+      </div>
+      <div class="card">
+        <div class="card-value">0.5h</div>
+        <div class="card-label">Horas de Atividade</div>
+      </div>
+      <div class="card">
+        <div class="card-value">10</div>
+        <div class="card-label">Mensagens Enviadas</div>
+      </div>
+    </div>
+
+    <!-- Lista de Usuários -->
+    
+      <div class="user-row">
+        <!-- Cabeçalho do Usuário -->
+        <div class="user-header">
+          <div class="user-info">
+            <div class="avatar-circle">P</div>
+            <div>
+              <div class="user-name">Paulo victor</div>
+              <div class="user-email">victuribdev@gmail.com</div>
+            </div>
+          </div>
+          <div class="user-meta">
+            <div class="meta-item">
+              <div class="meta-value">28min</div>
+              <div class="meta-label">Tempo Estimado</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Linha do Tempo Visual (24 horas) -->
+        <div class="timeline-wrapper">
+          <div class="timeline-label">🕐 Linha do Tempo (24 horas)</div>
+          <div class="timeline-track">
+            
+              <div class="timeline-bar" 
+                   style="left: 45.55555555555556%; width: max(0.5%, 0%);"
+                   title="Atividade: 10:56 - 10:56">
+              </div>
+            
+              <div class="timeline-bar" 
+                   style="left: 49.861111111111114%; width: max(0.5%, 1.9582430555555554%);"
+                   title="Atividade: 11:58 - 12:26">
+              </div>
+            
+          </div>
+          <div class="timeline-ruler">
+            <span>00h</span><span>06h</span><span>12h</span><span>18h</span><span>24h</span>
+          </div>
+        </div>
+
+        <!-- Resumo Simplificado (clicável) -->
+        <div class="activities-breakdown">
+          <div class="tag tag-session" onclick="toggleDetails('sessions-0')">
+            <span>🔥</span> 2 blocos de trabalho
+          </div>
+          <div class="tag tag-msg" onclick="toggleDetails('messages-0')">
+            <span>💬</span> 8 mensagens
+          </div>
+          
+        </div>
+
+        <!-- Detalhes das Sessões (expansível) -->
+        <div id="sessions-0" class="session-details">
+          <h4 style="margin-bottom: 15px; color: var(--text-main); font-size: 0.95rem;">📅 Detalhes dos Blocos de Trabalho</h4>
+          
+            <div class="session-item">
+              <div>
+                <div class="session-time-range">
+                  10:56 - 
+                  10:56
+                </div>
+                <div class="session-event-count">1 interações registradas</div>
+              </div>
+              <div style="background: #667eea; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">
+                0min
+              </div>
+            </div>
+          
+            <div class="session-item">
+              <div>
+                <div class="session-time-range">
+                  11:58 - 
+                  12:26
+                </div>
+                <div class="session-event-count">7 interações registradas</div>
+              </div>
+              <div style="background: #667eea; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">
+                28min
+              </div>
+            </div>
+          
+        </div>
+
+        <!-- Histórico de Mensagens (expansível) -->
+        <div id="messages-0" class="session-details">
+          <h4 style="margin-bottom: 15px; color: var(--text-main); font-size: 0.95rem;">💬 Histórico de Mensagens</h4>
+          
+            <div class="session-item" style="flex-direction: column; align-items: flex-start;">
+              <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 8px;">
+                <span style="font-size: 0.85rem; color: var(--text-muted);">
+                  12:02:37
+                </span>
+                <span style="font-size: 0.85rem; color: var(--primary); font-weight: 600;">
+                  🔒test
+                </span>
+              </div>
+              <div style="background: #F8F9FA; padding: 10px; border-radius: 8px; width: 100%; border-left: 3px solid #4A90E2;">
+                <p style="margin: 0; color: var(--text-main); font-size: 0.9rem; line-height: 1.5;">┃ "Olá, testando o sistema"</p>
+              </div>
+            </div>
+          
+            <div class="session-item" style="flex-direction: column; align-items: flex-start;">
+              <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 8px;">
+                <span style="font-size: 0.85rem; color: var(--text-muted);">
+                  12:02:43
+                </span>
+                <span style="font-size: 0.85rem; color: var(--primary); font-weight: 600;">
+                  🔒dev
+                </span>
+              </div>
+              <div style="background: #F8F9FA; padding: 10px; border-radius: 8px; width: 100%; border-left: 3px solid #4A90E2;">
+                <p style="margin: 0; color: var(--text-main); font-size: 0.9rem; line-height: 1.5;">teste</p>
+              </div>
+            </div>
+          
+            <div class="session-item" style="flex-direction: column; align-items: flex-start;">
+              <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 8px;">
+                <span style="font-size: 0.85rem; color: var(--text-muted);">
+                  12:03:01
+                </span>
+                <span style="font-size: 0.85rem; color: var(--primary); font-weight: 600;">
+                  🔒dev
+                </span>
+              </div>
+              <div style="background: #F8F9FA; padding: 10px; border-radius: 8px; width: 100%; border-left: 3px solid #4A90E2;">
+                <p style="margin: 0; color: var(--text-main); font-size: 0.9rem; line-height: 1.5;">test</p>
+              </div>
+            </div>
+          
+            <div class="session-item" style="flex-direction: column; align-items: flex-start;">
+              <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 8px;">
+                <span style="font-size: 0.85rem; color: var(--text-muted);">
+                  12:26:26
+                </span>
+                <span style="font-size: 0.85rem; color: var(--primary); font-weight: 600;">
+                  🔒test
+                </span>
+              </div>
+              <div style="background: #F8F9FA; padding: 10px; border-radius: 8px; width: 100%; border-left: 3px solid #4A90E2;">
+                <p style="margin: 0; color: var(--text-main); font-size: 0.9rem; line-height: 1.5;">olá testando o sistmme novamente hoje</p>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="user-row">
+        <!-- Cabeçalho do Usuário -->
+        <div class="user-header">
+          <div class="user-info">
+            <div class="avatar-circle">L</div>
+            <div>
+              <div class="user-name">Larissa Costa</div>
+              <div class="user-email">vendedorclickup01@gmail.com</div>
+            </div>
+          </div>
+          <div class="user-meta">
+            <div class="meta-item">
+              <div class="meta-value">1min</div>
+              <div class="meta-label">Tempo Estimado</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Linha do Tempo Visual (24 horas) -->
+        <div class="timeline-wrapper">
+          <div class="timeline-label">🕐 Linha do Tempo (24 horas)</div>
+          <div class="timeline-track">
+            
+              <div class="timeline-bar" 
+                   style="left: 50.208333333333336%; width: max(0.5%, 0.04124537037037038%);"
+                   title="Atividade: 12:03 - 12:04">
+              </div>
+            
+          </div>
+          <div class="timeline-ruler">
+            <span>00h</span><span>06h</span><span>12h</span><span>18h</span><span>24h</span>
+          </div>
+        </div>
+
+        <!-- Resumo Simplificado (clicável) -->
+        <div class="activities-breakdown">
+          <div class="tag tag-session" onclick="toggleDetails('sessions-1')">
+            <span>🔥</span> 1 blocos de trabalho
+          </div>
+          <div class="tag tag-msg" onclick="toggleDetails('messages-1')">
+            <span>💬</span> 2 mensagens
+          </div>
+          
+        </div>
+
+        <!-- Detalhes das Sessões (expansível) -->
+        <div id="sessions-1" class="session-details">
+          <h4 style="margin-bottom: 15px; color: var(--text-main); font-size: 0.95rem;">📅 Detalhes dos Blocos de Trabalho</h4>
+          
+            <div class="session-item">
+              <div>
+                <div class="session-time-range">
+                  12:03 - 
+                  12:04
+                </div>
+                <div class="session-event-count">2 interações registradas</div>
+              </div>
+              <div style="background: #667eea; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">
+                1min
+              </div>
+            </div>
+          
+        </div>
+
+        <!-- Histórico de Mensagens (expansível) -->
+        <div id="messages-1" class="session-details">
+          <h4 style="margin-bottom: 15px; color: var(--text-main); font-size: 0.95rem;">💬 Histórico de Mensagens</h4>
+          
+            <div class="session-item" style="flex-direction: column; align-items: flex-start;">
+              <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 8px;">
+                <span style="font-size: 0.85rem; color: var(--text-muted);">
+                  12:03:30
+                </span>
+                <span style="font-size: 0.85rem; color: var(--primary); font-weight: 600;">
+                  🔒1-closer-cos-transfer
+                </span>
+              </div>
+              <div style="background: #F8F9FA; padding: 10px; border-radius: 8px; width: 100%; border-left: 3px solid #4A90E2;">
+                <p style="margin: 0; color: var(--text-main); font-size: 0.9rem; line-height: 1.5;">Bom dia</p>
+              </div>
+            </div>
+          
+            <div class="session-item" style="flex-direction: column; align-items: flex-start;">
+              <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 8px;">
+                <span style="font-size: 0.85rem; color: var(--text-muted);">
+                  12:04:06
+                </span>
+                <span style="font-size: 0.85rem; color: var(--primary); font-weight: 600;">
+                  🔒1-closer-cos-transfer
+                </span>
+              </div>
+              <div style="background: #F8F9FA; padding: 10px; border-radius: 8px; width: 100%; border-left: 3px solid #4A90E2;">
+                <p style="margin: 0; color: var(--text-main); font-size: 0.9rem; line-height: 1.5;">Tem algumas pessoas no whatsapp com número do Brasil, estão com dúvidas, acho que uma delas é cliente e está perguntando do mentor.</p>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    
+
+    <div class="footer">
+      <p>💼 Relatório gerado automaticamente</p>
+      <p style="margin-top: 5px; font-size: 0.8rem;">Este relatório não implica controle de jornada ou cobrança por horas</p>
+    </div>
+  </div>
+
+  <script>
+    function toggleDetails(id) {
+      const element = document.getElementById(id);
+      element.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
+    

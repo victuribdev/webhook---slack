@@ -182,6 +182,37 @@ class SlackService {
   }
 
   /**
+   * Obtém informações de um canal
+   * @param {string} channelId - ID do canal no Slack
+   * @returns {Promise<Object>} - Informações do canal
+   */
+  async getChannelInfo(channelId) {
+    try {
+      const response = await axios.get(
+        `${this.apiUrl}/conversations.info`,
+        {
+          params: { channel: channelId },
+          headers: {
+            'Authorization': `Bearer ${this.botToken}`,
+          },
+        }
+      );
+
+      if (response.data.ok) {
+        return { success: true, data: response.data.channel };
+      } else {
+        return { success: false, error: response.data.error };
+      }
+    } catch (error) {
+      console.error('❌ Erro ao obter info do canal:', error.response?.data || error.message);
+      return {
+        success: false,
+        error: error.response?.data || error.message,
+      };
+    }
+  }
+
+  /**
    * Obtém a presença de um usuário
    * @param {string} userId - ID do usuário no Slack
    * @returns {Promise<Object>} - Presença do usuário (active/away)
@@ -209,6 +240,79 @@ class SlackService {
         success: false,
         error: error.response?.data || error.message,
       };
+    }
+  }
+  /**
+   * Busca lista de todos os canais públicos
+   * @returns {Promise<Object>} Resultado da operação
+   */
+  async getAllChannels() {
+    try {
+      const response = await axios.get(
+        `${this.apiUrl}/conversations.list`,
+        {
+          params: {
+            types: 'public_channel',
+            exclude_archived: true,
+            limit: 1000
+          },
+          headers: {
+            'Authorization': `Bearer ${this.botToken}`,
+          },
+        }
+      );
+
+      if (response.data.ok) {
+        return { success: true, channels: response.data.channels };
+      } else {
+        console.error('❌ Erro Slack API (conversations.list):', response.data.error);
+        return { success: false, error: response.data.error };
+      }
+    } catch (error) {
+      console.error('❌ Erro na requisição (getAllChannels):', error.message);
+      return { success: false, error: error.message };
+    }
+  }
+
+  /**
+   * Faz o bot entrar em um canal
+   * @param {string} channelId - ID do canal
+   * @returns {Promise<Object>} Resultado da operação
+   */
+  async joinChannel(channelId) {
+    try {
+      const response = await axios.post(
+        `${this.apiUrl}/conversations.join`,
+        { channel: channelId },
+        {
+          headers: {
+            'Authorization': `Bearer ${this.botToken}`,
+          },
+        }
+      );
+
+      if (response.data.ok) {
+        return { success: true, channel: response.data.channel };
+      } else {
+        // Se já estiver no canal, a API pode retornar erro ou aviso dependendo da versão,
+        // mas aqui tratamos erros reais
+        if (response.data.error === 'is_archived') {
+          return { success: false, error: 'archived' };
+        }
+
+        // Se erro for "já está no canal", consideramos sucesso
+        if (response.data.error === 'method_not_supported_for_channel_type' ||
+          response.data.error === 'channel_not_found' ||
+          response.data.error === 'already_in_channel') {
+          return { success: true, alreadyIn: true };
+        }
+
+        console.error(`❌ Erro Slack API (conversations.join) para ${channelId}:`, response.data.error);
+        return { success: false, error: response.data.error };
+      }
+    } catch (error) {
+      console.error(`❌ Erro na requisição (joinChannel) para ${channelId}:`, error.message);
+      return { success: false, error: error.message };
     }
   }
 }

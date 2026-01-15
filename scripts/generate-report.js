@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import activityAnalyzer from '../src/services/activityAnalyzer.js';
+import supabaseService from '../src/services/supabaseService.js';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
@@ -125,6 +126,16 @@ async function main() {
 
     activityAnalyzer.saveReportJSON(report, jsonPath);
     activityAnalyzer.saveReportHTML(report, htmlPath);
+
+    // Envia para migmainc.com (Supabase)
+    console.log('📤 Enviando para migmainc.com...');
+    const supabaseResult = await supabaseService.saveReport(report);
+
+    if (supabaseResult.success) {
+        console.log('✅ Relatório enviado para migmainc.com\n');
+    } else {
+        console.log('⚠️  Falha ao enviar para migmainc.com:', supabaseResult.error, '\n');
+    }
 
     // Exibe resumo
     console.log(`\n📈 Resumo do Relatório:\n`);

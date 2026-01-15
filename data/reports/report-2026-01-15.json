@@ -1,0 +1,104 @@
+{
+  "date": "2026-01-15",
+  "totalEvents": 16,
+  "uniqueUsers": 2,
+  "users": [
+    {
+      "userId": "U0A83923VHA",
+      "userName": "Paulo victor",
+      "userEmail": "victuribdev@gmail.com",
+      "userDisplayName": "Paulo victor",
+      "totalEvents": 8,
+      "totalSessions": 2,
+      "totalActiveTime": 28.1987,
+      "totalActiveTimeFormatted": "28min",
+      "eventTypeCounts": {
+        "message": 8
+      },
+      "messages": [
+        {
+          "timestamp": "2026-01-15T15:02:37.766Z",
+          "text": "┃ \"Olá, testando o sistema\"",
+          "channelId": "C0A8REF5T1R",
+          "channelName": "test",
+          "isPrivate": true
+        },
+        {
+          "timestamp": "2026-01-15T15:02:43.638Z",
+          "text": "teste",
+          "channelId": "C0A7WF18KPD",
+          "channelName": "dev",
+          "isPrivate": true
+        },
+        {
+          "timestamp": "2026-01-15T15:03:01.858Z",
+          "text": "test",
+          "channelId": "C0A7WF18KPD",
+          "channelName": "dev",
+          "isPrivate": true
+        },
+        {
+          "timestamp": "2026-01-15T15:26:26.444Z",
+          "text": "olá testando o sistmme novamente hoje",
+          "channelId": "C0A8REF5T1R",
+          "channelName": "test",
+          "isPrivate": true
+        }
+      ],
+      "sessions": [
+        {
+          "start": "2026-01-15T13:56:31.938Z",
+          "end": "2026-01-15T13:56:31.938Z",
+          "duration": 0,
+          "durationFormatted": "0min",
+          "eventCount": 1
+        },
+        {
+          "start": "2026-01-15T14:58:14.522Z",
+          "end": "2026-01-15T15:26:26.444Z",
+          "duration": 28.1987,
+          "durationFormatted": "28min",
+          "eventCount": 7
+        }
+      ]
+    },
+    {
+      "userId": "U0A8MHPPRPE",
+      "userName": "Larissa Costa",
+      "userEmail": "vendedorclickup01@gmail.com",
+      "userDisplayName": "Larissa Costa",
+      "totalEvents": 2,
+      "totalSessions": 1,
+      "totalActiveTime": 0.5939333333333334,
+      "totalActiveTimeFormatted": "1min",
+      "eventTypeCounts": {
+        "message": 2
+      },
+      "messages": [
+        {
+          "timestamp": "2026-01-15T15:03:30.730Z",
+          "text": "Bom dia",
+          "channelId": "C0A8E3QHRJQ",
+          "channelName": "1-closer-cos-transfer",
+          "isPrivate": true
+        },
+        {
+          "timestamp": "2026-01-15T15:04:06.366Z",
+          "text": "Tem algumas pessoas no whatsapp com número do Brasil, estão com dúvidas, acho que uma delas é cliente e está perguntando do mentor.",
+          "channelId": "C0A8E3QHRJQ",
+          "channelName": "1-closer-cos-transfer",
+          "isPrivate": true
+        }
+      ],
+      "sessions": [
+        {
+          "start": "2026-01-15T15:03:30.730Z",
+          "end": "2026-01-15T15:04:06.366Z",
+          "duration": 0.5939333333333334,
+          "durationFormatted": "1min",
+          "eventCount": 2
+        }
+      ]
+    }
+  ]
+}
