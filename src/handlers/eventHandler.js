@@ -172,7 +172,20 @@ export class EventHandler {
     }
 
     const time = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    console.log(`[${time}] 💬 Nova mensagem enviada`);
+
+    // Busca nome para log legível (Tenta buscar nome real, senão usa ID)
+    let userName = slackUserId;
+    try {
+      const userInfo = await slackService.getUserInfo(slackUserId);
+      if (userInfo && userInfo.success && userInfo.data) {
+        userName = userInfo.data.real_name || userInfo.data.name || slackUserId;
+      }
+    } catch (err) {
+      // Falha silenciosa, usa ID
+    }
+
+    const shortText = text ? (text.replace(/\n/g, ' ').substring(0, 60) + (text.length > 60 ? '...' : '')) : '<sem texto>';
+    console.log(`[${time}] 💬 ${userName}: "${shortText}"`);
 
     // Registra o evento silenciosamente
     activityLogger.logMessage(slackUserId, channel, text);
