@@ -175,17 +175,28 @@ export class EventHandler {
 
     // Busca nome para log legível (Tenta buscar nome real, senão usa ID)
     let userName = slackUserId;
+    let channelName = channel;
+
     try {
-      const userInfo = await slackService.getUserInfo(slackUserId);
+      // Paraleliza as buscas para não travar
+      const [userInfo, channelInfo] = await Promise.all([
+        slackService.getUserInfo(slackUserId).catch(() => null),
+        slackService.getChannelInfo(channel).catch(() => null)
+      ]);
+
       if (userInfo && userInfo.success && userInfo.data) {
         userName = userInfo.data.real_name || userInfo.data.name || slackUserId;
       }
+
+      if (channelInfo && channelInfo.success && channelInfo.data) {
+        channelName = channelInfo.data.name || channel;
+      }
     } catch (err) {
-      // Falha silenciosa, usa ID
+      // Falha silenciosa
     }
 
     const shortText = text ? (text.replace(/\n/g, ' ').substring(0, 60) + (text.length > 60 ? '...' : '')) : '<sem texto>';
-    console.log(`[${time}] 💬 ${userName}: "${shortText}"`);
+    console.log(`[${time}] 💬 ${userName} em #${channelName}: "${shortText}"`);
 
     // Registra o evento silenciosamente
     activityLogger.logMessage(slackUserId, channel, text);
