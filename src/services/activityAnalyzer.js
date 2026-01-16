@@ -13,7 +13,7 @@ const ACTIVITY_LOG_DIR = path.join(__dirname, '../../data/activity-logs');
  */
 class ActivityAnalyzer {
   constructor() {
-    this.sessionGapMinutes = 30; // Se passar 30min sem evento, considera nova sessão
+    this.sessionGapMinutes = 60; // Aumentado para 60min para capturar melhor intervalos de trabalho
     this.userCache = new Map(); // Cache de informações de usuários do Slack
     this.channelCache = new Map(); // Cache de informações de canais do Slack
     this.excludeUserIds = []; // IDs de usuários para excluir (bots, testes)
