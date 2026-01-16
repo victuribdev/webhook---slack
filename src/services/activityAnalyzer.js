@@ -147,6 +147,74 @@ class ActivityAnalyzer {
   }
 
   /**
+   * Calcula métricas baseadas puramente em eventos de presença (Active/Away)
+   * @param {Array} userEvents - Eventos do usuário
+   * @returns {Object} - Métricas de presença
+   */
+  calculatePresenceMetrics(userEvents) {
+    const presenceEvents = userEvents.filter(e => e.eventType === 'presence_change' || e.type === 'presence_change');
+
+    if (presenceEvents.length === 0) {
+      return { totalMinutes: 0, sessions: [], logs: [] };
+    }
+
+    const sessions = [];
+    let currentStart = null;
+    const logs = [];
+
+    // Ordena por data
+    presenceEvents.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+    presenceEvents.forEach(event => {
+      const time = new Date(event.timestamp);
+      const status = event.presence; // 'active' ou 'away'
+
+      logs.push({ time, status });
+
+      if (status === 'active') {
+        if (!currentStart) {
+          currentStart = time;
+        }
+      } else if (status === 'away') {
+        if (currentStart) {
+          const duration = (time - currentStart) / 1000 / 60; // minutos
+          sessions.push({
+            start: currentStart,
+            end: time,
+            duration: duration
+          });
+          currentStart = null;
+        }
+      }
+    });
+
+    // Se terminou o dia como 'active', fecha a sessão no último evento conhecido ou final do dia
+    // (Simplificação: fecha no momento do último evento registrado no log geral para não extrapolar)
+    if (currentStart) {
+      // Usa o último evento do usuário como "fim" se não tiver 'away' explícito
+      const lastEvent = userEvents[userEvents.length - 1];
+      const lastTime = new Date(lastEvent.timestamp);
+
+      if (lastTime > currentStart) {
+        const duration = (lastTime - currentStart) / 1000 / 60;
+        sessions.push({
+          start: currentStart,
+          end: lastTime,
+          duration: duration
+        });
+      }
+    }
+
+    const totalMinutes = sessions.reduce((sum, s) => sum + s.duration, 0);
+
+    return {
+      totalMinutes,
+      sessions,
+      logs
+    };
+  }
+
+  /**
    * Busca informações do usuário no Slack (com cache)
    * @param {string} userId - ID do usuário no Slack
    * @returns {Promise<Object>} - Informações do usuário
@@ -310,6 +378,9 @@ class ActivityAnalyzer {
         })
       );
 
+      // Calcula métricas de presença (Active/Away)
+      const presenceMetrics = this.calculatePresenceMetrics(userEvents[userId]);
+
       userAnalysis.push({
         userId,
         userName: userInfo.name,
@@ -317,8 +388,16 @@ class ActivityAnalyzer {
         userDisplayName: userInfo.displayName,
         totalEvents: userEvents[userId].length,
         totalSessions: sessions.length,
+
+        // Atividade baseada em interações
         totalActiveTime: totalMinutes,
         totalActiveTimeFormatted: this.formatDuration(totalMinutes),
+
+        // Atividade baseada em presença (Active/Away)
+        totalPresenceTime: presenceMetrics.totalMinutes,
+        totalPresenceTimeFormatted: this.formatDuration(presenceMetrics.totalMinutes),
+        presenceMetrics: presenceMetrics,
+
         eventTypeCounts,
         messages,
         sessions: sessions.map(session => ({
@@ -667,8 +746,13 @@ class ActivityAnalyzer {
           <div class="user-meta">
             <div class="meta-item">
               <div class="meta-value">${user.totalActiveTimeFormatted}</div>
-              <div class="meta-label">Tempo Estimado</div>
+              <div class="meta-label">Atividade (Foco)</div>
             </div>
+            ${user.totalPresenceTime > 0 ? `
+            <div class="meta-item" style="border-left: 1px solid #eee; padding-left: 20px;">
+              <div class="meta-value" style="color: #2ECC71;">${user.totalPresenceTimeFormatted}</div>
+              <div class="meta-label">Disponibilidade</div>
+            </div>` : ''}
           </div>
         </div>
 
