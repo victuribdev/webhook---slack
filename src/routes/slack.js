@@ -21,44 +21,29 @@ router.post('/events-test', express.json(), (req, res) => {
  * Endpoint para receber eventos do Slack
  * Este endpoint precisa estar configurado no Slack Event Subscriptions
  */
+// Endpoint Principal - Recebe Eventos
 router.post('/events', slackAuthMiddleware, async (req, res) => {
-  console.log(`🔔 [${new Date().toISOString()}] Requisição recebida em /slack/events`);
-  console.log(`   📦 Body type:`, req.body?.type);
-  console.log(`   📦 Body keys:`, Object.keys(req.body || {}));
-
   // O body já foi parseado pelo middleware de autenticação
   const { type, challenge, event } = req.body;
 
-  // URL Verification (quando você configura o webhook pela primeira vez)
+  // URL Verification (Configuração inicial do Slack)
   if (type === 'url_verification') {
-    console.log('✅ Verificação de URL do Slack');
     return res.json({ challenge });
   }
 
-  // Event Callback
+  // Eventos Reais (Mensagens, Presença, etc)
   if (type === 'event_callback' && event) {
-    console.log(`📨 [${new Date().toISOString()}] Evento recebido: ${event.type}`);
-    console.log(`   📝 Detalhes:`, JSON.stringify({
-      type: event.type,
-      user: event.user,
-      channel: event.channel,
-      subtype: event.subtype,
-      text: event.text ? event.text.substring(0, 50) + '...' : 'N/A'
-    }, null, 2));
-
-    // Processa o evento de forma assíncrona
+    // Processa o evento silenciosamente (Logs apenas no EventHandler)
     EventHandler.handleEvent(event).catch((error) => {
-      console.error(`❌ [${new Date().toISOString()}] Erro ao processar evento:`, error);
+      console.error(`❌ Erro no evento:`, error.message);
     });
 
-    // Responde imediatamente ao Slack (dentro de 3 segundos)
+    // Confirma recebimento para o Slack imediatamente
     res.sendStatus(200);
     return;
   }
 
   // Evento desconhecido
-  console.log(`⚠️  [${new Date().toISOString()}] Tipo de evento desconhecido:`, type);
-  console.log(`   📦 Body completo:`, JSON.stringify(req.body, null, 2));
   res.sendStatus(200);
 });
 

@@ -6,7 +6,7 @@ import { config } from '../config/index.js';
  * Converte o body (Buffer) para string e faz o parse para JSON
  */
 export function slackAuthMiddleware(req, res, next) {
-  console.log(`🔐 [${new Date().toISOString()}] Middleware de autenticação executado`);
+  // console.log(`🔐 [${new Date().toISOString()}] Middleware de autenticação executado`);
   const signature = req.headers['x-slack-signature'];
   const timestamp = req.headers['x-slack-request-timestamp'];
 
@@ -18,11 +18,11 @@ export function slackAuthMiddleware(req, res, next) {
 
   // O body precisa ser uma string para validação
   // Quando vem do express.raw(), é um Buffer, então convertemos para string
-  const rawBody = Buffer.isBuffer(req.body) 
+  const rawBody = Buffer.isBuffer(req.body)
     ? req.body.toString('utf8')
-    : typeof req.body === 'string' 
-    ? req.body 
-    : JSON.stringify(req.body);
+    : typeof req.body === 'string'
+      ? req.body
+      : JSON.stringify(req.body);
 
   const isValid = verifySlackSignature(
     config.slack.signingSecret,
@@ -33,13 +33,10 @@ export function slackAuthMiddleware(req, res, next) {
 
   if (!isValid) {
     console.warn('⚠️  Assinatura inválida do Slack');
-    console.warn('   📝 Signature recebida:', signature);
-    console.warn('   📝 Timestamp recebido:', timestamp);
-    console.warn('   📝 Body (primeiros 200 chars):', rawBody.substring(0, 200));
     return res.status(401).json({ error: 'Invalid signature' });
   }
-  
-  console.log('✅ Assinatura válida do Slack');
+
+  // Assinatura OK (silencioso)
 
   // Faz o parse do body e armazena no req.body para uso nas rotas
   try {
