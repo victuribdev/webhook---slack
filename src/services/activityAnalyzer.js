@@ -325,6 +325,7 @@ class ActivityAnalyzer {
       return {
         date,
         totalEvents: 0,
+        uniqueUsers: 0,
         users: []
       };
     }

@@ -4,19 +4,104 @@
   "uniqueUsers": 2,
   "users": [
     {
+      "userId": "U0A8PDB3UJZ",
+      "userName": "victor-dev",
+      "userEmail": "victtinho.ribeiro@gmail.com",
+      "userDisplayName": "victor-dev",
+      "totalEvents": 10,
+      "totalSessions": 3,
+      "totalActiveTime": 156.11666666666667,
+      "totalActiveTimeFormatted": "2h 36min",
+      "totalPresenceTime": 450,
+      "totalPresenceTimeFormatted": "7h 30min",
+      "presenceMetrics": {
+        "totalMinutes": 450,
+        "sessions": [
+          {
+            "start": "2026-01-14T09:00:00.000Z",
+            "end": "2026-01-14T16:30:00.000Z",
+            "duration": 450
+          }
+        ],
+        "logs": [
+          {
+            "time": "2026-01-14T09:00:00.000Z",
+            "status": "active"
+          },
+          {
+            "time": "2026-01-14T16:30:00.000Z",
+            "status": "away"
+          }
+        ]
+      },
+      "eventTypeCounts": {
+        "presence_change": 2,
+        "message": 6,
+        "huddle_start": 1,
+        "huddle_end": 1
+      },
+      "messages": [],
+      "sessions": [
+        {
+          "start": "2026-01-14T09:00:00.000Z",
+          "end": "2026-01-14T10:20:56.000Z",
+          "duration": 80.93333333333334,
+          "durationFormatted": "1h 21min",
+          "eventCount": 6
+        },
+        {
+          "start": "2026-01-14T14:00:00.000Z",
+          "end": "2026-01-14T14:30:22.000Z",
+          "duration": 30.366666666666667,
+          "durationFormatted": "30min",
+          "eventCount": 2
+        },
+        {
+          "start": "2026-01-14T15:45:11.000Z",
+          "end": "2026-01-14T16:30:00.000Z",
+          "duration": 44.81666666666667,
+          "durationFormatted": "45min",
+          "eventCount": 2
+        }
+      ]
+    },
+    {
       "userId": "U0A83923VHA",
       "userName": "Paulo victor",
       "userEmail": "victuribdev@gmail.com",
       "userDisplayName": "Paulo victor",
       "totalEvents": 10,
-      "totalSessions": 4,
-      "totalActiveTime": 36.1095,
-      "totalActiveTimeFormatted": "36min",
+      "totalSessions": 3,
+      "totalActiveTime": 80.3595,
+      "totalActiveTimeFormatted": "1h 20min",
+      "totalPresenceTime": 150,
+      "totalPresenceTimeFormatted": "2h 30min",
+      "presenceMetrics": {
+        "totalMinutes": 150,
+        "sessions": [
+          {
+            "start": "2026-01-14T09:30:00.000Z",
+            "end": "2026-01-14T12:00:00.000Z",
+            "duration": 150
+          }
+        ],
+        "logs": [
+          {
+            "time": "2026-01-14T09:30:00.000Z",
+            "status": "active"
+          },
+          {
+            "time": "2026-01-14T12:00:00.000Z",
+            "status": "away"
+          }
+        ]
+      },
       "eventTypeCounts": {
         "presence_change": 2,
         "message": 7,
         "channel_join": 1
       },
+      "messages": [],
       "sessions": [
         {
           "start": "2026-01-14T09:30:00.000Z",
@@ -27,17 +112,10 @@
         },
         {
           "start": "2026-01-14T11:15:45.000Z",
-          "end": "2026-01-14T11:15:45.000Z",
-          "duration": 0,
-          "durationFormatted": "0min",
-          "eventCount": 1
-        },
-        {
-          "start": "2026-01-14T12:00:00.000Z",
           "end": "2026-01-14T12:00:00.000Z",
-          "duration": 0,
-          "durationFormatted": "0min",
-          "eventCount": 1
+          "duration": 44.25,
+          "durationFormatted": "44min",
+          "eventCount": 2
         },
         {
           "start": "2026-01-14T22:34:19.353Z",
@@ -45,66 +123,6 @@
           "duration": 5.542833333333333,
           "durationFormatted": "6min",
           "eventCount": 5
-        }
-      ]
-    },
-    {
-      "userId": "U0A8PDB3UJZ",
-      "userName": "victor-dev",
-      "userEmail": "victtinho.ribeiro@gmail.com",
-      "userDisplayName": "victor-dev",
-      "totalEvents": 10,
-      "totalSessions": 6,
-      "totalActiveTime": 35.56666666666666,
-      "totalActiveTimeFormatted": "36min",
-      "eventTypeCounts": {
-        "presence_change": 2,
-        "message": 6,
-        "huddle_start": 1,
-        "huddle_end": 1
-      },
-      "sessions": [
-        {
-          "start": "2026-01-14T09:00:00.000Z",
-          "end": "2026-01-14T09:30:12.000Z",
-          "duration": 30.2,
-          "durationFormatted": "30min",
-          "eventCount": 4
-        },
-        {
-          "start": "2026-01-14T10:15:34.000Z",
-          "end": "2026-01-14T10:20:56.000Z",
-          "duration": 5.366666666666666,
-          "durationFormatted": "5min",
-          "eventCount": 2
-        },
-        {
-          "start": "2026-01-14T14:00:00.000Z",
-          "end": "2026-01-14T14:00:00.000Z",
-          "duration": 0,
-          "durationFormatted": "0min",
-          "eventCount": 1
-        },
-        {
-          "start": "2026-01-14T14:30:22.000Z",
-          "end": "2026-01-14T14:30:22.000Z",
-          "duration": 0,
-          "durationFormatted": "0min",
-          "eventCount": 1
-        },
-        {
-          "start": "2026-01-14T15:45:11.000Z",
-          "end": "2026-01-14T15:45:11.000Z",
-          "duration": 0,
-          "durationFormatted": "0min",
-          "eventCount": 1
-        },
-        {
-          "start": "2026-01-14T16:30:00.000Z",
-          "end": "2026-01-14T16:30:00.000Z",
-          "duration": 0,
-          "durationFormatted": "0min",
-          "eventCount": 1
         }
       ]
     }

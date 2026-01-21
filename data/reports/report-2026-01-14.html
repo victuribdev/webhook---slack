@@ -4,333 +4,515 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Relatório de Atividade - 2026-01-14</title>
+  <title>Relatório de Produtividade - 2026-01-14</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #4A90E2;
+      --secondary: #50E3C2;
+      --bg: #F7F9FC;
+      --card-bg: #FFFFFF;
+      --text-main: #2C3E50;
+      --text-muted: #95A5A6;
+      --success: #2ECC71;
+      --warning: #F1C40F;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      padding: 20px;
-      min-height: 100vh;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 40px 20px;
     }
+
     .container {
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-      overflow: hidden;
     }
+
+    /* Header */
     .header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 40px;
       text-align: center;
+      margin-bottom: 40px;
     }
-    .header h1 { font-size: 2.5em; margin-bottom: 10px; }
-    .header p { font-size: 1.2em; opacity: 0.9; }
-    .summary {
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+    .header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+    .badge-date {
+      background: #E1E8ED;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      color: #34495E;
+    }
+
+    /* Summary Cards */
+    .summary-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
-      padding: 40px;
-      background: #f8f9fa;
+      margin-bottom: 40px;
     }
-    .stat-card {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    .card {
+      background: var(--card-bg);
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
       text-align: center;
+      transition: transform 0.2s;
     }
-    .stat-card h3 { color: #667eea; font-size: 2em; margin-bottom: 5px; }
-    .stat-card p { color: #666; font-size: 0.9em; }
-    .users { padding: 40px; }
-    .user-card {
-      background: #f8f9fa;
-      border-radius: 10px;
-      padding: 30px;
+    .card:hover { transform: translateY(-5px); }
+    .card-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+    .card-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    /* User Rows */
+    .user-row {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
       margin-bottom: 30px;
-      border-left: 5px solid #667eea;
+      overflow: hidden;
     }
+    
     .user-header {
+      padding: 25px;
+      border-bottom: 1px solid #EEF2F7;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 20px;
     }
-    .user-id {
-      font-size: 1.5em;
-      font-weight: bold;
-      color: #333;
-    }
-    .user-time {
-      font-size: 1.8em;
-      color: #667eea;
-      font-weight: bold;
-    }
-    .user-stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+
+    .user-info {
+      display: flex;
       gap: 15px;
-      margin-bottom: 20px;
+      align-items: center;
     }
-    .mini-stat {
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
-      text-align: center;
+    .avatar-circle {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: bold;
     }
-    .mini-stat strong { display: block; font-size: 1.5em; color: #667eea; }
-    .mini-stat span { font-size: 0.85em; color: #666; }
-    .sessions {
-      margin-top: 20px;
+    .user-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-main);
     }
-    .sessions h4 {
-      color: #333;
-      margin-bottom: 15px;
-      font-size: 1.1em;
+    .user-email {
+      font-size: 0.9rem;
+      color: var(--text-muted);
     }
-    .session {
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
+
+    .user-meta {
+      display: flex;
+      gap: 30px;
+    }
+    .meta-item {
+      text-align: right;
+    }
+    .meta-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .meta-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* Visual Timeline */
+    .timeline-wrapper {
+      padding: 20px 25px;
+      background: #FAFBFC;
+      border-bottom: 1px solid #EEF2F7;
+    }
+    .timeline-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
       margin-bottom: 10px;
+      font-weight: 600;
+    }
+    .timeline-track {
+      position: relative;
+      height: 24px;
+      background: #EDF2F7;
+      border-radius: 12px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .timeline-bar {
+      position: absolute;
+      height: 100%;
+      background: linear-gradient(90deg, #4A90E2 0%, #63B3ED 100%);
+      border-radius: 4px;
+      opacity: 0.9;
+    }
+    .timeline-ruler {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+      color: #CBD5E0;
+      font-size: 0.7rem;
+    }
+
+    /* Activities Breakdown */
+    .activities-breakdown {
+      padding: 20px 25px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .tag {
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tag:hover { transform: translateY(-2px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .tag-msg { background: #E3F2FD; color: #1565C0; }
+    .tag-call { background: #E8F5E9; color: #2E7D32; }
+    .tag-session { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Session Details (collapsible) */
+    .session-details {
+      margin-top: 15px;
+      padding: 15px 25px;
+      background: #F8F9FA;
+      border-radius: 8px;
+      display: none;
+      animation: fadeIn 0.3s;
+    }
+    .session-details.active { display: block; }
+    .session-item {
+      padding: 10px 0;
+      border-bottom: 1px solid #E9ECEF;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
     }
-    .session-time { color: #666; font-size: 0.9em; }
-    .session-duration {
-      background: #667eea;
-      color: white;
-      padding: 5px 15px;
-      border-radius: 20px;
-      font-weight: bold;
+    .session-item:last-child { border-bottom: none; }
+    .session-time-range {
+      font-weight: 600;
+      color: var(--text-main);
     }
-    .event-types {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 15px;
+    .session-event-count {
+      font-size: 0.85rem;
+      color: var(--text-muted);
     }
-    .event-badge {
-      background: #e9ecef;
-      padding: 5px 12px;
-      border-radius: 15px;
-      font-size: 0.85em;
-      color: #495057;
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Footer */
     .footer {
-      background: #f8f9fa;
-      padding: 20px;
       text-align: center;
-      color: #666;
-      font-size: 0.9em;
+      margin-top: 50px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h1>📊 Relatório de Atividade</h1>
-      <p>2026-01-14</p>
+      <h1>📊 Relatório de Produtividade</h1>
+      <p>Resumo de Atividade do Dia • <span class="badge-date">2026-01-14</span></p>
     </div>
 
-    <div class="summary">
-      <div class="stat-card">
-        <h3>22</h3>
-        <p>Total de Eventos</p>
+    <!-- Resumo Global -->
+    <div class="summary-grid">
+      <div class="card">
+        <div class="card-value">2</div>
+        <div class="card-label">Colaboradores Ativos</div>
       </div>
-      <div class="stat-card">
-        <h3>2</h3>
-        <p>Usuários Ativos</p>
+      <div class="card">
+        <div class="card-value">3.9h</div>
+        <div class="card-label">Horas de Atividade</div>
       </div>
-      <div class="stat-card">
-        <h3>10</h3>
-        <p>Sessões Totais</p>
+      <div class="card">
+        <div class="card-value">13</div>
+        <div class="card-label">Mensagens Enviadas</div>
       </div>
     </div>
 
-    <div class="users">
-      
-        <div class="user-card">
-          <div class="user-header">
+    <!-- Lista de Usuários -->
+    
+      <div class="user-row">
+        <!-- Cabeçalho do Usuário -->
+        <div class="user-header">
+          <div class="user-info">
+            <div class="avatar-circle">V</div>
             <div>
-              <div class="user-id">👤 Paulo victor</div>
-              <div style="font-size: 0.9em; color: #666; margin-top: 5px;">📧 victuribdev@gmail.com</div>
-            </div>
-            <div class="user-time">⏱️ 36min</div>
-          </div>
-
-          <div class="user-stats">
-            <div class="mini-stat">
-              <strong>10</strong>
-              <span>Eventos</span>
-            </div>
-            <div class="mini-stat">
-              <strong>4</strong>
-              <span>Sessões</span>
-            </div>
-            <div class="mini-stat">
-              <strong>7</strong>
-              <span>Mensagens</span>
-            </div>
-            <div class="mini-stat">
-              <strong>0</strong>
-              <span>Calls</span>
+              <div class="user-name">victor-dev</div>
+              <div class="user-email">victtinho.ribeiro@gmail.com</div>
             </div>
           </div>
-
-          <div class="event-types">
-            <span class="event-badge">presence_change: 2</span><span class="event-badge">message: 7</span><span class="event-badge">channel_join: 1</span>
-          </div>
-
-          <div class="sessions">
-            <h4>📅 Sessões de Atividade (4)</h4>
+          <div class="user-meta">
+            <div class="meta-item">
+              <div class="meta-value">2h 36min</div>
+              <div class="meta-label">Atividade (Foco)</div>
+            </div>
             
-              <div class="session">
-                <div class="session-time">
-                  06:30:00 - 
-                  07:00:34
-                  <span style="color: #999; margin-left: 10px;">(3 eventos)</span>
-                </div>
-                <div class="session-duration">31min</div>
-              </div>
-            
-              <div class="session">
-                <div class="session-time">
-                  08:15:45 - 
-                  08:15:45
-                  <span style="color: #999; margin-left: 10px;">(1 eventos)</span>
-                </div>
-                <div class="session-duration">0min</div>
-              </div>
-            
-              <div class="session">
-                <div class="session-time">
-                  09:00:00 - 
-                  09:00:00
-                  <span style="color: #999; margin-left: 10px;">(1 eventos)</span>
-                </div>
-                <div class="session-duration">0min</div>
-              </div>
-            
-              <div class="session">
-                <div class="session-time">
-                  19:34:19 - 
-                  19:39:51
-                  <span style="color: #999; margin-left: 10px;">(5 eventos)</span>
-                </div>
-                <div class="session-duration">6min</div>
-              </div>
-            
+            <div class="meta-item" style="border-left: 1px solid #eee; padding-left: 20px;">
+              <div class="meta-value" style="color: #2ECC71;">7h 30min</div>
+              <div class="meta-label">Disponibilidade</div>
+            </div>
           </div>
         </div>
-      
-        <div class="user-card">
-          <div class="user-header">
-            <div>
-              <div class="user-id">👤 victor-dev</div>
-              <div style="font-size: 0.9em; color: #666; margin-top: 5px;">📧 victtinho.ribeiro@gmail.com</div>
-            </div>
-            <div class="user-time">⏱️ 36min</div>
-          </div>
 
-          <div class="user-stats">
-            <div class="mini-stat">
-              <strong>10</strong>
-              <span>Eventos</span>
-            </div>
-            <div class="mini-stat">
-              <strong>6</strong>
-              <span>Sessões</span>
-            </div>
-            <div class="mini-stat">
-              <strong>6</strong>
-              <span>Mensagens</span>
-            </div>
-            <div class="mini-stat">
-              <strong>1</strong>
-              <span>Calls</span>
-            </div>
+        <!-- Linha do Tempo Visual (24 horas) -->
+        <div class="timeline-wrapper">
+          <div class="timeline-label">🕐 Linha do Tempo (24 horas)</div>
+          <div class="timeline-track">
+            
+              <div class="timeline-bar" 
+                   style="left: 25%; width: max(0.5%, 5.620370370370371%);"
+                   title="Atividade: 06:00 - 07:20">
+              </div>
+            
+              <div class="timeline-bar" 
+                   style="left: 45.83333333333333%; width: max(0.5%, 2.1087962962962963%);"
+                   title="Atividade: 11:00 - 11:30">
+              </div>
+            
+              <div class="timeline-bar" 
+                   style="left: 53.125%; width: max(0.5%, 3.1122685185185186%);"
+                   title="Atividade: 12:45 - 13:30">
+              </div>
+            
           </div>
-
-          <div class="event-types">
-            <span class="event-badge">presence_change: 2</span><span class="event-badge">message: 6</span><span class="event-badge">huddle_start: 1</span><span class="event-badge">huddle_end: 1</span>
-          </div>
-
-          <div class="sessions">
-            <h4>📅 Sessões de Atividade (6)</h4>
-            
-              <div class="session">
-                <div class="session-time">
-                  06:00:00 - 
-                  06:30:12
-                  <span style="color: #999; margin-left: 10px;">(4 eventos)</span>
-                </div>
-                <div class="session-duration">30min</div>
-              </div>
-            
-              <div class="session">
-                <div class="session-time">
-                  07:15:34 - 
-                  07:20:56
-                  <span style="color: #999; margin-left: 10px;">(2 eventos)</span>
-                </div>
-                <div class="session-duration">5min</div>
-              </div>
-            
-              <div class="session">
-                <div class="session-time">
-                  11:00:00 - 
-                  11:00:00
-                  <span style="color: #999; margin-left: 10px;">(1 eventos)</span>
-                </div>
-                <div class="session-duration">0min</div>
-              </div>
-            
-              <div class="session">
-                <div class="session-time">
-                  11:30:22 - 
-                  11:30:22
-                  <span style="color: #999; margin-left: 10px;">(1 eventos)</span>
-                </div>
-                <div class="session-duration">0min</div>
-              </div>
-            
-              <div class="session">
-                <div class="session-time">
-                  12:45:11 - 
-                  12:45:11
-                  <span style="color: #999; margin-left: 10px;">(1 eventos)</span>
-                </div>
-                <div class="session-duration">0min</div>
-              </div>
-            
-              <div class="session">
-                <div class="session-time">
-                  13:30:00 - 
-                  13:30:00
-                  <span style="color: #999; margin-left: 10px;">(1 eventos)</span>
-                </div>
-                <div class="session-duration">0min</div>
-              </div>
-            
+          <div class="timeline-ruler">
+            <span>00h</span><span>06h</span><span>12h</span><span>18h</span><span>24h</span>
           </div>
         </div>
-      
-    </div>
+
+        <!-- Resumo Simplificado (clicável) -->
+        <div class="activities-breakdown">
+          <div class="tag tag-session" onclick="toggleDetails('sessions-0')">
+            <span>🔥</span> 3 blocos de trabalho
+          </div>
+          <div class="tag tag-msg" onclick="toggleDetails('messages-0')">
+            <span>💬</span> 6 mensagens
+          </div>
+          
+          <div class="tag tag-call">
+            <span>📞</span> 1 reuniões/calls
+          </div>
+        </div>
+
+        <!-- Detalhes das Sessões (expansível) -->
+        <div id="sessions-0" class="session-details">
+          <h4 style="margin-bottom: 15px; color: var(--text-main); font-size: 0.95rem;">📅 Detalhes dos Blocos de Trabalho</h4>
+          
+            <div class="session-item">
+              <div>
+                <div class="session-time-range">
+                  06:00 - 
+                  07:20
+                </div>
+                <div class="session-event-count">6 interações registradas</div>
+              </div>
+              <div style="background: #667eea; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">
+                1h 21min
+              </div>
+            </div>
+          
+            <div class="session-item">
+              <div>
+                <div class="session-time-range">
+                  11:00 - 
+                  11:30
+                </div>
+                <div class="session-event-count">2 interações registradas</div>
+              </div>
+              <div style="background: #667eea; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">
+                30min
+              </div>
+            </div>
+          
+            <div class="session-item">
+              <div>
+                <div class="session-time-range">
+                  12:45 - 
+                  13:30
+                </div>
+                <div class="session-event-count">2 interações registradas</div>
+              </div>
+              <div style="background: #667eea; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">
+                45min
+              </div>
+            </div>
+          
+        </div>
+
+        <!-- Histórico de Mensagens (expansível) -->
+        <div id="messages-0" class="session-details">
+          <h4 style="margin-bottom: 15px; color: var(--text-main); font-size: 0.95rem;">💬 Histórico de Mensagens</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Nenhuma mensagem com texto registrada</p>
+        </div>
+      </div>
+    
+      <div class="user-row">
+        <!-- Cabeçalho do Usuário -->
+        <div class="user-header">
+          <div class="user-info">
+            <div class="avatar-circle">P</div>
+            <div>
+              <div class="user-name">Paulo victor</div>
+              <div class="user-email">victuribdev@gmail.com</div>
+            </div>
+          </div>
+          <div class="user-meta">
+            <div class="meta-item">
+              <div class="meta-value">1h 20min</div>
+              <div class="meta-label">Atividade (Foco)</div>
+            </div>
+            
+            <div class="meta-item" style="border-left: 1px solid #eee; padding-left: 20px;">
+              <div class="meta-value" style="color: #2ECC71;">2h 30min</div>
+              <div class="meta-label">Disponibilidade</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Linha do Tempo Visual (24 horas) -->
+        <div class="timeline-wrapper">
+          <div class="timeline-label">🕐 Linha do Tempo (24 horas)</div>
+          <div class="timeline-track">
+            
+              <div class="timeline-bar" 
+                   style="left: 27.083333333333332%; width: max(0.5%, 2.122685185185185%);"
+                   title="Atividade: 06:30 - 07:00">
+              </div>
+            
+              <div class="timeline-bar" 
+                   style="left: 34.375%; width: max(0.5%, 3.0729166666666665%);"
+                   title="Atividade: 08:15 - 09:00">
+              </div>
+            
+              <div class="timeline-bar" 
+                   style="left: 81.52777777777777%; width: max(0.5%, 0.38491898148148146%);"
+                   title="Atividade: 19:34 - 19:39">
+              </div>
+            
+          </div>
+          <div class="timeline-ruler">
+            <span>00h</span><span>06h</span><span>12h</span><span>18h</span><span>24h</span>
+          </div>
+        </div>
+
+        <!-- Resumo Simplificado (clicável) -->
+        <div class="activities-breakdown">
+          <div class="tag tag-session" onclick="toggleDetails('sessions-1')">
+            <span>🔥</span> 3 blocos de trabalho
+          </div>
+          <div class="tag tag-msg" onclick="toggleDetails('messages-1')">
+            <span>💬</span> 7 mensagens
+          </div>
+          
+        </div>
+
+        <!-- Detalhes das Sessões (expansível) -->
+        <div id="sessions-1" class="session-details">
+          <h4 style="margin-bottom: 15px; color: var(--text-main); font-size: 0.95rem;">📅 Detalhes dos Blocos de Trabalho</h4>
+          
+            <div class="session-item">
+              <div>
+                <div class="session-time-range">
+                  06:30 - 
+                  07:00
+                </div>
+                <div class="session-event-count">3 interações registradas</div>
+              </div>
+              <div style="background: #667eea; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">
+                31min
+              </div>
+            </div>
+          
+            <div class="session-item">
+              <div>
+                <div class="session-time-range">
+                  08:15 - 
+                  09:00
+                </div>
+                <div class="session-event-count">2 interações registradas</div>
+              </div>
+              <div style="background: #667eea; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">
+                44min
+              </div>
+            </div>
+          
+            <div class="session-item">
+              <div>
+                <div class="session-time-range">
+                  19:34 - 
+                  19:39
+                </div>
+                <div class="session-event-count">5 interações registradas</div>
+              </div>
+              <div style="background: #667eea; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">
+                6min
+              </div>
+            </div>
+          
+        </div>
+
+        <!-- Histórico de Mensagens (expansível) -->
+        <div id="messages-1" class="session-details">
+          <h4 style="margin-bottom: 15px; color: var(--text-main); font-size: 0.95rem;">💬 Histórico de Mensagens</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Nenhuma mensagem com texto registrada</p>
+        </div>
+      </div>
+    
 
     <div class="footer">
-      <p>Relatório gerado automaticamente pelo Slack Activity Logger</p>
-      <p>Modo: Sensor Passivo | Data: 14/01/2026, 19:48:00</p>
+      <p>💼 Relatório gerado automaticamente</p>
+      <p style="margin-top: 5px; font-size: 0.8rem;">Este relatório não implica controle de jornada ou cobrança por horas</p>
     </div>
   </div>
+
+  <script>
+    function toggleDetails(id) {
+      const element = document.getElementById(id);
+      element.classList.toggle('active');
+    }
+  </script>
 </body>
 </html>
     

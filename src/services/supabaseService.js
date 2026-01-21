@@ -30,7 +30,7 @@ class SupabaseService {
                 .upsert({
                     date: report.date,
                     total_events: report.totalEvents,
-                    unique_users: report.uniqueUsers,
+                    unique_users: report.uniqueUsers || 0,
                     report_data: report
                 }, {
                     onConflict: 'date'
