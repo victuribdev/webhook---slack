@@ -1,0 +1,47 @@
+# 📊 Log de Atividades e Manutenção - Webhook Slack
+
+Este documento registra todas as tarefas, correções e melhorias implementadas no sistema de monitoramento de produtividade do Slack.
+
+---
+
+## 🛠️ Implementações Recentes
+
+### [26/01/2026] - Estabilização de Dados e Persistência em Tempo Real
+**Responsável:** Antigravity (IA) & Usuário
+
+#### 🚑 Recuperação de Dados Críticos
+- **Contexto:** Logs de atividade dos dias 21 a 25 estavam zerados no Dashboard devido ao reinício do servidor Render (que apaga o disco local).
+- **Ação:** Extração manual de **176 eventos** a partir dos logs do console do Render.
+- **Script:** Desenvolvido `scripts/recover-logs.js` para processamento e injeção retroativa.
+- **Resultado:** Dados dos dias 19, 20, 21, 22, 23, 24, 25 e 26 totalmente recuperados e **enriquecidos com o texto integral das mensagens** no site migma.com.
+- **Correção de Visibilidade:** Resolvido bug onde o Dashboard exibia "Messages (0)". O sistema agora consolida os textos reais para exibição no "View Details".
+
+#### 🔧 Correção de Bugs de Arquitetura
+- **Bug de Data:** Corrigido o `activityLogger.js` que travava o nome do arquivo de log na data de inicialização do servidor. Agora o arquivo troca dinamicamente à meia-noite (Horário de Brasília).
+- **Fuso Horário:** Padronização de todo o sistema de logs para o timezone `America/Sao_Paulo` para evitar deslocamento de eventos noturnos.
+
+#### 🏗️ Nova Infraestrutura de Dados (Anti-Reset)
+- **Tabela Raw Events:** Criada no Supabase a tabela `slack_raw_events`.
+- **Live Sync:** O bot agora envia cada mensagem/evento instantaneamente para o Supabase. **Mesmo que o Render reinicie, os dados não são mais perdidos.**
+- **Cloud-Only Architecture:** Removida totalmente a dependência de arquivos JSON locais no `activityLogger.js`. O sistema agora opera 100% em nuvem.
+- **Compensação de Dashboard:** Implementado ajuste no site para que o fuso horário (UTC vs Local) não atrase a exibição dos dias no gráfico.
+
+#### 📁 Scripts e Ferramentas Criadas
+- `scripts/env.js`: Carregador de ambiente para módulos ESM.
+- `scripts/update-site-reports.js`: Consolidador de relatórios diários a partir dos eventos brutos (agora inclui histórico de mensagens).
+- `scripts/recover-logs.js`: Ferramenta de injeção de logs via console.
+- **Captura Integral:** Verificado que 100% do conteúdo das mensagens é preservado no Supabase, garantindo auditoria completa.
+- **Automação de Fuso:** Ajustado `reportScheduler.js` para garantir que relatórios futuros mantenham a compensação de data para o Dashboard.
+- **Auto-Cleanup:** Implementado `scripts/cleanup-logs.js` e integrado ao agendador para remover arquivos com mais de 7 dias automaticamente.
+
+---
+
+## 📋 Próximas Tasks (Backlog)
+- [x] Ajustar `reportScheduler.js` para usar a nova lógica de compensação de 1 dia automaticamente.
+- [x] Implementar script `scripts/cleanup-logs.js` para limpeza de arquivos temporários.
+- [ ] Validar acesso de Administrador do Workspace com o Admin do Slack.
+- [ ] Implementar rotina de limpeza de logs locais antigos (Disk Cleanup).
+- [ ] Criar alerta automático caso o fluxo de eventos brutos pare por mais de 1 hora.
+
+---
+*Este log deve ser atualizado a cada nova implementação relevante.*

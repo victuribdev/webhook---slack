@@ -96,6 +96,50 @@ class SupabaseService {
             return { success: false, error: error.message };
         }
     }
+    /**
+     * Busca eventos brutos de uma data específica
+     * @param {string} date - Data no formato YYYY-MM-DD
+     */
+    async getRawEventsByDate(date) {
+        try {
+            const { data, error } = await supabase
+                .from('slack_raw_events')
+                .select('*')
+                .gte('slack_timestamp', `${date}T00:00:00.000Z`)
+                .lt('slack_timestamp', `${date}T23:59:59.999Z`);
+
+            if (error) return { success: false, error: error.message };
+            return { success: true, data };
+        } catch (error) {
+            return { success: false, error: error.message };
+        }
+    }
+
+    /**
+     * Salva um evento bruto no banco de dados
+     * @param {Object} event - Dados do evento
+     */
+    async saveRawEvent(event) {
+        if (!supabaseUrl || !supabaseKey) return;
+
+        try {
+            const { error } = await supabase
+                .from('slack_raw_events')
+                .insert({
+                    slack_timestamp: event.timestamp || new Date().toISOString(),
+                    user_id: event.userId,
+                    event_type: event.eventType,
+                    channel_id: event.channelId || null,
+                    metadata: event
+                });
+
+            if (error) {
+                console.error('❌ Erro ao salvar evento bruto no Supabase:', error.message);
+            }
+        } catch (error) {
+            console.error('❌ Erro de conexão ao salvar evento bruto:', error.message);
+        }
+    }
 }
 
 export default new SupabaseService();
