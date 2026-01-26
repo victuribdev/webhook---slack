@@ -59,9 +59,14 @@ async function updateAllReports() {
 
                     // Captura o texto se for uma mensagem
                     if (e.eventType === 'message' && e.text) {
+                        // Tradução básica de IDs para nomes se necessário
+                        let channelName = e.channelId || 'canal-geral';
+                        if (channelName === 'C0A7WF18KPD') channelName = 'dev';
+                        if (channelName === 'C0A8P6URM9T') channelName = '1-closer-cos-transfer';
+
                         messages.push({
-                            timestamp: e.timestamp, // O site espera 'timestamp' para formatar a hora
-                            channelName: e.channelId || 'canal-geral', // O site espera 'channelName'
+                            timestamp: e.timestamp,
+                            channelName: channelName,
                             text: e.text
                         });
                     }

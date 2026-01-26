@@ -21,6 +21,39 @@ class ReportScheduler {
         }
     }
 
+    /**
+     * Gera ou atualiza o relatório do dia atual para o Dashboard (Tempo Real)
+     */
+    async updateTodayLiveReport() {
+        const now = new Date();
+        const brDate = now.toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' });
+
+        console.log(`[${now.toLocaleTimeString()}] ⚡ Atualizando Dashboard em tempo real (${brDate})...`);
+
+        try {
+            const report = await activityAnalyzer.generateReport(brDate, {
+                excludeBots: true,
+                enrichUserData: true
+            });
+
+            // Compensação de fuso para exibição no Dashboard
+            const compensateDate = new Date(brDate);
+            compensateDate.setUTCDate(compensateDate.getUTCDate() + 1);
+            const finalDate = compensateDate.toISOString().split('T')[0];
+
+            const finalReport = {
+                ...report,
+                date: finalDate,
+                original_date: brDate,
+                is_live: true // Marca como um relatório parcial/ao vivo
+            };
+
+            await supabaseService.saveReport(finalReport);
+        } catch (error) {
+            console.error('❌ Erro na atualização em tempo real:', error.message);
+        }
+    }
+
     async generateDailyReport() {
         const time = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
@@ -95,8 +128,16 @@ class ReportScheduler {
             timezone: 'America/Sao_Paulo'
         });
 
+        // Atualização em Tempo Real (A cada 5 minutos)
+        cron.schedule('*/5 * * * *', async () => {
+            await this.updateTodayLiveReport();
+        }, {
+            timezone: 'America/Sao_Paulo'
+        });
+
         console.log('[' + time + '] 🕐 Agendador de relatórios ativado');
-        console.log('[' + time + '] 📅 Relatórios serão gerados automaticamente todo dia às 00:01');
+        console.log('[' + time + '] 📅 Relatórios diários às 00:01');
+        console.log('[' + time + '] ⚡ Atualização do Dashboard em tempo real (a cada 5 min)');
         console.log('[' + time + '] 📤 Enviados automaticamente para migmainc.com');
     }
 }
