@@ -23,6 +23,7 @@ Este documento registra todas as tarefas, correções e melhorias implementadas 
 #### 🏗️ Nova Infraestrutura de Dados (Anti-Reset)
 - **Tabela Raw Events:** Criada no Supabase a tabela `slack_raw_events`.
 - **Live Sync:** O bot agora envia cada mensagem/evento instantaneamente para o Supabase. **Mesmo que o Render reinicie, os dados não são mais perdidos.**
+- **Live Dashboard (Real-time):** Implementado agendamento no `reportScheduler.js` para atualizar o relatório diário a cada **5 minutos**. O site agora reflete a atividade quase instantaneamente.
 - **Cloud-Only Architecture:** Removida totalmente a dependência de arquivos JSON locais no `activityLogger.js`. O sistema agora opera 100% em nuvem.
 - **Compensação de Dashboard:** Implementado ajuste no site para que o fuso horário (UTC vs Local) não atrase a exibição dos dias no gráfico.
 

@@ -14,6 +14,9 @@ const supabase = createClient(supabaseUrl, supabaseKey);
  * Serviço para integração com Supabase
  */
 class SupabaseService {
+    constructor() {
+        this.supabase = supabase;
+    }
     /**
      * Salva relatório no Supabase
      * @param {Object} report - Relatório completo

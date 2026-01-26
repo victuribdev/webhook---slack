@@ -28,7 +28,7 @@ class ReportScheduler {
         const now = new Date();
         const brDate = now.toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' });
 
-        console.log(`[${now.toLocaleTimeString()}] ⚡ Atualizando Dashboard em tempo real (${brDate})...`);
+        console.log(`[${now.toLocaleTimeString('pt-BR')}] ⚡ Atualizando Dashboard em tempo real (${brDate})...`);
 
         try {
             const report = await activityAnalyzer.generateReport(brDate, {
@@ -36,19 +36,15 @@ class ReportScheduler {
                 enrichUserData: true
             });
 
-            // Compensação de fuso para exibição no Dashboard
-            const compensateDate = new Date(brDate);
-            compensateDate.setUTCDate(compensateDate.getUTCDate() + 1);
-            const finalDate = compensateDate.toISOString().split('T')[0];
-
             const finalReport = {
                 ...report,
-                date: finalDate,
+                date: brDate, // Salva a data real de Brasília (YYYY-MM-DD)
                 original_date: brDate,
-                is_live: true // Marca como um relatório parcial/ao vivo
+                is_live: true
             };
 
             await supabaseService.saveReport(finalReport);
+            console.log(`✅ Relatório salvo no Supabase para a data: ${brDate}`);
         } catch (error) {
             console.error('❌ Erro na atualização em tempo real:', error.message);
         }
@@ -90,14 +86,13 @@ class ReportScheduler {
 
             // Envia para o Supabase (migmainc.com)
             console.log('[' + time + '] 📤 Enviando para migmainc.com...');
-            // Compensação de fuso para o Dashboard: 
-            // Adicionamos +1 dia no objeto que vai para o banco para que o site exiba a data correta
-            const reportForSupabase = {
+
+            const finalReport = {
                 ...report,
-                date: new Date(new Date(date).getTime() + 86400000).toISOString().split('T')[0]
+                date: date // Salva a data real de Brasília (YYYY-MM-DD)
             };
 
-            const supabaseResult = await supabaseService.saveReport(reportForSupabase);
+            const supabaseResult = await supabaseService.saveReport(finalReport);
 
             if (supabaseResult.success) {
                 console.log('[' + time + '] ✅ Relatório enviado para migmainc.com');
