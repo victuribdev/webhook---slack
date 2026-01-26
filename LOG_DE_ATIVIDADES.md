@@ -13,8 +13,8 @@ Este documento registra todas as tarefas, correções e melhorias implementadas 
 - **Contexto:** Logs de atividade dos dias 21 a 25 estavam zerados no Dashboard devido ao reinício do servidor Render (que apaga o disco local).
 - **Ação:** Extração manual de **176 eventos** a partir dos logs do console do Render.
 - **Script:** Desenvolvido `scripts/recover-logs.js` para processamento e injeção retroativa.
-- **Resultado:** Dados dos dias 19, 20, 21, 22, 23, 24, 25 e 26 totalmente recuperados e **enriquecidos com o texto integral das mensagens** no site migma.com.
-- **Correção de Visibilidade:** Resolvido bug onde o Dashboard exibia "Messages (0)". O sistema agora consolida os textos reais para exibição no "View Details".
+- **Resultado:** Dados dos dias 19 a 26 recuperados com sucesso, enriquecidos com texto integral e **sem duplicidade** (limpeza profunda realizada).
+- **Correção de UI (N/A):** Resolvido bug onde horário e canal apareciam como "N/A" no Dashboard. Ajustado mapeamento de campos para `timestamp` e `channelName` conforme esperado pelo frontend.
 
 #### 🔧 Correção de Bugs de Arquitetura
 - **Bug de Data:** Corrigido o `activityLogger.js` que travava o nome do arquivo de log na data de inicialização do servidor. Agora o arquivo troca dinamicamente à meia-noite (Horário de Brasília).
