@@ -315,6 +315,33 @@ class SlackService {
       return { success: false, error: error.message };
     }
   }
+
+  /**
+   * Busca lista de todos os usuários do workspace
+   * @returns {Promise<Object>} Resultado da operação
+   */
+  async getAllUsers() {
+    try {
+      const response = await axios.get(
+        `${this.apiUrl}/users.list`,
+        {
+          headers: {
+            'Authorization': `Bearer ${this.botToken}`,
+          },
+        }
+      );
+
+      if (response.data.ok) {
+        return { success: true, users: response.data.members };
+      } else {
+        console.error('❌ Erro Slack API (users.list):', response.data.error);
+        return { success: false, error: response.data.error };
+      }
+    } catch (error) {
+      console.error('❌ Erro na requisição (getAllUsers):', error.message);
+      return { success: false, error: error.message };
+    }
+  }
 }
 
 export default new SlackService();

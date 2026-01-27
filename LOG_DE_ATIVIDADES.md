@@ -35,6 +35,14 @@ Este documento registra todas as tarefas, correções e melhorias implementadas 
 - **Automação de Fuso:** Ajustado `reportScheduler.js` para garantir que relatórios futuros mantenham a compensação de data para o Dashboard.
 - **Auto-Cleanup:** Implementado `scripts/cleanup-logs.js` e integrado ao agendador para remover arquivos com mais de 7 dias automaticamente.
 
+### [27/01/2026] - Implementação de Inferência de Leitura (Opção 2)
+**Responsável:** Antigravity (IA)
+- **Contexto:** Necessidade de identificar visualizações de mensagens sem confirmação nativa do Slack.
+- **Presence Polling:** Criado o `presenceTracker.js` que verifica a presença de todos os usuários a cada 5 minutos.
+- **Inferred Activity:** O sistema agora registra eventos de presença mesmo sem mensagens, permitindo "preencher" a linha do tempo e provar que o usuário estava online.
+- **Algoritmo de Leitura:** Implementada lógica no `activityAnalyzer.js` que detecta "Leitura Provável" se um usuário ficar ativo em até 4 horas após o envio de uma mensagem.
+- **UI de Dashboard:** Relatórios HTML e Live Dashboard agora exibem a lista nominal de quem provavelmente visualizou cada mensagem.
+
 ---
 
 ## 📋 Próximas Tasks (Backlog)

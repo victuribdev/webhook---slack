@@ -5,6 +5,7 @@ import slackRoutes from './routes/slack.js';
 import activityLogger from './services/activityLogger.js';
 import slackService from './services/slackService.js';
 import reportScheduler from './services/reportScheduler.js';
+import presenceTracker from './services/presenceTracker.js';
 
 const app = express();
 
@@ -86,6 +87,9 @@ app.listen(PORT, () => {
 
   // Inicia agendador de relatórios automáticos
   reportScheduler.startDailySchedule();
+
+  // Inicia rastreador de presença (Opção 2 - Inferred Presence)
+  presenceTracker.start();
 
   // ============================================================================
   // CÓDIGO LEGADO (COMENTADO) - Sistema de Clock-In/Out Automático

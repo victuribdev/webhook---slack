@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import slackService from './slackService.js';
+import supabaseService from './supabaseService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -318,16 +319,28 @@ class ActivityAnalyzer {
   async analyzeDate(date, options = {}) {
     const { excludeBots = true, enrichUserData = true } = options;
 
+    console.log(`🔍 [ActivityAnalyzer] Analisando data: ${date}`);
     const filename = `activity-${date}.json`;
-    const events = this.readLogFile(filename);
+    let events = this.readLogFile(filename);
 
     if (events.length === 0) {
-      return {
-        date,
-        totalEvents: 0,
-        uniqueUsers: 0,
-        users: []
-      };
+      console.log(`⚠️ [ActivityAnalyzer] Sem eventos locais para ${date}. Buscando no Cloud (Supabase)...`);
+      const { data: cloudEvents, success } = await supabaseService.getRawEventsByDate(date);
+
+      if (success && cloudEvents && cloudEvents.length > 0) {
+        console.log(`☁️ [ActivityAnalyzer] Encontrados ${cloudEvents.length} eventos no Cloud para ${date}`);
+        events = cloudEvents.map(e => ({
+          ...e.metadata,
+          timestamp: e.slack_timestamp
+        }));
+      } else {
+        return {
+          date,
+          totalEvents: 0,
+          uniqueUsers: 0,
+          users: []
+        };
+      }
     }
 
     const userEvents = this.groupByUser(events);
@@ -365,13 +378,19 @@ class ActivityAnalyzer {
       const messagesRaw = userEvents[userId]
         .filter(event => event.eventType === 'message' && event.text);
 
-      // Enriquece mensagens com nomes de canais (paralelo)
+      // Enriquece mensagens com nomes de canais e usuários (paralelo)
       const messages = await Promise.all(
         messagesRaw.map(async (event) => {
-          const channelInfo = await this.getChannelInfo(event.channelId);
+          const [channelInfo, userInfo] = await Promise.all([
+            this.getChannelInfo(event.channelId),
+            this.getUserInfo(event.userId)
+          ]);
+
           return {
             timestamp: event.timestamp,
             text: event.text,
+            userId: event.userId,
+            userName: userInfo.name,
             channelId: event.channelId,
             channelName: channelInfo.name,
             isPrivate: channelInfo.isPrivate
@@ -414,12 +433,58 @@ class ActivityAnalyzer {
     // Ordena por tempo ativo (maior primeiro)
     userAnalysis.sort((a, b) => b.totalActiveTime - a.totalActiveTime);
 
+    // LÓGICA OPÇÃO 2: Inferência de Leitura
+    // Cruzamos cada mensagem com a atividade posterior de outros usuários
+    this.crossReferenceMessageViews(userAnalysis);
+
     return {
       date,
       totalEvents: events.length,
       uniqueUsers: userAnalysis.length,
       users: userAnalysis
     };
+  }
+
+  /**
+   * Cruza mensagens com atividade posterior para inferir visualização
+   * @param {Array} userAnalysis - Lista de análises de usuários
+   */
+  crossReferenceMessageViews(userAnalysis) {
+    // Janela de visualização provável (ex: se ficou ativo até 4 horas depois)
+    const WATCH_WINDOW_MINUTES = 240;
+
+    userAnalysis.forEach(sender => {
+      if (!sender.messages) return;
+
+      sender.messages.forEach(msg => {
+        const msgTime = new Date(msg.timestamp);
+        msg.likelyViewers = [];
+
+        userAnalysis.forEach(viewer => {
+          // Não conta o próprio remetente
+          if (viewer.userId === sender.userId) return;
+
+          // Procura QUALQUER evento do "viewer" que aconteceu após msgTime
+          // dentro da janela de observação
+          const sawIt = viewer.sessions.some(session => {
+            const sessionStart = new Date(session.start);
+            const sessionEnd = new Date(session.end);
+
+            // Se a sessão começou depois da mensagem
+            // OU se a mensagem caiu dentro de uma sessão ativa
+            return (sessionStart >= msgTime && (sessionStart - msgTime) / 1000 / 60 < WATCH_WINDOW_MINUTES) ||
+              (msgTime >= sessionStart && msgTime <= sessionEnd);
+          });
+
+          if (sawIt) {
+            msg.likelyViewers.push({
+              userId: viewer.userId,
+              userName: viewer.userName
+            });
+          }
+        });
+      });
+    });
   }
 
   /**
@@ -821,6 +886,11 @@ class ActivityAnalyzer {
               </div>
               <div style="background: #F8F9FA; padding: 10px; border-radius: 8px; width: 100%; border-left: 3px solid #4A90E2;">
                 <p style="margin: 0; color: var(--text-main); font-size: 0.9rem; line-height: 1.5;">${msg.text}</p>
+                ${msg.likelyViewers && msg.likelyViewers.length > 0 ? `
+                <div style="margin-top: 10px; font-size: 0.75rem; color: #667eea; border-top: 1px dashed #ddd; padding-top: 5px;">
+                  👁️ <strong>Leitura Provável (Ativos após):</strong> 
+                  ${msg.likelyViewers.map(v => v.userName).join(', ')}
+                </div>` : ''}
               </div>
             </div>
           `).join('') : '<p style="color: var(--text-muted); font-size: 0.9rem;">Nenhuma mensagem com texto registrada</p>'}
