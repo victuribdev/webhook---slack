@@ -16,9 +16,9 @@ async function syncAndReport() {
     const { data: events, error } = await supabaseService.supabase
         .from('slack_raw_events')
         .select('*')
-        .gte('created_at', `${targetDate}T00:00:00Z`)
-        .lte('created_at', `${targetDate}T23:59:59Z`)
-        .order('created_at', { ascending: true });
+        .gte('slack_timestamp', `${targetDate}T00:00:00Z`)
+        .lte('slack_timestamp', `${targetDate}T23:59:59Z`)
+        .order('slack_timestamp', { ascending: true });
 
     if (error) {
         console.error('❌ Erro ao buscar eventos:', error.message);
