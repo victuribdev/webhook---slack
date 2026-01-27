@@ -319,16 +319,13 @@ class ActivityAnalyzer {
   async analyzeDate(date, options = {}) {
     const { excludeBots = true, enrichUserData = true } = options;
 
-    console.log(`🔍 [ActivityAnalyzer] Analisando data: ${date}`);
     const filename = `activity-${date}.json`;
     let events = this.readLogFile(filename);
 
     if (events.length === 0) {
-      console.log(`⚠️ [ActivityAnalyzer] Sem eventos locais para ${date}. Buscando no Cloud (Supabase)...`);
       const { data: cloudEvents, success } = await supabaseService.getRawEventsByDate(date);
 
       if (success && cloudEvents && cloudEvents.length > 0) {
-        console.log(`☁️ [ActivityAnalyzer] Encontrados ${cloudEvents.length} eventos no Cloud para ${date}`);
         events = cloudEvents.map(e => ({
           ...e.metadata,
           timestamp: e.slack_timestamp

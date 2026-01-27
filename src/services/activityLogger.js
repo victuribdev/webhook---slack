@@ -22,7 +22,6 @@ class ActivityLogger {
         };
 
         this.eventBuffer.push(event);
-        console.log(`📊 [ActivityLogger] ${eventType} - ${userId}`);
     }
 
     /**
@@ -37,7 +36,6 @@ class ActivityLogger {
         try {
             // Salva no Supabase para persistência definitiva
             await Promise.all(eventsToSend.map(event => supabaseService.saveRawEvent(event)));
-            console.log(`☁️ [ActivityLogger] ${eventsToSend.length} evento(s) sincronizados com o Supabase`);
         } catch (error) {
             console.error('❌ Erro de sincronização Cloud:', error.message);
             // Em caso de erro, re-insere no buffer para tentar depois
